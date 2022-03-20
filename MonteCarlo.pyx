@@ -1,5 +1,33 @@
 # метод Монте-Карло
 # S = (k/n) * So
+
+# импорт модуля random
+# uniform() - возвращает случайное число с плавающей точкой, 
+# но при этом она позволяет задавать диапазон для 
+# отбора значений от а до б включительно
+from random import uniform
+
+#from __future__ import print_function
+
+cdef class MonteCarlo:
+    cdef double n, x1, x2, y1, y2
+    cdef list s
+
+    def __cinit__(self, n, x1, x2, y1, y2, *s, output = False):
+        self.n = n
+        self.x1 = x1
+        self.x2 = x2
+        self.y1 = y1
+        self.y2 = y2
+        self.s = [*s]
+
+    cpdef describe(self):
+        #print("hello", uniform(5, 7))
+        #return uniform(5, 7)
+        return self.s
+
+
+'''
 from random import uniform
 
 class MonteCarlo:
@@ -46,3 +74,4 @@ if __name__ == '__main__':
     print(s)
 
 # n = 10**6       # количество испытаний
+'''
