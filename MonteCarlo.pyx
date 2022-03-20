@@ -20,6 +20,7 @@ class MonteCarlo:
         # print(arr)
         
     def get(self):
+        step = int(1)
         while True:
             try:
                 for _ in range(self.n):
@@ -34,12 +35,14 @@ class MonteCarlo:
                         # print(arr[i])
                     if all(i for i in arr):
                         self.k += 1
+                    print(step)###
+                    step += 1###
                 return (self.k / self.n) * self.So
             except ZeroDivisionError:
                 continue
         
 if __name__ == '__main__':
-    s = MonteCarlo(10**4, -2, 2, -2, 2, 'x**3 + y**4 + 2 >= 0', '3*x + y**2 <= 2').get()
+    s = MonteCarlo(10**6, -2, 2, -2, 2, 'x**3 + y**4 + 2 >= 0', '3*x + y**2 <= 2').get()
     print(s)
 
 # n = 10**6       # количество испытаний
