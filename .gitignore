@@ -2,3 +2,11 @@
 /build/
 /.vscode/
 /alg/build/
+/alg/__pycache__/
+/alg/.vscode/
+/fs/build/
+/fs/__pycache__/
+/fs/.vscode/
+/net/build/
+/net/__pycache__/
+/net/.vscode/
