@@ -11,3 +11,6 @@
 /net/build/
 /net/__pycache__/
 /net/.vscode/
+/example/build/
+/example/__pycache__/
+/example/.vscode/
