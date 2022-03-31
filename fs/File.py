@@ -24,7 +24,7 @@ class File:
     '''
     class File - класс для обработки файлов
     методы:
-        file_name_init(self, folder: str, filename: str) -> str
+        file_name_init(folder: str, filename: str) -> str
         file_read(file: str) -> list[str] 
         file_read_utf8(file: str) -> list[str]  
         file_write(file: str, arr: list) -> None  
@@ -36,7 +36,7 @@ class File:
     # инициализация полного имени файла (директория + имя файла)
     def file_name_init(self, folder: str, filename: str) -> str:
         '''
-        file_name_init(self, folder: str, filename: str) -> str  
+        file_name_init(folder: str, filename: str) -> str  
                 инициализация полного имени файла                  
                     (директория + имя файла)                       
                 возвращаемое значение - str (строку)               
