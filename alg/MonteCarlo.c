@@ -910,12 +910,12 @@ static const char *__pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_obj_10MonteCarlo_MonteCarlo;
 
-/* "MonteCarlo.pyx":30
+/* "MonteCarlo.pyx":31
  * from random import uniform
- * 
+ * # *****************************************************************************************
  * cdef class MonteCarlo:             # <<<<<<<<<<<<<<
  *     '''
- *     ************************************************************
+ *     class MonteCarlo -
  */
 struct __pyx_obj_10MonteCarlo_MonteCarlo {
   PyObject_HEAD
@@ -1457,8 +1457,8 @@ static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 /* Late includes */
 
-/* "MonteCarlo.pyx":74
- * 
+/* "MonteCarlo.pyx":68
+ *     # ---------------------------------------------------------------------------
  *     #
  *     def __cinit__(self, n, x1, x2, y1, y2, *s, output=False):             # <<<<<<<<<<<<<<
  *         #
@@ -1521,25 +1521,25 @@ static int __pyx_pw_10MonteCarlo_10MonteCarlo_1__cinit__(PyObject *__pyx_v_self,
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_x1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 5, 5, 1); __PYX_ERR(0, 74, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 5, 5, 1); __PYX_ERR(0, 68, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_x2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 5, 5, 2); __PYX_ERR(0, 74, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 5, 5, 2); __PYX_ERR(0, 68, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_y1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 5, 5, 3); __PYX_ERR(0, 74, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 5, 5, 3); __PYX_ERR(0, 68, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_y2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 5, 5, 4); __PYX_ERR(0, 74, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 5, 5, 4); __PYX_ERR(0, 68, __pyx_L3_error)
         }
       }
       if (kw_args == 1) {
@@ -1549,7 +1549,7 @@ static int __pyx_pw_10MonteCarlo_10MonteCarlo_1__cinit__(PyObject *__pyx_v_self,
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 5) ? pos_args : 5;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "__cinit__") < 0)) __PYX_ERR(0, 74, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, used_pos_args, "__cinit__") < 0)) __PYX_ERR(0, 68, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) < 5) {
       goto __pyx_L5_argtuple_error;
@@ -1569,7 +1569,7 @@ static int __pyx_pw_10MonteCarlo_10MonteCarlo_1__cinit__(PyObject *__pyx_v_self,
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 5, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 74, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 5, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 68, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_s); __pyx_v_s = 0;
   __Pyx_AddTraceback("MonteCarlo.MonteCarlo.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -1596,64 +1596,64 @@ static int __pyx_pf_10MonteCarlo_10MonteCarlo___cinit__(struct __pyx_obj_10Monte
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "MonteCarlo.pyx":76
+  /* "MonteCarlo.pyx":70
  *     def __cinit__(self, n, x1, x2, y1, y2, *s, output=False):
  *         #
  *         self.n = n             # <<<<<<<<<<<<<<
  *         #
  *         self.x1 = x1
  */
-  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_n); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_n); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 70, __pyx_L1_error)
   __pyx_v_self->n = __pyx_t_1;
 
-  /* "MonteCarlo.pyx":78
+  /* "MonteCarlo.pyx":72
  *         self.n = n
  *         #
  *         self.x1 = x1             # <<<<<<<<<<<<<<
  *         self.x2 = x2
  *         self.y1 = y1
  */
-  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_x1); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 78, __pyx_L1_error)
+  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_x1); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 72, __pyx_L1_error)
   __pyx_v_self->x1 = __pyx_t_2;
 
-  /* "MonteCarlo.pyx":79
+  /* "MonteCarlo.pyx":73
  *         #
  *         self.x1 = x1
  *         self.x2 = x2             # <<<<<<<<<<<<<<
  *         self.y1 = y1
  *         self.y2 = y2
  */
-  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_x2); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_x2); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 73, __pyx_L1_error)
   __pyx_v_self->x2 = __pyx_t_2;
 
-  /* "MonteCarlo.pyx":80
+  /* "MonteCarlo.pyx":74
  *         self.x1 = x1
  *         self.x2 = x2
  *         self.y1 = y1             # <<<<<<<<<<<<<<
  *         self.y2 = y2
  *         #
  */
-  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_y1); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_y1); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L1_error)
   __pyx_v_self->y1 = __pyx_t_2;
 
-  /* "MonteCarlo.pyx":81
+  /* "MonteCarlo.pyx":75
  *         self.x2 = x2
  *         self.y1 = y1
  *         self.y2 = y2             # <<<<<<<<<<<<<<
  *         #
  *         self.s = [*s]
  */
-  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_y2); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_v_y2); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L1_error)
   __pyx_v_self->y2 = __pyx_t_2;
 
-  /* "MonteCarlo.pyx":83
+  /* "MonteCarlo.pyx":77
  *         self.y2 = y2
  *         #
  *         self.s = [*s]             # <<<<<<<<<<<<<<
  *         #  -     -
  *         self.output = output
  */
-  __pyx_t_3 = PySequence_List(__pyx_v_s); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_3 = PySequence_List(__pyx_v_s); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_3);
   __Pyx_GOTREF(__pyx_v_self->s);
@@ -1661,17 +1661,17 @@ static int __pyx_pf_10MonteCarlo_10MonteCarlo___cinit__(struct __pyx_obj_10Monte
   __pyx_v_self->s = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "MonteCarlo.pyx":85
+  /* "MonteCarlo.pyx":79
  *         self.s = [*s]
  *         #  -     -
  *         self.output = output             # <<<<<<<<<<<<<<
  *         #
  *         self.So = (abs(self.x1) + abs(self.x2)) * (abs(self.y1) + abs(self.y2))
  */
-  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_output); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 85, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_output); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L1_error)
   __pyx_v_self->output = __pyx_t_1;
 
-  /* "MonteCarlo.pyx":87
+  /* "MonteCarlo.pyx":81
  *         self.output = output
  *         #
  *         self.So = (abs(self.x1) + abs(self.x2)) * (abs(self.y1) + abs(self.y2))             # <<<<<<<<<<<<<<
@@ -1680,7 +1680,7 @@ static int __pyx_pf_10MonteCarlo_10MonteCarlo___cinit__(struct __pyx_obj_10Monte
  */
   __pyx_v_self->So = ((fabs(__pyx_v_self->x1) + fabs(__pyx_v_self->x2)) * (fabs(__pyx_v_self->y1) + fabs(__pyx_v_self->y2)));
 
-  /* "MonteCarlo.pyx":89
+  /* "MonteCarlo.pyx":83
  *         self.So = (abs(self.x1) + abs(self.x2)) * (abs(self.y1) + abs(self.y2))
  *         #   ()
  *         self.k = int()             # <<<<<<<<<<<<<<
@@ -1689,39 +1689,39 @@ static int __pyx_pf_10MonteCarlo_10MonteCarlo___cinit__(struct __pyx_obj_10Monte
  */
   __pyx_v_self->k = 0;
 
-  /* "MonteCarlo.pyx":91
+  /* "MonteCarlo.pyx":85
  *         self.k = int()
  *         #
  *         if self.output:             # <<<<<<<<<<<<<<
  *             print(self.get())
- * 
+ *     # ---------------------------------------------------------------------------
  */
   __pyx_t_4 = (__pyx_v_self->output != 0);
   if (__pyx_t_4) {
 
-    /* "MonteCarlo.pyx":92
+    /* "MonteCarlo.pyx":86
  *         #
  *         if self.output:
  *             print(self.get())             # <<<<<<<<<<<<<<
- * 
+ *     # ---------------------------------------------------------------------------
  *     #
  */
-    __pyx_t_3 = ((struct __pyx_vtabstruct_10MonteCarlo_MonteCarlo *)__pyx_v_self->__pyx_vtab)->get(__pyx_v_self, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 92, __pyx_L1_error)
+    __pyx_t_3 = ((struct __pyx_vtabstruct_10MonteCarlo_MonteCarlo *)__pyx_v_self->__pyx_vtab)->get(__pyx_v_self, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (__Pyx_PrintOne(0, __pyx_t_3) < 0) __PYX_ERR(0, 92, __pyx_L1_error)
+    if (__Pyx_PrintOne(0, __pyx_t_3) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "MonteCarlo.pyx":91
+    /* "MonteCarlo.pyx":85
  *         self.k = int()
  *         #
  *         if self.output:             # <<<<<<<<<<<<<<
  *             print(self.get())
- * 
+ *     # ---------------------------------------------------------------------------
  */
   }
 
-  /* "MonteCarlo.pyx":74
- * 
+  /* "MonteCarlo.pyx":68
+ *     # ---------------------------------------------------------------------------
  *     #
  *     def __cinit__(self, n, x1, x2, y1, y2, *s, output=False):             # <<<<<<<<<<<<<<
  *         #
@@ -1740,12 +1740,12 @@ static int __pyx_pf_10MonteCarlo_10MonteCarlo___cinit__(struct __pyx_obj_10Monte
   return __pyx_r;
 }
 
-/* "MonteCarlo.pyx":106
+/* "MonteCarlo.pyx":100
  *     #       n -
  *     #       So -
  *     cpdef get(self):             # <<<<<<<<<<<<<<
  *         '''
- *         ************************************************************
+ *         get() -> float
  */
 
 static PyObject *__pyx_pw_10MonteCarlo_10MonteCarlo_3get(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
@@ -1784,7 +1784,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_10MonteCarlo_10MonteCarlo_3get)) {
         __Pyx_XDECREF(__pyx_r);
@@ -1801,7 +1801,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_r = __pyx_t_2;
@@ -1822,8 +1822,8 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
     #endif
   }
 
-  /* "MonteCarlo.pyx":115
- *         ************************************************************
+  /* "MonteCarlo.pyx":107
+ *                   - float
  *         '''
  *         while True:             # <<<<<<<<<<<<<<
  *             try:
@@ -1831,7 +1831,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
  */
   while (1) {
 
-    /* "MonteCarlo.pyx":116
+    /* "MonteCarlo.pyx":108
  *         '''
  *         while True:
  *             try:             # <<<<<<<<<<<<<<
@@ -1847,7 +1847,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
       __Pyx_XGOTREF(__pyx_t_7);
       /*try:*/ {
 
-        /* "MonteCarlo.pyx":117
+        /* "MonteCarlo.pyx":109
  *         while True:
  *             try:
  *                 for _ in range(self.n):             # <<<<<<<<<<<<<<
@@ -1859,18 +1859,18 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
         for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
           __pyx_v__ = __pyx_t_10;
 
-          /* "MonteCarlo.pyx":118
+          /* "MonteCarlo.pyx":110
  *             try:
  *                 for _ in range(self.n):
  *                     self.x = uniform(self.x1, self.x2)             # <<<<<<<<<<<<<<
  *                     self.y = uniform(self.y1, self.y2)
  *                     self.arr = list(self.s.copy())
  */
-          __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_uniform); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 118, __pyx_L5_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_uniform); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 110, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->x1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 118, __pyx_L5_error)
+          __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->x1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 110, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_4 = PyFloat_FromDouble(__pyx_v_self->x2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 118, __pyx_L5_error)
+          __pyx_t_4 = PyFloat_FromDouble(__pyx_v_self->x2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 110, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_4);
           __pyx_t_11 = NULL;
           __pyx_t_12 = 0;
@@ -1887,7 +1887,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
           #if CYTHON_FAST_PYCALL
           if (PyFunction_Check(__pyx_t_2)) {
             PyObject *__pyx_temp[3] = {__pyx_t_11, __pyx_t_3, __pyx_t_4};
-            __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L5_error)
             __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -1897,7 +1897,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
           #if CYTHON_FAST_PYCCALL
           if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
             PyObject *__pyx_temp[3] = {__pyx_t_11, __pyx_t_3, __pyx_t_4};
-            __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L5_error)
             __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -1905,7 +1905,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
           } else
           #endif
           {
-            __pyx_t_13 = PyTuple_New(2+__pyx_t_12); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 118, __pyx_L5_error)
+            __pyx_t_13 = PyTuple_New(2+__pyx_t_12); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 110, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_13);
             if (__pyx_t_11) {
               __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_11); __pyx_t_11 = NULL;
@@ -1916,27 +1916,27 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
             PyTuple_SET_ITEM(__pyx_t_13, 1+__pyx_t_12, __pyx_t_4);
             __pyx_t_3 = 0;
             __pyx_t_4 = 0;
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
           }
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_14 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_14 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 118, __pyx_L5_error)
+          __pyx_t_14 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_14 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 110, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __pyx_v_self->x = __pyx_t_14;
 
-          /* "MonteCarlo.pyx":119
+          /* "MonteCarlo.pyx":111
  *                 for _ in range(self.n):
  *                     self.x = uniform(self.x1, self.x2)
  *                     self.y = uniform(self.y1, self.y2)             # <<<<<<<<<<<<<<
  *                     self.arr = list(self.s.copy())
  * 
  */
-          __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_uniform); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 119, __pyx_L5_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_uniform); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 111, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_13 = PyFloat_FromDouble(__pyx_v_self->y1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 119, __pyx_L5_error)
+          __pyx_t_13 = PyFloat_FromDouble(__pyx_v_self->y1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 111, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_4 = PyFloat_FromDouble(__pyx_v_self->y2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 119, __pyx_L5_error)
+          __pyx_t_4 = PyFloat_FromDouble(__pyx_v_self->y2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 111, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_4);
           __pyx_t_3 = NULL;
           __pyx_t_12 = 0;
@@ -1953,7 +1953,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
           #if CYTHON_FAST_PYCALL
           if (PyFunction_Check(__pyx_t_2)) {
             PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_t_13, __pyx_t_4};
-            __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L5_error)
             __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
@@ -1963,7 +1963,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
           #if CYTHON_FAST_PYCCALL
           if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
             PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_t_13, __pyx_t_4};
-            __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_12, 2+__pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L5_error)
             __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
@@ -1971,7 +1971,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
           } else
           #endif
           {
-            __pyx_t_11 = PyTuple_New(2+__pyx_t_12); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 119, __pyx_L5_error)
+            __pyx_t_11 = PyTuple_New(2+__pyx_t_12); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 111, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
             if (__pyx_t_3) {
               __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -1982,23 +1982,23 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
             PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_12, __pyx_t_4);
             __pyx_t_13 = 0;
             __pyx_t_4 = 0;
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           }
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_14 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_14 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 119, __pyx_L5_error)
+          __pyx_t_14 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_14 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 111, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __pyx_v_self->y = __pyx_t_14;
 
-          /* "MonteCarlo.pyx":120
+          /* "MonteCarlo.pyx":112
  *                     self.x = uniform(self.x1, self.x2)
  *                     self.y = uniform(self.y1, self.y2)
  *                     self.arr = list(self.s.copy())             # <<<<<<<<<<<<<<
  * 
  *                     for self.i in range(len(self.arr)):
  */
-          __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->s, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L5_error)
+          __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->s, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 112, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
           __pyx_t_11 = NULL;
           if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2012,10 +2012,10 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
           }
           __pyx_t_1 = (__pyx_t_11) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_11) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
           __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
-          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L5_error)
+          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_2 = PySequence_List(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L5_error)
+          __pyx_t_2 = PySequence_List(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 112, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_GIVEREF(__pyx_t_2);
@@ -2024,7 +2024,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
           __pyx_v_self->arr = ((PyObject*)__pyx_t_2);
           __pyx_t_2 = 0;
 
-          /* "MonteCarlo.pyx":122
+          /* "MonteCarlo.pyx":114
  *                     self.arr = list(self.s.copy())
  * 
  *                     for self.i in range(len(self.arr)):             # <<<<<<<<<<<<<<
@@ -2035,15 +2035,15 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
           __Pyx_INCREF(__pyx_t_2);
           if (unlikely(__pyx_t_2 == Py_None)) {
             PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-            __PYX_ERR(0, 122, __pyx_L5_error)
+            __PYX_ERR(0, 114, __pyx_L5_error)
           }
-          __pyx_t_15 = PyList_GET_SIZE(__pyx_t_2); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 122, __pyx_L5_error)
+          __pyx_t_15 = PyList_GET_SIZE(__pyx_t_2); if (unlikely(__pyx_t_15 == ((Py_ssize_t)-1))) __PYX_ERR(0, 114, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __pyx_t_16 = __pyx_t_15;
           for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_16; __pyx_t_12+=1) {
             __pyx_v_self->i = __pyx_t_12;
 
-            /* "MonteCarlo.pyx":123
+            /* "MonteCarlo.pyx":115
  * 
  *                     for self.i in range(len(self.arr)):
  *                         self.arr[self.i] = self.arr[self.i].replace('x', str(self.x))             # <<<<<<<<<<<<<<
@@ -2052,16 +2052,16 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
  */
             if (unlikely(__pyx_v_self->arr == Py_None)) {
               PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-              __PYX_ERR(0, 123, __pyx_L5_error)
+              __PYX_ERR(0, 115, __pyx_L5_error)
             }
-            __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_self->arr, __pyx_v_self->i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_self->arr, __pyx_v_self->i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 115, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_replace); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 123, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_replace); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 115, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->x); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L5_error)
+            __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->x); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 115, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 123, __pyx_L5_error)
+            __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 115, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_4);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             __pyx_t_1 = NULL;
@@ -2079,7 +2079,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
             #if CYTHON_FAST_PYCALL
             if (PyFunction_Check(__pyx_t_11)) {
               PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_n_s_x, __pyx_t_4};
-              __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_17, 2+__pyx_t_17); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 123, __pyx_L5_error)
+              __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_17, 2+__pyx_t_17); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 115, __pyx_L5_error)
               __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
               __Pyx_GOTREF(__pyx_t_2);
               __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2088,14 +2088,14 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
             #if CYTHON_FAST_PYCCALL
             if (__Pyx_PyFastCFunction_Check(__pyx_t_11)) {
               PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_n_s_x, __pyx_t_4};
-              __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_17, 2+__pyx_t_17); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 123, __pyx_L5_error)
+              __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_17, 2+__pyx_t_17); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 115, __pyx_L5_error)
               __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
               __Pyx_GOTREF(__pyx_t_2);
               __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
             } else
             #endif
             {
-              __pyx_t_13 = PyTuple_New(2+__pyx_t_17); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 123, __pyx_L5_error)
+              __pyx_t_13 = PyTuple_New(2+__pyx_t_17); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 115, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_13);
               if (__pyx_t_1) {
                 __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -2106,19 +2106,19 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
               __Pyx_GIVEREF(__pyx_t_4);
               PyTuple_SET_ITEM(__pyx_t_13, 1+__pyx_t_17, __pyx_t_4);
               __pyx_t_4 = 0;
-              __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_13, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 123, __pyx_L5_error)
+              __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_13, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 115, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_2);
               __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
             }
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             if (unlikely(__pyx_v_self->arr == Py_None)) {
               PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-              __PYX_ERR(0, 123, __pyx_L5_error)
+              __PYX_ERR(0, 115, __pyx_L5_error)
             }
-            if (unlikely(__Pyx_SetItemInt(__pyx_v_self->arr, __pyx_v_self->i, __pyx_t_2, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(0, 123, __pyx_L5_error)
+            if (unlikely(__Pyx_SetItemInt(__pyx_v_self->arr, __pyx_v_self->i, __pyx_t_2, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(0, 115, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-            /* "MonteCarlo.pyx":124
+            /* "MonteCarlo.pyx":116
  *                     for self.i in range(len(self.arr)):
  *                         self.arr[self.i] = self.arr[self.i].replace('x', str(self.x))
  *                         self.arr[self.i] = self.arr[self.i].replace('y', str(self.y))             # <<<<<<<<<<<<<<
@@ -2127,16 +2127,16 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
  */
             if (unlikely(__pyx_v_self->arr == Py_None)) {
               PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-              __PYX_ERR(0, 124, __pyx_L5_error)
+              __PYX_ERR(0, 116, __pyx_L5_error)
             }
-            __pyx_t_11 = __Pyx_GetItemInt_List(__pyx_v_self->arr, __pyx_v_self->i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 124, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_GetItemInt_List(__pyx_v_self->arr, __pyx_v_self->i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 116, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
-            __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_replace); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 124, __pyx_L5_error)
+            __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_replace); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 116, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-            __pyx_t_11 = PyFloat_FromDouble(__pyx_v_self->y); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 124, __pyx_L5_error)
+            __pyx_t_11 = PyFloat_FromDouble(__pyx_v_self->y); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 116, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
-            __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_11); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 124, __pyx_L5_error)
+            __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_11); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 116, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_4);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             __pyx_t_11 = NULL;
@@ -2154,7 +2154,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
             #if CYTHON_FAST_PYCALL
             if (PyFunction_Check(__pyx_t_13)) {
               PyObject *__pyx_temp[3] = {__pyx_t_11, __pyx_n_s_y, __pyx_t_4};
-              __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_13, __pyx_temp+1-__pyx_t_17, 2+__pyx_t_17); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L5_error)
+              __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_13, __pyx_temp+1-__pyx_t_17, 2+__pyx_t_17); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L5_error)
               __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
               __Pyx_GOTREF(__pyx_t_2);
               __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2163,14 +2163,14 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
             #if CYTHON_FAST_PYCCALL
             if (__Pyx_PyFastCFunction_Check(__pyx_t_13)) {
               PyObject *__pyx_temp[3] = {__pyx_t_11, __pyx_n_s_y, __pyx_t_4};
-              __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_13, __pyx_temp+1-__pyx_t_17, 2+__pyx_t_17); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L5_error)
+              __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_13, __pyx_temp+1-__pyx_t_17, 2+__pyx_t_17); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L5_error)
               __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
               __Pyx_GOTREF(__pyx_t_2);
               __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
             } else
             #endif
             {
-              __pyx_t_1 = PyTuple_New(2+__pyx_t_17); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L5_error)
+              __pyx_t_1 = PyTuple_New(2+__pyx_t_17); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               if (__pyx_t_11) {
                 __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_11); __pyx_t_11 = NULL;
@@ -2181,19 +2181,19 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
               __Pyx_GIVEREF(__pyx_t_4);
               PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_17, __pyx_t_4);
               __pyx_t_4 = 0;
-              __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L5_error)
+              __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_2);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             }
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
             if (unlikely(__pyx_v_self->arr == Py_None)) {
               PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-              __PYX_ERR(0, 124, __pyx_L5_error)
+              __PYX_ERR(0, 116, __pyx_L5_error)
             }
-            if (unlikely(__Pyx_SetItemInt(__pyx_v_self->arr, __pyx_v_self->i, __pyx_t_2, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(0, 124, __pyx_L5_error)
+            if (unlikely(__Pyx_SetItemInt(__pyx_v_self->arr, __pyx_v_self->i, __pyx_t_2, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(0, 116, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-            /* "MonteCarlo.pyx":125
+            /* "MonteCarlo.pyx":117
  *                         self.arr[self.i] = self.arr[self.i].replace('x', str(self.x))
  *                         self.arr[self.i] = self.arr[self.i].replace('y', str(self.y))
  *                         self.arr[self.i] = eval(self.arr[self.i])             # <<<<<<<<<<<<<<
@@ -2202,24 +2202,24 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
  */
             if (unlikely(__pyx_v_self->arr == Py_None)) {
               PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-              __PYX_ERR(0, 125, __pyx_L5_error)
+              __PYX_ERR(0, 117, __pyx_L5_error)
             }
-            __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_self->arr, __pyx_v_self->i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L5_error)
+            __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_self->arr, __pyx_v_self->i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_13 = __Pyx_Globals(); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 125, __pyx_L5_error)
+            __pyx_t_13 = __Pyx_Globals(); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 117, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_13);
-            __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 117, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v__); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 125, __pyx_L5_error)
+            __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v__); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 117, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_4);
             if (__pyx_t_4) {
-              if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_, __pyx_t_4) < 0) __PYX_ERR(0, 125, __pyx_L5_error)
+              if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_, __pyx_t_4) < 0) __PYX_ERR(0, 117, __pyx_L5_error)
             }
             __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
             if (((PyObject *)__pyx_v_self)) {
-              if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_self, ((PyObject *)__pyx_v_self)) < 0) __PYX_ERR(0, 125, __pyx_L5_error)
+              if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_self, ((PyObject *)__pyx_v_self)) < 0) __PYX_ERR(0, 117, __pyx_L5_error)
             }
-            __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 125, __pyx_L5_error)
+            __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 117, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_4);
             __Pyx_GIVEREF(__pyx_t_2);
             PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
@@ -2230,56 +2230,56 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
             __pyx_t_2 = 0;
             __pyx_t_13 = 0;
             __pyx_t_1 = 0;
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_eval, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_eval, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 117, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
             if (unlikely(__pyx_v_self->arr == Py_None)) {
               PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-              __PYX_ERR(0, 125, __pyx_L5_error)
+              __PYX_ERR(0, 117, __pyx_L5_error)
             }
-            if (unlikely(__Pyx_SetItemInt(__pyx_v_self->arr, __pyx_v_self->i, __pyx_t_1, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(0, 125, __pyx_L5_error)
+            if (unlikely(__Pyx_SetItemInt(__pyx_v_self->arr, __pyx_v_self->i, __pyx_t_1, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(0, 117, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           }
 
-          /* "MonteCarlo.pyx":127
+          /* "MonteCarlo.pyx":119
  *                         self.arr[self.i] = eval(self.arr[self.i])
  * 
  *                     if all([self.i for self.i in self.arr]):             # <<<<<<<<<<<<<<
  *                         self.k += 1
  * 
  */
-          __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L5_error)
+          __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           if (unlikely(__pyx_v_self->arr == Py_None)) {
             PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-            __PYX_ERR(0, 127, __pyx_L5_error)
+            __PYX_ERR(0, 119, __pyx_L5_error)
           }
           __pyx_t_4 = __pyx_v_self->arr; __Pyx_INCREF(__pyx_t_4); __pyx_t_15 = 0;
           for (;;) {
             if (__pyx_t_15 >= PyList_GET_SIZE(__pyx_t_4)) break;
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_13 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_15); __Pyx_INCREF(__pyx_t_13); __pyx_t_15++; if (unlikely(0 < 0)) __PYX_ERR(0, 127, __pyx_L5_error)
+            __pyx_t_13 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_15); __Pyx_INCREF(__pyx_t_13); __pyx_t_15++; if (unlikely(0 < 0)) __PYX_ERR(0, 119, __pyx_L5_error)
             #else
-            __pyx_t_13 = PySequence_ITEM(__pyx_t_4, __pyx_t_15); __pyx_t_15++; if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 127, __pyx_L5_error)
+            __pyx_t_13 = PySequence_ITEM(__pyx_t_4, __pyx_t_15); __pyx_t_15++; if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 119, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_13);
             #endif
-            __pyx_t_12 = __Pyx_PyInt_As_int(__pyx_t_13); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 127, __pyx_L5_error)
+            __pyx_t_12 = __Pyx_PyInt_As_int(__pyx_t_13); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 119, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
             __pyx_v_self->i = __pyx_t_12;
-            __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_self->i); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 127, __pyx_L5_error)
+            __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_self->i); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 119, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_13);
-            if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_13))) __PYX_ERR(0, 127, __pyx_L5_error)
+            if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_13))) __PYX_ERR(0, 119, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
           }
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_all, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 127, __pyx_L5_error)
+          __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_all, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 119, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_4);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_18 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_18 < 0)) __PYX_ERR(0, 127, __pyx_L5_error)
+          __pyx_t_18 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_18 < 0)) __PYX_ERR(0, 119, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           if (__pyx_t_18) {
 
-            /* "MonteCarlo.pyx":128
+            /* "MonteCarlo.pyx":120
  * 
  *                     if all([self.i for self.i in self.arr]):
  *                         self.k += 1             # <<<<<<<<<<<<<<
@@ -2288,7 +2288,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
  */
             __pyx_v_self->k = (__pyx_v_self->k + 1);
 
-            /* "MonteCarlo.pyx":127
+            /* "MonteCarlo.pyx":119
  *                         self.arr[self.i] = eval(self.arr[self.i])
  * 
  *                     if all([self.i for self.i in self.arr]):             # <<<<<<<<<<<<<<
@@ -2298,7 +2298,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
           }
         }
 
-        /* "MonteCarlo.pyx":130
+        /* "MonteCarlo.pyx":122
  *                         self.k += 1
  * 
  *                 self.k_res, self.n_res, self.So_res = self.k, self.n, self.So             # <<<<<<<<<<<<<<
@@ -2312,7 +2312,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
         __pyx_v_self->n_res = __pyx_t_9;
         __pyx_v_self->So_res = __pyx_t_14;
 
-        /* "MonteCarlo.pyx":132
+        /* "MonteCarlo.pyx":124
  *                 self.k_res, self.n_res, self.So_res = self.k, self.n, self.So
  * 
  *                 return (self.k_res / self.n_res) * self.So_res             # <<<<<<<<<<<<<<
@@ -2322,15 +2322,15 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
         __Pyx_XDECREF(__pyx_r);
         if (unlikely(__pyx_v_self->n_res == 0)) {
           PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-          __PYX_ERR(0, 132, __pyx_L5_error)
+          __PYX_ERR(0, 124, __pyx_L5_error)
         }
-        __pyx_t_4 = PyFloat_FromDouble(((__pyx_v_self->k_res / __pyx_v_self->n_res) * __pyx_v_self->So_res)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L5_error)
+        __pyx_t_4 = PyFloat_FromDouble(((__pyx_v_self->k_res / __pyx_v_self->n_res) * __pyx_v_self->So_res)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 124, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_4);
         __pyx_r = __pyx_t_4;
         __pyx_t_4 = 0;
         goto __pyx_L9_try_return;
 
-        /* "MonteCarlo.pyx":116
+        /* "MonteCarlo.pyx":108
  *         '''
  *         while True:
  *             try:             # <<<<<<<<<<<<<<
@@ -2346,24 +2346,27 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "MonteCarlo.pyx":133
+      /* "MonteCarlo.pyx":125
  * 
  *                 return (self.k_res / self.n_res) * self.So_res
  *             except ZeroDivisionError:             # <<<<<<<<<<<<<<
  *                 continue
+ *     # ---------------------------------------------------------------------------
  */
       __pyx_t_9 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_ZeroDivisionError);
       if (__pyx_t_9) {
         __Pyx_AddTraceback("MonteCarlo.MonteCarlo.get", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_1, &__pyx_t_13) < 0) __PYX_ERR(0, 133, __pyx_L7_except_error)
+        if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_1, &__pyx_t_13) < 0) __PYX_ERR(0, 125, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_GOTREF(__pyx_t_13);
 
-        /* "MonteCarlo.pyx":134
+        /* "MonteCarlo.pyx":126
  *                 return (self.k_res / self.n_res) * self.So_res
  *             except ZeroDivisionError:
  *                 continue             # <<<<<<<<<<<<<<
+ *     # ---------------------------------------------------------------------------
+ * # *****************************************************************************************
  */
         goto __pyx_L21_except_continue;
         __pyx_L21_except_continue:;
@@ -2375,7 +2378,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
       goto __pyx_L7_except_error;
       __pyx_L7_except_error:;
 
-      /* "MonteCarlo.pyx":116
+      /* "MonteCarlo.pyx":108
  *         '''
  *         while True:
  *             try:             # <<<<<<<<<<<<<<
@@ -2403,12 +2406,12 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
     __pyx_L3_continue:;
   }
 
-  /* "MonteCarlo.pyx":106
+  /* "MonteCarlo.pyx":100
  *     #       n -
  *     #       So -
  *     cpdef get(self):             # <<<<<<<<<<<<<<
  *         '''
- *         ************************************************************
+ *         get() -> float
  */
 
   /* function exit code */
@@ -2431,7 +2434,7 @@ static PyObject *__pyx_f_10MonteCarlo_10MonteCarlo_get(struct __pyx_obj_10MonteC
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10MonteCarlo_10MonteCarlo_3get(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_10MonteCarlo_10MonteCarlo_2get[] = "\n        ************************************************************\n        * get() -> float                                           *\n        *           \320\262\320\276\320\267\320\262\321\200\320\260\321\211\320\260\320\265\321\202 \320\277\320\273\320\276\321\211\320\260\320\264\321\214 \321\204\320\270\320\263\321\203\321\200\321\213 \320\262\320\277\320\270\321\201\320\260\320\275\320\275\320\276\320\271            *\n        *               \320\262 \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272.                           *\n        *           \320\262\320\276\320\267\320\262\321\200\320\260\321\211\320\260\320\265\320\274\320\276\320\265 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 - float                  *\n        ************************************************************\n        ";
+static char __pyx_doc_10MonteCarlo_10MonteCarlo_2get[] = "\n        get() -> float                                           \n                \320\262\320\276\320\267\320\262\321\200\320\260\321\211\320\260\320\265\321\202 \320\277\320\273\320\276\321\211\320\260\320\264\321\214 \321\204\320\270\320\263\321\203\321\200\321\213 \320\262\320\277\320\270\321\201\320\260\320\275\320\275\320\276\320\271        \n                    \320\262 \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272.\n                \320\262\320\276\320\267\320\262\321\200\320\260\321\211\320\260\320\265\320\274\320\276\320\265 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 - float\n        ";
 static PyObject *__pyx_pw_10MonteCarlo_10MonteCarlo_3get(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -2452,7 +2455,7 @@ static PyObject *__pyx_pf_10MonteCarlo_10MonteCarlo_2get(struct __pyx_obj_10Mont
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_10MonteCarlo_10MonteCarlo_get(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_10MonteCarlo_10MonteCarlo_get(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2678,7 +2681,7 @@ static PyTypeObject __pyx_type_10MonteCarlo_MonteCarlo = {
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
-  "\n    ************************************************************\n    * class MonteCarlo - \320\277\320\276\320\270\321\201\320\272 \320\277\320\273\320\276\321\211\320\260\320\264\320\270 \321\204\320\270\320\263\321\203\321\200\321\213 \320\262\320\277\320\270\321\201\320\260\320\275\320\275\320\276\320\271        *\n    *                    \320\262 \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272                       *\n    *----------------------------------------------------------*\n    * \320\272\320\276\320\275\321\201\321\202\321\200\321\203\320\272\321\202\320\276\321\200 \320\270 \320\274\320\265\321\202\320\276\320\264\321\213:                                    *\n    *----------------------------------------------------------*\n    * MonteCarlo() -> None                                     *\n    *       \320\277\321\200\320\270\320\275\320\270\320\274\320\260\320\265\321\202 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213 \320\264\320\273\321\217 \320\275\320\260\321\205\320\276\320\266\320\264\320\265\320\275\320\270\321\217 \320\277\320\273\320\276\321\211\320\260\320\264\320\270         *\n    *       \320\262\320\276\320\267\320\262\321\200\320\260\321\211\320\260\320\265\320\274\320\276\320\265 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 - None                       *\n    *   \320\237\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213 \320\272\320\276\320\275\321\201\321\202\321\200\321\203\320\272\321\202\320\276\321\200\320\260:                                *\n    *    n - \320\272\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\276 \320\270\321\201\320\277\321\213\321\202\320\260\320\275\320\270\320\271 (int)                        *\n    *    x1 - \320\275\320\260\320\270\320\274\320\265\320\275\321\214\321\210\320\260\321\217 \320\272\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\320""\260 x \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272\320\260 (float)   *\n    *    x2 - \320\275\320\260\320\270\320\261\320\276\320\273\321\214\321\210\320\260\321\217 \320\272\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\320\260 x \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272\320\260 (float)   *\n    *    y1 - \320\275\320\260\320\270\320\274\320\265\320\275\321\214\321\210\320\260\321\217 \320\272\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\320\260 y \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272\320\260 (float)   *\n    *    y2 - \320\275\320\260\320\270\320\261\320\276\320\273\321\214\321\210\320\260\321\217 \320\272\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\320\260 y \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272\320\260 (float)   *\n    *    *s - n \321\201\320\270\321\201\321\202\320\265\320\274 \321\203\321\200\320\260\320\262\320\275\320\265\320\275\320\270\320\271 (str)                         *\n    *    output - \320\262\321\213\320\262\320\276\320\264 \320\277\320\273\320\276\321\211\320\260\320\264\320\270 \320\262 \320\272\320\276\320\275\321\201\320\276\320\273\321\214 (bool)               *\n    *             default (\320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216) - False               *\n    *----------------------------------------------------------*\n    * get() -> float                                           *\n    *           \320\262\320\276\320\267\320\262\321\200\320\260\321\211\320\260\320\265\321\202 \320\277\320\273\320\276\321\211\320\260\320\264\321\214 \321\204\320\270\320\263\321\203\321\200\321\213 \320\262\320\277\320\270\321\201\320\260\320\275\320\275\320\276\320\271            *\n    *        ""       \320\262 \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272.                           *\n    *           \320\262\320\276\320\267\320\262\321\200\320\260\321\211\320\260\320\265\320\274\320\276\320\265 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 - float                  *\n    ************************************************************\n    * \320\243\321\201\321\202\320\260\320\275\320\276\320\262\320\272\320\260 \320\274\320\276\320\264\321\203\320\273\321\217:                                        *\n    *           \321\201\320\274\320\276\321\202\321\200\320\270 \321\204\320\260\320\271\320\273 MonteCarloSetup.py                 *\n    ************************************************************\n    * \320\237\321\200\320\270\320\274\320\265\321\200 \320\270\321\201\320\277\320\276\320\273\321\214\320\267\320\276\320\262\320\260\320\275\320\270\321\217:                                    *\n    *           \321\201\320\274\320\276\321\202\321\200\320\270 \321\204\320\260\320\271\320\273 MonteCarloTest.py                  *\n    ************************************************************\n    ", /*tp_doc*/
+  "\n    class MonteCarlo - \320\277\320\276\320\270\321\201\320\272 \320\277\320\273\320\276\321\211\320\260\320\264\320\270 \321\204\320\270\320\263\321\203\321\200\321\213 \320\262\320\277\320\270\321\201\320\260\320\275\320\275\320\276\320\271        \n        \320\262 \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272                       \n    \320\272\320\276\320\275\321\201\321\202\321\200\321\203\320\272\321\202\320\276\321\200:                                  \n        MonteCarlo() -> None                                     \n                \320\277\321\200\320\270\320\275\320\270\320\274\320\260\320\265\321\202 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213 \320\264\320\273\321\217 \320\275\320\260\321\205\320\276\320\266\320\264\320\265\320\275\320\270\321\217 \320\277\320\273\320\276\321\211\320\260\320\264\320\270         \n                \320\262\320\276\320\267\320\262\321\200\320\260\321\211\320\260\320\265\320\274\320\276\320\265 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 - None                       \n            \320\237\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213 \320\272\320\276\320\275\321\201\321\202\321\200\321\203\320\272\321\202\320\276\321\200\320\260:                                \n                n - \320\272\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\276 \320\270\321\201\320\277\321\213\321\202\320\260\320\275\320\270\320\271 (int)                        \n                x1 - \320\275\320\260\320\270\320\274\320\265\320\275\321\214\321\210\320\260\321\217 \320\272\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\320\260 x \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272\320\260 (float)   \n                x2 - \320\275\320\260\320\270\320\261\320\276\320\273\321\214\321\210\320\260\321\217 \320\272\320\276\320\276""\321\200\320\264\320\270\320\275\320\260\321\202\320\260 x \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272\320\260 (float)   \n                y1 - \320\275\320\260\320\270\320\274\320\265\320\275\321\214\321\210\320\260\321\217 \320\272\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\320\260 y \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272\320\260 (float)   \n                y2 - \320\275\320\260\320\270\320\261\320\276\320\273\321\214\321\210\320\260\321\217 \320\272\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\320\260 y \320\277\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\320\270\320\272\320\260 (float)   \n                *s - n \321\201\320\270\321\201\321\202\320\265\320\274 \321\203\321\200\320\260\320\262\320\275\320\265\320\275\320\270\320\271 (str)                         \n                output - \320\262\321\213\320\262\320\276\320\264 \320\277\320\273\320\276\321\211\320\260\320\264\320\270 \320\262 \320\272\320\276\320\275\321\201\320\276\320\273\321\214 (bool)               \n                    default (\320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216) - False   \n    \320\274\320\265\321\202\320\276\320\264\321\213:            \n        get() -> float   \n    \320\270\320\275\321\204\320\276\321\200\320\274\320\260\321\206\320\270\321\217:                                                      \n        \320\243\321\201\321\202\320\260\320\275\320\276\320\262\320\272\320\260 \320\274\320\276\320\264\321\203\320\273\321\217:                                        \n            \321\201\320\274\320\276\321\202\321\200\320\270 \321\204\320\260\320\271\320\273 MonteCarloSetup.py                 \n        \320\237\321\200\320\270\320\274\320\265\321\200 \320\270\321\201\320\277\320\276\320\273\321\214\320\267\320\276\320\262\320""\260\320\275\320\270\321\217:                                    \n            \321\201\320\274\320\276\321\202\321\200\320\270 \321\204\320\260\320\271\320\273 MonteCarloTest.py\n    ", /*tp_doc*/
   __pyx_tp_traverse_10MonteCarlo_MonteCarlo, /*tp_traverse*/
   __pyx_tp_clear_10MonteCarlo_MonteCarlo, /*tp_clear*/
   0, /*tp_richcompare*/
@@ -2805,10 +2808,10 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 117, __pyx_L1_error)
-  __pyx_builtin_eval = __Pyx_GetBuiltinName(__pyx_n_s_eval); if (!__pyx_builtin_eval) __PYX_ERR(0, 125, __pyx_L1_error)
-  __pyx_builtin_all = __Pyx_GetBuiltinName(__pyx_n_s_all); if (!__pyx_builtin_all) __PYX_ERR(0, 127, __pyx_L1_error)
-  __pyx_builtin_ZeroDivisionError = __Pyx_GetBuiltinName(__pyx_n_s_ZeroDivisionError); if (!__pyx_builtin_ZeroDivisionError) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_builtin_eval = __Pyx_GetBuiltinName(__pyx_n_s_eval); if (!__pyx_builtin_eval) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_builtin_all = __Pyx_GetBuiltinName(__pyx_n_s_all); if (!__pyx_builtin_all) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_builtin_ZeroDivisionError = __Pyx_GetBuiltinName(__pyx_n_s_ZeroDivisionError); if (!__pyx_builtin_ZeroDivisionError) __PYX_ERR(0, 125, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -2892,16 +2895,16 @@ static int __Pyx_modinit_type_init_code(void) {
   /*--- Type init code ---*/
   __pyx_vtabptr_10MonteCarlo_MonteCarlo = &__pyx_vtable_10MonteCarlo_MonteCarlo;
   __pyx_vtable_10MonteCarlo_MonteCarlo.get = (PyObject *(*)(struct __pyx_obj_10MonteCarlo_MonteCarlo *, int __pyx_skip_dispatch))__pyx_f_10MonteCarlo_10MonteCarlo_get;
-  if (PyType_Ready(&__pyx_type_10MonteCarlo_MonteCarlo) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_10MonteCarlo_MonteCarlo) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_10MonteCarlo_MonteCarlo.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_10MonteCarlo_MonteCarlo.tp_dictoffset && __pyx_type_10MonteCarlo_MonteCarlo.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_10MonteCarlo_MonteCarlo.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_10MonteCarlo_MonteCarlo.tp_dict, __pyx_vtabptr_10MonteCarlo_MonteCarlo) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_MonteCarlo, (PyObject *)&__pyx_type_10MonteCarlo_MonteCarlo) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10MonteCarlo_MonteCarlo) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_10MonteCarlo_MonteCarlo.tp_dict, __pyx_vtabptr_10MonteCarlo_MonteCarlo) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_MonteCarlo, (PyObject *)&__pyx_type_10MonteCarlo_MonteCarlo) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10MonteCarlo_MonteCarlo) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
   __pyx_ptype_10MonteCarlo_MonteCarlo = &__pyx_type_10MonteCarlo_MonteCarlo;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -3135,24 +3138,24 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "MonteCarlo.pyx":28
+  /* "MonteCarlo.pyx":29
  * #
  * #
  * from random import uniform             # <<<<<<<<<<<<<<
- * 
+ * # *****************************************************************************************
  * cdef class MonteCarlo:
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_uniform);
   __Pyx_GIVEREF(__pyx_n_s_uniform);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_uniform);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_random, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_random, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_uniform); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_uniform); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_uniform, __pyx_t_1) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_uniform, __pyx_t_1) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
