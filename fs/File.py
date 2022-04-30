@@ -28,6 +28,7 @@ class File:
         file_read(file: str) -> list[str] 
         file_read_utf8(file: str) -> list[str]  
         file_write(file: str, arr: list) -> None  
+        file_write_append(file: str, arr: list) -> None 
         file_write_dict(file: str, dictor: dict) -> None  
         file_list_console(arr: list) -> None   
         file_print_console_utf8(file: str) -> None 
@@ -101,6 +102,22 @@ class File:
         for i in range(len(arr)):
             arr[i] += '\n'
         with open(file, 'w') as f:
+            f.writelines(arr)
+    # ---------------------------------------------------------------------------
+    # дозапись содержимого списка (list) в файл
+    def file_write_append(self, file: str, arr: list) -> None:
+        '''
+        file_write_append(file: str, arr: list) -> None                 
+                дозапись содержимого списка (list) в файл            
+                возвращаемое значение - None (None)                
+        параметры:                                               
+                file: str - имя файла которое неоходимо открыть    
+                    для дозаписи содержимого списка          
+                arr: list - список для дозаписи в файл               
+        '''
+        for i in range(len(arr)):
+            arr[i] += '\n'
+        with open(file, 'a') as f:
             f.writelines(arr)
     # ---------------------------------------------------------------------------
     # запись содержимого словаря (dict) в файл
@@ -186,6 +203,11 @@ if __name__ == '__main__':
         print('----------запись содержимого списка (list) в файл----------')
         f.file_write(FILE_PATH_WRITE, arr)
         print('запись содержимого произведена')
+        # ---------------------------------------------------------------------------
+        # дозапись содержимого списка (list) в файл
+        print('----------запись содержимого списка (list) в файл----------')
+        f.file_write_append(FILE_PATH_WRITE, ['a', 'b', 'c'])
+        print('дозапись содержимого произведена')
         # ---------------------------------------------------------------------------
         # запись содержимого словаря (dict) в файл
         print('----------запись содержимого словаря (dict) в файл----------')
