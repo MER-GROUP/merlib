@@ -22,15 +22,17 @@ import sys
 from os.path import dirname, join
 # импортируем молуль os
 # remove - удаляет указанный файл
-from os import remove
+# listdir - получает все файлы и папки в текущей директории
+from os import remove, listdir
 # *****************************************************************************************
 # класс для работы с файлом
 class File:
     '''
     class File - класс для обработки файлов
     методы:
-        file_delete(self, file: str) -> bool
+        file_delete(file: str) -> bool
         file_name_init(folder: str, filename: str) -> str
+        file_get_current_dir() -> list[str]
         file_read(file: str) -> list[str] 
         file_read_utf8(file: str) -> list[str]  
         file_write(file: str, arr: list) -> None  
@@ -43,7 +45,7 @@ class File:
     # удаление файла с носителя
     def file_delete(self, file: str) -> bool:
         '''
-        file_delete(self, file: str) -> bool:                       
+        file_delete(file: str) -> bool                     
                 удаление файла с носителя            
                 возвращаемое значение - bool (True - удалено, False - ошибка)   
         параметры:                                               
@@ -81,6 +83,18 @@ class File:
         # print('FILE_PATH :', type(FILE_PATH))
         # возвращаеи полное имя файла (директория + имя файла)
         return FILE_PATH
+    # ---------------------------------------------------------------------------
+    # получить все файлы и папки в текущей директории
+    def file_get_current_dir(self) -> list[str]:
+        '''
+        file_get_current_dir() -> list[str]                       
+                получает все файлы и папки в текущей директории             
+                возвращаемое значение - list[str] (список строк)     
+        параметры:                                               
+                нет параметров                          
+        '''
+        files_arr = listdir()
+        return files_arr
     # ---------------------------------------------------------------------------
     # чтение содержимого файла построчно
     def file_read(self, file: str) -> list[str]:
@@ -248,7 +262,7 @@ if __name__ == '__main__':
         print('----------вывод в консоль содержимого файла содержащий текст в utf-8 кодировке----------')
         f.file_print_console_utf8(FILE_PATH_READ)
         # ---------------------------------------------------------------------------
-        # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
+        # инициализация полного имени файла (директория + имя файла)
         print('----------инициализация полного имени файла (директория + имя файла)----------')
         file_name = f.file_name_init('./temp/', 'test_read.txt')
         print(file_name)
@@ -261,6 +275,10 @@ if __name__ == '__main__':
             print(f'Файл {file_name} удален')
         else:
             print('Ошибка удаления')
+        # ---------------------------------------------------------------------------
+        # получить все файлы и папки в текущей директории
+        print('----------получить все файлы и папки в текущей директории----------')
+        print(f.file_get_current_dir())
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
