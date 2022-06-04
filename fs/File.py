@@ -181,7 +181,10 @@ class File:
                 file: str - имя файла которое неоходимо открыть\n     
                     и прочитать\n                             
         '''
-        with open(file, 'r') as f:
+        # определить имя файла
+        file_name = self.file_name_init('', file)
+        # открыть файл и прочитать построчно
+        with open(file_name, 'r') as f:
             return f.readlines()
     # ---------------------------------------------------------------------------
     # чтение содержимого файла содержащий текст в utf-8 кодировке
@@ -194,8 +197,12 @@ class File:
                 file: str - имя файла которое неоходимо открыть\n     
                     и прочитать\n                             
         '''
+        # определить имя файла
+        file_name = self.file_name_init('', file)
+        # var
         str_byte = None
-        with open(file, 'r', encoding='utf-8') as f:
+        # открыть файл и прочитать текст в utf-8 кодировке
+        with open(file_name, 'r', encoding='utf-8') as f:
             # shutil.copyfileobj(f, str_byte.extend)
             str_byte = f.read().encode('utf-8')
         # print(repr(str(str_byte, 'utf-8')))
@@ -212,9 +219,13 @@ class File:
                     для записи содержимого списка\n           
                 arr: list - список для записи в файл\n                
         '''
+        # определить имя файла
+        file_name = self.file_name_init('', file)
+        # в списке к концу строк добавляем \n (переход на новую строку)
         for i in range(len(arr)):
             arr[i] += '\n'
-        with open(file, 'w') as f:
+        # создаем файл и записываем содержимое списка
+        with open(file_name, 'w') as f:
             f.writelines(arr)
     # ---------------------------------------------------------------------------
     # дозапись содержимого списка (list) в файл
@@ -228,9 +239,13 @@ class File:
                     для дозаписи содержимого списка\n           
                 arr: list - список для дозаписи в файл\n                
         '''
+        # определить имя файла
+        file_name = self.file_name_init('', file)
+        # в списке к концу строк добавляем \n (переход на новую строку)
         for i in range(len(arr)):
             arr[i] += '\n'
-        with open(file, 'a') as f:
+        # открываем файл и дозаписываем содержимое списка
+        with open(file_name, 'a') as f:
             f.writelines(arr)
     # ---------------------------------------------------------------------------
     # запись содержимого словаря (dict) в файл
@@ -244,7 +259,10 @@ class File:
                     для записи содержимого словаря\n          
                 dictor: dict - словарь для записи в файл\n            
         '''
-        with open(file, 'w') as f:
+        # определить имя файла
+        file_name = self.file_name_init('', file)
+        # создать файл и записать содержимое словаря (хэш таблицы)
+        with open(file_name, 'w') as f:
             for k,v in dictor.items():
                 f.write(f'{k} {v}\n')
     # ---------------------------------------------------------------------------
@@ -275,7 +293,10 @@ class File:
                 file: str - имя файла которое неоходимо открыть,\n    
                     прочитать и вывести в консоль\n           
         '''
-        with open(file, 'r', encoding='utf-8') as f:
+        # определить имя файла
+        file_name = self.file_name_init('', file)
+        # открыть файл, скопировать содержимое в консоль (терминал)
+        with open(file_name, 'r', encoding='utf-8') as f:
             shutil.copyfileobj(f, sys.stdout)
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
