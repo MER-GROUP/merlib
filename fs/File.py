@@ -50,6 +50,7 @@ class File:
         file_delete(file: str) -> bool
         file_name_init(folder: str, filename: str) -> str
         file_get_current_dir_files() -> list[str]
+        file_get_dir_files(dir: str) -> list[str]
         file_get_current_access_dir_in_str() -> list[str]
         file_get_current_access_dir_in_int() -> list[int]
         file_set_access_open_all(name: str) -> bool
@@ -137,6 +138,21 @@ class File:
                 нет параметров\n                        
         '''
         files_arr = listdir()
+        return files_arr
+    # ---------------------------------------------------------------------------
+    # получить все файлы и папки в указанной директории
+    def file_get_dir_files(self, dir: str) -> list[str]:
+        '''
+        file_get_dir_files(dir: str) -> list[str]\n               
+                получает все файлы и папки в указанной директории\n           
+                возвращаемое значение - list[str] (список строк)\n                
+        параметры:\n                                                
+                dir: str - имя директории которую необходимо показать\n                
+        '''
+        # определить имя директории
+        dir_name = self.file_name_init('', dir)
+        # получить все файлы и папки в указанной директории
+        files_arr = listdir(dir_name)
         return files_arr
     # ---------------------------------------------------------------------------
     # получить все установленные права доступа файлов в текущей директории
@@ -456,6 +472,10 @@ if __name__ == '__main__':
         # запретить весь доступ к указанному файлу/директории
         print('----------запретить весь доступ к указанному файлу/директории----------')
         f.file_set_access_close_all('./temp/open.txt')
+        # ---------------------------------------------------------------------------
+        # получить все файлы и папки в указанной директории
+        print('----------получить все файлы и папки в указанной директории----------')
+        print(f.file_get_dir_files('./temp/'))
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
