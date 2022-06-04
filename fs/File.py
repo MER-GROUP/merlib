@@ -40,6 +40,7 @@ class File:
     '''
     class File - класс для обработки файлов
     методы:
+        file_create_dir(dir: str) -> bool
         file_delete(file: str) -> bool
         file_name_init(folder: str, filename: str) -> str
         file_get_current_dir_files() -> list[str]
@@ -54,6 +55,26 @@ class File:
         file_print_console_utf8(file: str) -> None 
     '''
     # ---------------------------------------------------------------------------
+    # создать указанную папку/директорию
+    def file_create_dir(self, dir: str) -> bool:
+        '''
+        file_create_dir(dir: str) -> bool\n                      
+                создает указанную папку/директорию\n             
+                возвращаемое значение - bool (True - создано, False - ошибка)\n    
+        параметры:\n                                                
+                dir: str - имя папки/директории которое неоходимо создать\n                        
+        '''
+        try:
+            # определить имя создаваемой папки/директории
+            dir_name = self.file_name_init('', dir)
+            # создать папку/директорию
+            mkdir(dir_name)
+            return True
+        except (Exception) as e:
+            # show msg except
+            # print(e)
+            return False
+    # ---------------------------------------------------------------------------
     # удаление файла с носителя
     def file_delete(self, file: str) -> bool:
         '''
@@ -64,8 +85,10 @@ class File:
                 file: str - имя файла которое неоходимо удалить с носителя\n                        
         '''
         try:
+            # определить имя удаляемого файла
+            file_name = self.file_name_init('', file)
             # delete file
-            remove(file)
+            remove(file_name)
             return True
         except (FileNotFoundError) as e:
             # show msg except
@@ -339,6 +362,13 @@ if __name__ == '__main__':
         # получить все установленные права доступа файлов виде int (777)
         print('----------получить все установленные права доступа файлов виде int (777)----------')
         print(f.file_get_current_access_dir_in_int())
+        # ---------------------------------------------------------------------------
+        # создать указанную папку/директорию
+        print('----------создать указанную папку/директорию----------')
+        f.file_create_dir('./temp/new_dir_1/')
+        dir = f.file_name_init('./temp/', './new_dir_2/')
+        f.file_create_dir(dir)
+        print(f.file_get_current_dir_files())
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
