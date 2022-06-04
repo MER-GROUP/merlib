@@ -56,11 +56,11 @@ class File:
     # удаление файла с носителя
     def file_delete(self, file: str) -> bool:
         '''
-        file_delete(file: str) -> bool                     
-                удаление файла с носителя            
-                возвращаемое значение - bool (True - удалено, False - ошибка)   
-        параметры:                                               
-                file: str - имя файла которое неоходимо удалить с носителя                       
+        file_delete(file: str) -> bool\n                      
+                удаление файла с носителя\n             
+                возвращаемое значение - bool (True - удалено, False - ошибка)\n    
+        параметры:\n                                                
+                file: str - имя файла которое неоходимо удалить с носителя\n                        
         '''
         try:
             # delete file
@@ -74,13 +74,13 @@ class File:
     # инициализация полного имени файла (директория + имя файла)
     def file_name_init(self, folder: str, filename: str) -> str:
         '''
-        file_name_init(folder: str, filename: str) -> str  
-                инициализация полного имени файла                  
-                    (директория + имя файла)                       
-                возвращаемое значение - str (строку)               
-        параметры:                                               
-                folder: str - создать директорию в текущей папке   
-                filename: str - создать файл в директории folder   
+        file_name_init(folder: str, filename: str) -> str\n   
+                инициализация полного имени файла\n                   
+                    (директория + имя файла)\n                        
+                возвращаемое значение - str (строку)\n                
+        параметры:\n                                                
+                folder: str - создать директорию в текущей папке\n    
+                filename: str - создать файл в директории folder\n    
         '''
         # определяем текущую директорию, гбе будет храниться файл
         CURRENT_DIR = dirname(__file__)
@@ -130,12 +130,12 @@ class File:
     # чтение содержимого файла построчно
     def file_read(self, file: str) -> list[str]:
         '''
-        file_read(file: str) -> list[str]                        
-                читает информацию из файла построчно               
-                возвращаемое значение - list[str] (список строк)   
-        параметры:                                               
-                file: str - имя файла которое неоходимо открыть    
-                    и прочитать                            
+        file_read(file: str) -> list[str]\n                         
+                читает информацию из файла построчно\n                
+                возвращаемое значение - list[str] (список строк)\n    
+        параметры:\n                                                
+                file: str - имя файла которое неоходимо открыть\n     
+                    и прочитать\n                             
         '''
         with open(file, 'r') as f:
             return f.readlines()
@@ -143,12 +143,12 @@ class File:
     # чтение содержимого файла содержащий текст в utf-8 кодировке
     def file_read_utf8(self, file: str) -> list[str]:
         '''
-        file_read_utf8(file: str) -> list[str]                   
-                читает информацию из файла в utf-8 кодировке       
-                возвращаемое значение - list[str] (список строк)   
-        параметры:                                               
-                file: str - имя файла которое неоходимо открыть    
-                    и прочитать                            
+        file_read_utf8(file: str) -> list[str]\n                    
+                читает информацию из файла в utf-8 кодировке\n        
+                возвращаемое значение - list[str] (список строк)\n    
+        параметры:\n                                                
+                file: str - имя файла которое неоходимо открыть\n     
+                    и прочитать\n                             
         '''
         str_byte = None
         with open(file, 'r', encoding='utf-8') as f:
@@ -160,13 +160,13 @@ class File:
     # запись содержимого списка (list) в файл
     def file_write(self, file: str, arr: list) -> None:
         '''
-        file_write(file: str, arr: list) -> None                 
-                запись содержимого списка (list) в файл            
-                возвращаемое значение - None (None)                
-        параметры:                                               
-                file: str - имя файла которое неоходимо открыть    
-                    для записи содержимого списка          
-                arr: list - список для записи в файл               
+        file_write(file: str, arr: list) -> None\n                  
+                запись содержимого списка (list) в файл\n             
+                возвращаемое значение - None (None)\n                 
+        параметры:\n                                                
+                file: str - имя файла которое неоходимо открыть\n     
+                    для записи содержимого списка\n           
+                arr: list - список для записи в файл\n                
         '''
         for i in range(len(arr)):
             arr[i] += '\n'
@@ -176,13 +176,13 @@ class File:
     # дозапись содержимого списка (list) в файл
     def file_write_append(self, file: str, arr: list) -> None:
         '''
-        file_write_append(file: str, arr: list) -> None                 
-                дозапись содержимого списка (list) в файл            
-                возвращаемое значение - None (None)                
-        параметры:                                               
-                file: str - имя файла которое неоходимо открыть    
-                    для дозаписи содержимого списка          
-                arr: list - список для дозаписи в файл               
+        file_write_append(file: str, arr: list) -> None\n                  
+                дозапись содержимого списка (list) в файл\n             
+                возвращаемое значение - None (None)\n                 
+        параметры:\n                                                
+                file: str - имя файла которое неоходимо открыть\n     
+                    для дозаписи содержимого списка\n           
+                arr: list - список для дозаписи в файл\n                
         '''
         for i in range(len(arr)):
             arr[i] += '\n'
@@ -192,13 +192,13 @@ class File:
     # запись содержимого словаря (dict) в файл
     def file_write_dict(self, file: str, dictor: dict) -> None:
         '''
-        file_write_dict(file: str, dictor: dict) -> None         
-                запись содержимого словаря (dict) в файл           
-                возвращаемое значение - None (None)                
-        параметры:                                               
-                file: str - имя файла которое неоходимо открыть    
-                    для записи содержимого словаря         
-                dictor: dict - словарь для записи в файл           
+        file_write_dict(file: str, dictor: dict) -> None\n          
+                запись содержимого словаря (dict) в файл\n            
+                возвращаемое значение - None (None)\n                 
+        параметры:\n                                                
+                file: str - имя файла которое неоходимо открыть\n     
+                    для записи содержимого словаря\n          
+                dictor: dict - словарь для записи в файл\n            
         '''
         with open(file, 'w') as f:
             for k,v in dictor.items():
@@ -207,11 +207,11 @@ class File:
     # вывод в консоль содержимого списка (list)
     def file_list_print_console(self, arr: list) -> None:
         '''
-        file_list_console(arr: list) -> None                     
-                вывод в консоль содержимого списка (list)          
-                возвращаемое значение - None (None)                
-        параметры:                                               
-                arr: list - список для вывода в консоль         
+        file_list_console(arr: list) -> None\n                      
+                вывод в консоль содержимого списка (list)\n           
+                возвращаемое значение - None (None)\n                 
+        параметры:\n                                                
+                arr: list - список для вывода в консоль\n          
         '''
         for line in arr:
             # print(line.strip())
@@ -223,13 +223,13 @@ class File:
     # (аналог type filename в cmd.exe)
     def file_print_console_utf8(self, file: str) -> None:
         '''
-        file_print_console_utf8(file: str) -> None               
-                вывод в консоль содержимого файла содержащий       
-                    текст в utf-8 кодировке                        
-                возвращаемое значение - None (None)                
-        параметры:                                               
-                file: str - имя файла которое неоходимо открыть,   
-                    прочитать и вывести в консоль          
+        file_print_console_utf8(file: str) -> None\n                
+                вывод в консоль содержимого файла содержащий\n        
+                    текст в utf-8 кодировке\n                         
+                возвращаемое значение - None (None)\n                 
+        параметры:\n                                                
+                file: str - имя файла которое неоходимо открыть,\n    
+                    прочитать и вывести в консоль\n           
         '''
         with open(file, 'r', encoding='utf-8') as f:
             shutil.copyfileobj(f, sys.stdout)
