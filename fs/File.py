@@ -44,6 +44,7 @@ class File:
         file_name_init(folder: str, filename: str) -> str
         file_get_current_dir_files() -> list[str]
         file_get_current_access_dir_in_str() -> list[str]
+        file_get_current_access_dir_in_int() -> list[int]
         file_read(file: str) -> list[str] 
         file_read_utf8(file: str) -> list[str]  
         file_write(file: str, arr: list) -> None  
@@ -124,6 +125,26 @@ class File:
         for file in self.file_get_current_dir_files():
             # Определим установленные разрешения в виде букв -rwx
             access_arr.append(stat.filemode(os.stat(file).st_mode))
+        # return
+        return access_arr
+    # ---------------------------------------------------------------------------
+    # получить все установленные права доступа файлов в текущей директории
+    # в виде int (777)
+    def file_get_current_access_dir_in_int(self) -> list[int]:
+        '''
+        file_get_current_access_dir_in_int() -> list[int]\n                       
+                получает все установленные права доступа файлов\n 
+                    в текущей директории в виде int (777)\n 
+                возвращаемое значение - list[int] (список чисел)\n    
+        параметры:\n                                              
+                нет параметров\n                        
+        '''
+        # массив установленных разрешений для файлов и папок
+        access_arr = list()
+        # заполняем массив установленныз разрешений для файлов и папок
+        for file in self.file_get_current_dir_files():
+            # Определим установленные разрешения в виде чисел - int (777)
+            access_arr.append(stat.S_IMODE(os.stat(file).st_mode))
         # return
         return access_arr
     # ---------------------------------------------------------------------------
@@ -311,9 +332,13 @@ if __name__ == '__main__':
         print('----------получить все файлы и папки в текущей директории----------')
         print(f.file_get_current_dir_files())
         # ---------------------------------------------------------------------------
-        # получить все файлы и папки в текущей директории
+        # получить все установленные права доступа файлов виде str (rwx)
         print('----------получить все установленные права доступа файлов виде str (rwx)----------')
         print(f.file_get_current_access_dir_in_str())
+        # ---------------------------------------------------------------------------
+        # получить все установленные права доступа файлов виде int (777)
+        print('----------получить все установленные права доступа файлов виде int (777)----------')
+        print(f.file_get_current_access_dir_in_int())
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
