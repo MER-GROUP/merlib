@@ -7,6 +7,7 @@ class File - класс для обработки файлов
     os.path
     os
     stat
+    pathlib
 
 Реализация методов класса - Максим Романенко (Red Alert) - 2022г.
 '''
@@ -36,6 +37,9 @@ from os import remove, listdir, chmod, mkdir
 # stat.S_IRWXU|stat.S_IRWXG|stat.S_IRWXO - права доступа rwxrwxrwx (весь доступ разрешен)
 # stat.S_ENFMT - права доступа -----S--- (весь доступ запрещен)
 import stat
+# импортируем молуль pathlib
+# Path - задает путь к файлу
+from pathlib import Path
 # *****************************************************************************************
 # класс для работы с файлом
 class File:
