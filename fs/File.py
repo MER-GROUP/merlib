@@ -33,6 +33,7 @@ from os import remove, listdir, chmod, mkdir
 # импортируем молуль stat (работа с разрешениями прав доступа файлов и папок)
 # stat.filemode - получить состояние (права доступа) файла/папки в виде строки (rwx)
 # stat.S_IMODE - получить состояние (права доступа) файла/папки в виде числа (777)
+# stat.S_IRWXU|stat.S_IRWXG|stat.S_IRWXO - права доступа rwxrwxrwx
 import stat
 # *****************************************************************************************
 # класс для работы с файлом
@@ -46,6 +47,7 @@ class File:
         file_get_current_dir_files() -> list[str]
         file_get_current_access_dir_in_str() -> list[str]
         file_get_current_access_dir_in_int() -> list[int]
+        file_set_access_open_all(name: str) -> bool
         file_read(file: str) -> list[str] 
         file_read_utf8(file: str) -> list[str]  
         file_write(file: str, arr: list) -> None  
@@ -170,6 +172,30 @@ class File:
             access_arr.append(stat.S_IMODE(os.stat(file).st_mode))
         # return
         return access_arr
+    # ---------------------------------------------------------------------------
+    # разрешить весь доступ к указанному файлу/директории
+    def file_set_access_open_all(self, name: str) -> bool:
+        '''
+        file_set_access_open_all(name: str) -> bool\n                      
+                разрешает весь доступ к указанному файлу/директории\n             
+                возвращаемое значение - bool (True - доступ разрешен, False - ошибка)\n    
+        параметры:\n                                                
+                name: str - имя папки/директории к которому нужно разрешить доступ\n                        
+        '''
+        try:
+            # определить имя файла/директории
+            dir_file_name = self.file_name_init('', name)
+            # определяем текущие права файла
+            permissions = os.stat(dir_file_name).st_mode
+            # Convert a file's mode to a string of the form '-rwxrwxrwx'
+            permissions = stat.filemode(permissions)
+            # задаем новые права доступа к файлу
+            new_permissions = stat.S_IRWXU|stat.S_IRWXG|stat.S_IRWXO
+            chmod(dir_file_name, new_permissions)
+        except (PermissionError) as e:
+            # show msg except
+            # print(e)
+            return False
     # ---------------------------------------------------------------------------
     # чтение содержимого файла построчно
     def file_read(self, file: str) -> list[str]:
@@ -390,6 +416,11 @@ if __name__ == '__main__':
         dir = f.file_name_init('./temp/', './new_dir_2/')
         f.file_create_dir(dir)
         print(f.file_get_current_dir_files())
+        # ---------------------------------------------------------------------------
+        # разрешить весь доступ к указанному файлу/директории
+        print('----------разрешить весь доступ к указанному файлу/директории----------')
+        f.file_write('./temp/open.txt', ['test'])
+        f.file_set_access_open_all('./temp/open.txt')
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
