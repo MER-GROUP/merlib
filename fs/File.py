@@ -14,6 +14,7 @@ class File - класс для обработки файлов
 # *****************************************************************************************
 # модуль для легкого копирования файлов и папок
 # shutil.copyfileobj - копирование файлового объекта
+# shutil.rmtree - удаление непустой папки/директории с носителя
 import shutil
 # модуль для работы с вводом и выводом в консоль
 # sys.stdout - вывод информации в терминал (консоль)
@@ -50,6 +51,7 @@ class File:
         file_create_dir(dir: str) -> bool
         file_delete(file: str) -> bool
         file_delete_empty_folder(file: str) -> bool
+        file_delete_full_folder(file: str) -> bool
         file_name_init(folder: str, filename: str) -> str
         file_get_current_dir_files() -> list[str]
         file_get_dir_files(dir: str) -> list[str]
@@ -123,6 +125,29 @@ class File:
             rmdir(dir_name)
             return True
         except (OSError) as e:
+            # show msg except
+            # print(e)
+            return False
+    # ---------------------------------------------------------------------------
+    # удаление непустой папки/директории с носителя
+    # также удаляет пустую папку/директорию
+    def file_delete_full_folder(self, dir: str) -> bool:
+        '''
+        file_delete_full_folder(file: str) -> bool\n                      
+                удаление непустой папки/директории с носителя\n  
+                    (также удаляет пустую папку/директорию)\n            
+                возвращаемое значение - bool (True - удалено, False - ошибка)\n    
+        параметры:\n                                                
+                dir: str - имя непустой папки/директории которое\n   
+                    неоходимо удалить с носителя\n                        
+        '''
+        try:
+            # определить имя удаляемой папки/директории
+            dir_name = self.file_name_init('', dir)
+            # delete folder
+            shutil.rmtree(dir_name)
+            return True
+        except (Exception) as e:
             # show msg except
             # print(e)
             return False
@@ -504,6 +529,14 @@ if __name__ == '__main__':
         print('----------удаление пустой папки/директории с носителя----------')
         if (f.file_delete_empty_folder('./temp/new_dir_2/')):
             print('Пустая директория удалена')
+        else:
+            print('Ошибка удаления')
+        # ---------------------------------------------------------------------------
+        # удаление непустой папки/директории с носителя
+        # также удаляет пустую папку/директорию
+        print('----------удаление непустой папки/директории с носителя----------')
+        if (f.file_delete_full_folder('./temp/new_dir_1/')):
+            print('Непустая директория удалена')
         else:
             print('Ошибка удаления')
         # ---------------------------------------------------------------------------
