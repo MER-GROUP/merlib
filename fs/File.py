@@ -30,7 +30,8 @@ import os
 # listdir - получает все файлы и папки в текущей директории
 # chmod - управление правами доступа у файлам и директориям
 # mkdir - создание директории/папки
-from os import remove, listdir, chmod, mkdir
+# rmdir - удаляет пустую папку/директорию
+from os import remove, listdir, chmod, mkdir, rmdir
 # импортируем молуль stat (работа с разрешениями прав доступа файлов и папок)
 # stat.filemode - получить состояние (права доступа) файла/папки в виде строки (rwx)
 # stat.S_IMODE - получить состояние (права доступа) файла/папки в виде числа (777)
@@ -48,6 +49,7 @@ class File:
     методы:
         file_create_dir(dir: str) -> bool
         file_delete(file: str) -> bool
+        file_delete_empty_folder(file: str) -> bool
         file_name_init(folder: str, filename: str) -> str
         file_get_current_dir_files() -> list[str]
         file_get_dir_files(dir: str) -> list[str]
@@ -100,6 +102,27 @@ class File:
             remove(file_name)
             return True
         except (FileNotFoundError) as e:
+            # show msg except
+            # print(e)
+            return False
+    # ---------------------------------------------------------------------------
+    # удаление пустой папки/директории с носителя
+    def file_delete_empty_folder(self, dir: str) -> bool:
+        '''
+        file_delete_empty_folder(file: str) -> bool\n                      
+                удаление пустой папки/директории с носителя\n             
+                возвращаемое значение - bool (True - удалено, False - ошибка)\n    
+        параметры:\n                                                
+                dir: str - имя пустой папки/директории которое\n   
+                    неоходимо удалить с носителя\n                        
+        '''
+        try:
+            # определить имя удаляемой папки/директории
+            dir_name = self.file_name_init('', dir)
+            # delete folder
+            rmdir(dir_name)
+            return True
+        except (OSError) as e:
             # show msg except
             # print(e)
             return False
@@ -476,6 +499,13 @@ if __name__ == '__main__':
         # получить все файлы и папки в указанной директории
         print('----------получить все файлы и папки в указанной директории----------')
         print(f.file_get_dir_files('./temp/'))
+        # ---------------------------------------------------------------------------
+        # удаление пустой папки/директории с носителя
+        print('----------удаление пустой папки/директории с носителя----------')
+        if (f.file_delete_empty_folder('./temp/new_dir_2/')):
+            print('Пустая директория удалена')
+        else:
+            print('Ошибка удаления')
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
