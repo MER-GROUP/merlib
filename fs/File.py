@@ -255,6 +255,9 @@ class File:
         параметры:\n                                              
                 нет параметров\n                        
         '''
+        # создаем свое исключение
+        class file_get_path_to_downloads_ERROR(BaseException):
+            pass
         # if android
         if hasattr(sys, 'getandroidapilevel'):
             # получить Download путь к каталогу в Android
@@ -275,14 +278,15 @@ class File:
         elif sys.platform in ("win", "win32", "win64", "cygwin"):
             # работа с реестром windows
             import winreg
-            with winreg.OpenKey(HKEY_CURRENT_USER, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders') as key:
-                downloads_path = QueryValueEx(key, '{374DE290-123F-4565-9164-39C4925E467B}')[0]
+            sub_key = r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders'
+            downloads_guid = '{374DE290-123F-4565-9164-39C4925E467B}'
+            downloads_path_win = None
+            with winreg.OpenKey(winreg.HKEY_CURRENT_USER, sub_key) as key:
+                downloads_path_win = winreg.QueryValueEx(key, downloads_guid)[0]
+            downloads_path = str(Path(downloads_path_win)) + '\\'
             return downloads_path
         # if unknown
         else:
-            # создаем свое исключение
-            class file_get_path_to_downloads_ERROR(BaseException):
-                pass
             try:
                 raise file_get_path_to_downloads_ERROR
             except (file_get_path_to_downloads_ERROR) as e:
