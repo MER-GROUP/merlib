@@ -14,9 +14,11 @@ class File - класс для обработки файлов
 # *****************************************************************************************
 # модуль для легкого копирования файлов и папок
 # shutil.copyfileobj - копирование файлового объекта
+# shutil.rmtree - удаление непустой папки/директории с носителя
 import shutil
 # модуль для работы с вводом и выводом в консоль
 # sys.stdout - вывод информации в терминал (консоль)
+# sys.platform - определение иммени платформы (операционной системы)
 import sys
 # импортируем молуль os.path
 # dirname - определяем текущую директорию
@@ -24,13 +26,15 @@ import sys
 from os.path import dirname, join
 # импортируем молуль os
 # os.stat(<file>).st_mode - получить состояние (права доступа) файла/папки в виде числа
+# os.path.join(Path.home(), "Downloads") - получить путь/директорию к папке Downloads
 import os
 # импортируем молуль os
 # remove - удаляет указанный файл
 # listdir - получает все файлы и папки в текущей директории
 # chmod - управление правами доступа у файлам и директориям
 # mkdir - создание директории/папки
-from os import remove, listdir, chmod, mkdir
+# rmdir - удаляет пустую папку/директорию
+from os import remove, listdir, chmod, mkdir, rmdir
 # импортируем молуль stat (работа с разрешениями прав доступа файлов и папок)
 # stat.filemode - получить состояние (права доступа) файла/папки в виде строки (rwx)
 # stat.S_IMODE - получить состояние (права доступа) файла/папки в виде числа (777)
@@ -48,11 +52,14 @@ class File:
     методы:
         file_create_dir(dir: str) -> bool
         file_delete(file: str) -> bool
+        file_delete_empty_folder(file: str) -> bool
+        file_delete_full_folder(file: str) -> bool
         file_name_init(folder: str, filename: str) -> str
         file_get_current_dir_files() -> list[str]
         file_get_dir_files(dir: str) -> list[str]
         file_get_current_access_dir_in_str() -> list[str]
         file_get_current_access_dir_in_int() -> list[int]
+        file_get_path_to_downloads() -> str
         file_set_access_open_all(name: str) -> bool
         file_set_access_close_all(name: str) -> bool
         file_read(file: str) -> list[str] 
@@ -104,13 +111,57 @@ class File:
             # print(e)
             return False
     # ---------------------------------------------------------------------------
+    # удаление пустой папки/директории с носителя
+    def file_delete_empty_folder(self, dir: str) -> bool:
+        '''
+        file_delete_empty_folder(file: str) -> bool\n                      
+                удаление пустой папки/директории с носителя\n             
+                возвращаемое значение - bool (True - удалено, False - ошибка)\n    
+        параметры:\n                                                
+                dir: str - имя пустой папки/директории которое\n   
+                    неоходимо удалить с носителя\n                        
+        '''
+        try:
+            # определить имя удаляемой папки/директории
+            dir_name = self.file_name_init('', dir)
+            # delete folder
+            rmdir(dir_name)
+            return True
+        except (OSError) as e:
+            # show msg except
+            # print(e)
+            return False
+    # ---------------------------------------------------------------------------
+    # удаление непустой папки/директории с носителя
+    # также удаляет пустую папку/директорию
+    def file_delete_full_folder(self, dir: str) -> bool:
+        '''
+        file_delete_full_folder(file: str) -> bool\n                      
+                удаление непустой папки/директории с носителя\n  
+                    (также удаляет пустую папку/директорию)\n            
+                возвращаемое значение - bool (True - удалено, False - ошибка)\n    
+        параметры:\n                                                
+                dir: str - имя непустой папки/директории которое\n   
+                    неоходимо удалить с носителя\n                        
+        '''
+        try:
+            # определить имя удаляемой папки/директории
+            dir_name = self.file_name_init('', dir)
+            # delete folder
+            shutil.rmtree(dir_name)
+            return True
+        except (Exception) as e:
+            # show msg except
+            # print(e)
+            return False
+    # ---------------------------------------------------------------------------
     # инициализация полного имени файла (директория + имя файла)
     def file_name_init(self, folder: str, filename: str) -> str:
         '''
         file_name_init(folder: str, filename: str) -> str\n   
                 инициализация полного имени файла\n                   
                     (директория + имя файла)\n                        
-                возвращаемое значение - str (строку)\n                
+                возвращаемое значение - str (строка)\n                
         параметры:\n                                                
                 folder: str - создать директорию в текущей папке\n    
                 filename: str - создать файл в директории folder\n    
@@ -194,6 +245,49 @@ class File:
             access_arr.append(stat.S_IMODE(os.stat(file).st_mode))
         # return
         return access_arr
+    # ---------------------------------------------------------------------------
+    # получить путь/директорию к папке Downloads
+    def file_get_path_to_downloads(self) -> str:
+        '''
+        file_get_path_to_downloads() -> str\n                       
+                получает путь/директорию к папке Downloads\n 
+                возвращаемое значение - str (строка)\n   
+        параметры:\n                                              
+                нет параметров\n                        
+        '''
+        # if android
+        if hasattr(sys, 'getandroidapilevel'):
+            # получить Download путь к каталогу в Android
+            from android.storage import primary_external_storage_path
+            dir = primary_external_storage_path()
+            downloads_path = os.path.join(dir, './Download/')
+            return downloads_path
+        # if linux and freebsd and macosx
+        elif (sys.platform.startswith("linux") or 
+                sys.platform.startswith("linux2") or
+                sys.platform.startswith("freebsd") or
+                sys.platform == "darwin"):
+            # downloads_path = str(Path.home()/"Downloads")
+            # downloads_path = str(os.path.join(Path.home(), "Downloads"))
+            downloads_path = str(os.path.join(Path.home(), "./Downloads/"))
+            return downloads_path
+        # if windows
+        elif sys.platform in ("win", "win32", "win64", "cygwin"):
+            # работа с реестром windows
+            import winreg
+            with winreg.OpenKey(HKEY_CURRENT_USER, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders') as key:
+                downloads_path = QueryValueEx(key, '{374DE290-123F-4565-9164-39C4925E467B}')[0]
+            return downloads_path
+        # if unknown
+        else:
+            # создаем свое исключение
+            class file_get_path_to_downloads_ERROR(BaseException):
+                pass
+            try:
+                raise file_get_path_to_downloads_ERROR
+            except (file_get_path_to_downloads_ERROR) as e:
+                print(e, ' OS is unknown')
+            # return 'unknown'
     # ---------------------------------------------------------------------------
     # разрешить весь доступ к указанному файлу/директории
     def file_set_access_open_all(self, name: str) -> bool:
@@ -476,6 +570,25 @@ if __name__ == '__main__':
         # получить все файлы и папки в указанной директории
         print('----------получить все файлы и папки в указанной директории----------')
         print(f.file_get_dir_files('./temp/'))
+        # ---------------------------------------------------------------------------
+        # удаление пустой папки/директории с носителя
+        print('----------удаление пустой папки/директории с носителя----------')
+        if (f.file_delete_empty_folder('./temp/new_dir_2/')):
+            print('Пустая директория удалена')
+        else:
+            print('Ошибка удаления')
+        # ---------------------------------------------------------------------------
+        # удаление непустой папки/директории с носителя
+        # также удаляет пустую папку/директорию
+        print('----------удаление непустой папки/директории с носителя----------')
+        if (f.file_delete_full_folder('./temp/new_dir_1/')):
+            print('Непустая директория удалена')
+        else:
+            print('Ошибка удаления')
+        # ---------------------------------------------------------------------------
+        # получить путь/директорию к папке Downloads
+        print('----------получить путь/директорию к папке Downloads----------')
+        print(f.file_get_path_to_downloads())
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()

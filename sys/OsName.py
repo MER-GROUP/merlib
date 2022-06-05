@@ -33,44 +33,45 @@ class OsName:
     # метод - определяем имя ОС
     def os_name_get(self) -> str:
         '''
-        os_name_get() -> str                                 
-                возвращает имя ОС               
-                возвращаемое значение - str (текстовая строка) 
-                возвращаемые str значения:
-                        android
-                        linux
-                        mac
-                        win
-                        other
+        os_name_get() -> str\n                                 
+                возвращает имя ОС\n                
+                возвращаемое значение - str (текстовая строка)\n  
+                возвращаемые str значения:\n 
+                        android\n 
+                        linux\n 
+                        freebsd\n 
+                        macosx\n 
+                        windows\n 
+                        unknown\n 
         '''
         if hasattr(sys, 'getandroidapilevel'):
             # android
             # print('android')
             return 'android'
-        elif _platform == "linux" or _platform == "linux2":
+        elif _platform.startswith("linux") or _platform.startswith("linux2"):
             # linux
             # print('linux')
             # print(_platform)
             return 'linux'
+        elif _platform.startswith("freebsd"):
+            # linux
+            # print('linux')
+            # print(_platform)
+            return 'freebsd'
         elif _platform == "darwin":
             # MAC OS X
             # print('Mac OS')
             # print(_platform)
-            return 'mac'
-        elif _platform == "win32":
+            return 'macosx'
+        elif _platform in ("win", "win32", "win64", "cygwin"):
             # Windows
-            # print('Windows 32')
+            # print('Windows')
             # print(_platform)
-            return 'win'
-        elif _platform == "win64":
-            # Windows 64-bit
-            # print('Windows 32')
-            # print(_platform)
-            return 'win'
+            return 'windows'
         else:
-            # other
-            # print('other')
-            return 'other'
+            # unknown
+            # print('unknown')
+            return 'unknown'
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
 # тест
