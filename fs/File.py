@@ -18,6 +18,7 @@ class File - класс для обработки файлов
 import shutil
 # модуль для работы с вводом и выводом в консоль
 # sys.stdout - вывод информации в терминал (консоль)
+# sys.platform - определение иммени платформы (операционной системы)
 import sys
 # импортируем молуль os.path
 # dirname - определяем текущую директорию
@@ -158,7 +159,7 @@ class File:
         file_name_init(folder: str, filename: str) -> str\n   
                 инициализация полного имени файла\n                   
                     (директория + имя файла)\n                        
-                возвращаемое значение - str (строку)\n                
+                возвращаемое значение - str (строка)\n                
         параметры:\n                                                
                 folder: str - создать директорию в текущей папке\n    
                 filename: str - создать файл в директории folder\n    
@@ -242,6 +243,37 @@ class File:
             access_arr.append(stat.S_IMODE(os.stat(file).st_mode))
         # return
         return access_arr
+    # ---------------------------------------------------------------------------
+    # получить путь/директорию к папке Downloads
+    def file_get_path_to_downloads(self) -> str:
+        '''
+        file_get_path_to_downloads() -> str\n                       
+                получает путь/директорию к папке Downloads\n 
+                возвращаемое значение - str (строка)\n   
+        параметры:\n                                              
+                нет параметров\n                        
+        '''
+        # if android
+        if hasattr(sys, 'getandroidapilevel'):
+            pass
+            return 'android'
+        # if linux and freebsd
+        elif (sys.platform.startswith("linux") or 
+                sys.platform.startswith("linux2") or
+                sys.platform.startswith("freebsd")):
+            pass
+            return 'linux or freebsd'
+        # if macosx
+        elif sys.platform == "darwin":
+            pass
+            return 'macosx'
+        # if windows
+        elif sys.platform in ("win", "win32", "win64", "cygwin"):
+            pass
+            return 'windows'
+        # if unknown
+        else:
+            return 'unknown'
     # ---------------------------------------------------------------------------
     # разрешить весь доступ к указанному файлу/директории
     def file_set_access_open_all(self, name: str) -> bool:
