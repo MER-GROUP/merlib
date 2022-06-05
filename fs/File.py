@@ -26,6 +26,7 @@ import sys
 from os.path import dirname, join
 # импортируем молуль os
 # os.stat(<file>).st_mode - получить состояние (права доступа) файла/папки в виде числа
+# os.path.join(Path.home(), "Downloads") - получить путь/директорию к папке Downloads
 import os
 # импортируем молуль os
 # remove - удаляет указанный файл
@@ -58,6 +59,7 @@ class File:
         file_get_dir_files(dir: str) -> list[str]
         file_get_current_access_dir_in_str() -> list[str]
         file_get_current_access_dir_in_int() -> list[int]
+        file_get_path_to_downloads() -> str
         file_set_access_open_all(name: str) -> bool
         file_set_access_close_all(name: str) -> bool
         file_read(file: str) -> list[str] 
@@ -255,25 +257,37 @@ class File:
         '''
         # if android
         if hasattr(sys, 'getandroidapilevel'):
-            pass
-            return 'android'
-        # if linux and freebsd
+            # получить Download путь к каталогу в Android
+            from android.storage import primary_external_storage_path
+            dir = primary_external_storage_path()
+            downloads_path = os.path.join(dir, './Download/')
+            return downloads_path
+        # if linux and freebsd and macosx
         elif (sys.platform.startswith("linux") or 
                 sys.platform.startswith("linux2") or
-                sys.platform.startswith("freebsd")):
-            pass
-            return 'linux or freebsd'
-        # if macosx
-        elif sys.platform == "darwin":
-            pass
-            return 'macosx'
+                sys.platform.startswith("freebsd") or
+                sys.platform == "darwin"):
+            # downloads_path = str(Path.home()/"Downloads")
+            # downloads_path = str(os.path.join(Path.home(), "Downloads"))
+            downloads_path = str(os.path.join(Path.home(), "./Downloads/"))
+            return downloads_path
         # if windows
         elif sys.platform in ("win", "win32", "win64", "cygwin"):
-            pass
-            return 'windows'
+            # работа с реестром windows
+            import winreg
+            with winreg.OpenKey(HKEY_CURRENT_USER, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders') as key:
+                downloads_path = QueryValueEx(key, '{374DE290-123F-4565-9164-39C4925E467B}')[0]
+            return downloads_path
         # if unknown
         else:
-            return 'unknown'
+            # создаем свое исключение
+            class file_get_path_to_downloads_ERROR(BaseException):
+                pass
+            try:
+                raise file_get_path_to_downloads_ERROR
+            except (file_get_path_to_downloads_ERROR) as e:
+                print(e, ' OS is unknown')
+            # return 'unknown'
     # ---------------------------------------------------------------------------
     # разрешить весь доступ к указанному файлу/директории
     def file_set_access_open_all(self, name: str) -> bool:
@@ -571,6 +585,10 @@ if __name__ == '__main__':
             print('Непустая директория удалена')
         else:
             print('Ошибка удаления')
+        # ---------------------------------------------------------------------------
+        # получить путь/директорию к папке Downloads
+        print('----------получить путь/директорию к папке Downloads----------')
+        print(f.file_get_path_to_downloads())
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
