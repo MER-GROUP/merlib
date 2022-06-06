@@ -444,6 +444,7 @@ class File:
             return str(e)
     # ---------------------------------------------------------------------------
     # разрешить весь доступ к указанному файлу/директории
+    # работает только с файлофой системой unix (ext и т.д.)
     def file_set_access_open_all(self, name: str) -> bool:
         '''
         file_set_access_open_all(name: str) -> bool\n                      
@@ -469,6 +470,7 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # запретить весь доступ к указанному файлу/директории
+    # работает только с файлофой системой unix (ext и т.д.)
     def file_set_access_close_all(self, name: str) -> bool:
         '''
         file_set_access_close_all(name: str) -> bool\n                      
