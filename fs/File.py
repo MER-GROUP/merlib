@@ -64,6 +64,7 @@ class File:
         file_get_dir_files(dir: str) -> list[str]
         file_get_current_access_dir_in_str() -> list[str]
         file_get_current_access_dir_in_int() -> list[int]
+        file_get_installer() -> str
         file_get_path_to_downloads() -> str
         file_get_local_language() -> str
         file_set_access_open_all(name: str) -> bool
@@ -281,6 +282,57 @@ class File:
         # return
         return access_arr
     # ---------------------------------------------------------------------------
+    # получить установщик данного файла
+    def file_get_installer(self) -> str:
+        '''
+        file_get_installer() -> str\n                       
+                получает установщик данного файла\n 
+                возвращаемое значение - str (строка)\n 
+        возвращаемое значение для android\n 
+            com.google.android.packageinstaller - установка с телефона\n 
+            com.android.vending - установка с 'google play market'\n 
+            com.amazon.venezia - установка с amazon.com\n 
+        возвращаемое значение для остальных ОС\n 
+            unknown - источник установки неизвестен\n 
+        параметры:\n                                              
+                нет параметров\n                        
+        '''
+        # создаем свое исключение
+        class file_get_installer_ERROR(BaseException):
+            pass
+        # if android
+        if hasattr(sys, 'getandroidapilevel'):
+            # получить установщик данного файла
+            from jnius import autoclass, JavaException
+            try:
+                Context = autoclass('android.content.Context')
+                # получить установщик данного файла
+                return str(
+                    Context.getPackageManager().getInstallerPackageName(
+                        str(Context.getPackageName())
+                        )
+                    )
+            except (BaseException) as e:
+                return ('BaseException: ' + str(e))
+            except (JavaException) as e:
+                return ('JavaException: ' + str(e))
+        # if linux and freebsd and macosx
+        elif (sys.platform.startswith("linux") or 
+                sys.platform.startswith("linux2") or
+                sys.platform.startswith("freebsd") or
+                sys.platform == "darwin"):
+            return 'unknown'
+        # if windows
+        elif sys.platform in ("win", "win32", "win64", "cygwin"):
+            return 'unknown'
+        # if unknown
+        else:
+            try:
+                raise file_get_installer_ERROR
+            except (file_get_installer_ERROR) as e:
+                return (str(e) + ' OS is unknown')
+            # return 'unknown'
+    # ---------------------------------------------------------------------------
     # получить путь/директорию к папке Downloads
     def file_get_path_to_downloads(self) -> str:
         '''
@@ -325,7 +377,7 @@ class File:
             try:
                 raise file_get_path_to_downloads_ERROR
             except (file_get_path_to_downloads_ERROR) as e:
-                print(e, ' OS is unknown')
+                return (str(e) + ' OS is unknown')
             # return 'unknown'
     # ---------------------------------------------------------------------------
     # получить установленный по умолчанию язык операционной системы
@@ -365,7 +417,7 @@ class File:
             try:
                 raise file_get_local_language_ERROR
             except (file_get_local_language_ERROR) as e:
-                print(e, ' OS is unknown')
+                return (str(e) + ' OS is unknown')
             # return 'unknown'
     # ---------------------------------------------------------------------------
     # разрешить весь доступ к указанному файлу/директории
@@ -676,6 +728,10 @@ if __name__ == '__main__':
         # создать пустой файл
         print('----------создать пустой файл----------')
         print(f.file_create('./temp/empty_file.txt'))
+        # ---------------------------------------------------------------------------
+        # получить установщик данного файла
+        print('----------получить установщик данного файла----------')
+        print(f.file_get_installer())
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
