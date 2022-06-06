@@ -44,6 +44,8 @@ import stat
 # импортируем молуль pathlib
 # Path - задает путь к файлу
 from pathlib import Path
+# импортируем молуль locale - Сервисы интернационализации
+import locale
 # *****************************************************************************************
 # класс для работы с файлом
 class File:
@@ -60,6 +62,7 @@ class File:
         file_get_current_access_dir_in_str() -> list[str]
         file_get_current_access_dir_in_int() -> list[int]
         file_get_path_to_downloads() -> str
+        file_get_local_language() -> str
         file_set_access_open_all(name: str) -> bool
         file_set_access_close_all(name: str) -> bool
         file_read(file: str) -> list[str] 
@@ -293,6 +296,46 @@ class File:
                 print(e, ' OS is unknown')
             # return 'unknown'
     # ---------------------------------------------------------------------------
+    # получить установленный по умолчанию язык операционной системы
+    def file_get_local_language(self) -> str:
+        '''
+        file_get_local_language() -> str\n                       
+                получает установленный по умолчанию язык операционной системы\n 
+                возвращаемое значение - str (строка)\n   
+        параметры:\n                                              
+                нет параметров\n                        
+        '''
+        # создаем свое исключение
+        class file_get_local_language_ERROR(BaseException):
+            pass
+        # if android
+        if hasattr(sys, 'getandroidapilevel'):
+            # Получение языка установленного в системе
+            from jnius import autoclass
+            language = autoclass("java.util.Locale").getDefault().getDisplayLanguage()
+            return language
+        # if linux and freebsd and macosx
+        elif (sys.platform.startswith("linux") or 
+                sys.platform.startswith("linux2") or
+                sys.platform.startswith("freebsd") or
+                sys.platform == "darwin"):
+            language = locale.getdefaultlocale()[0].split('_')[0]
+            return language
+        # if windows
+        elif sys.platform in ("win", "win32", "win64", "cygwin"):
+            import ctypes
+            windll = ctypes.windll.kernel32
+            windll.GetUserDefaultUILanguage()
+            language = locale.windows_locale[windll.GetUserDefaultUILanguage()]
+            return language
+        # if unknown
+        else:
+            try:
+                raise file_get_local_language_ERROR
+            except (file_get_local_language_ERROR) as e:
+                print(e, ' OS is unknown')
+            # return 'unknown'
+    # ---------------------------------------------------------------------------
     # разрешить весь доступ к указанному файлу/директории
     def file_set_access_open_all(self, name: str) -> bool:
         '''
@@ -329,7 +372,6 @@ class File:
         try:
             # определить имя файла/директории
             dir_file_name = self.file_name_init('', name)
-            print(dir_file_name) #####################################
             # определяем текущие права файла
             # permissions = os.stat(dir_file_name).st_mode
             # Convert a file's mode to a string of the form '-rwxrwxrwx'
@@ -564,6 +606,7 @@ if __name__ == '__main__':
         # ---------------------------------------------------------------------------
         # разрешить весь доступ к указанному файлу/директории
         print('----------разрешить весь доступ к указанному файлу/директории----------')
+        f.file_delete('./temp/open.txt')
         f.file_write('./temp/open.txt', ['test'])
         f.file_set_access_open_all('./temp/open.txt')
         # ---------------------------------------------------------------------------
@@ -593,6 +636,10 @@ if __name__ == '__main__':
         # получить путь/директорию к папке Downloads
         print('----------получить путь/директорию к папке Downloads----------')
         print(f.file_get_path_to_downloads())
+        # ---------------------------------------------------------------------------
+        # получить установленный по умолчанию язык операционной системы
+        print('----------получить установленный по умолчанию язык операционной системы----------')
+        print(f.file_get_local_language())
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
