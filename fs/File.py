@@ -43,7 +43,9 @@ from os import remove, listdir, chmod, mkdir, rmdir
 import stat
 # импортируем молуль pathlib
 # Path - задает путь к файлу
+# Path.unlink - отмена связи или удаление файла по указанному пути
 from pathlib import Path
+
 # импортируем молуль locale - Сервисы интернационализации
 import locale
 # *****************************************************************************************
@@ -104,12 +106,23 @@ class File:
                 file: str - имя файла которое неоходимо удалить с носителя\n                        
         '''
         try:
-            # определить имя удаляемого файла
-            file_name = self.file_name_init('', file)
-            # delete file
-            remove(file_name)
-            return True
-        except (FileNotFoundError) as e:
+            try:
+                # определить имя удаляемого файла
+                file_name = self.file_name_init('', file)
+                # delete file
+                remove(file_name)
+                # return
+                return True
+            except(FileNotFoundError, OSError) as e:
+                # определить имя удаляемого файла
+                file_name = self.file_name_init('', file)
+                # указывает путь у файлу
+                file_name_path = Path(file_name)
+                # удаляем файл
+                file_name_path.unlink()
+                # return
+                return True
+        except (FileNotFoundError, OSError) as e:
             # show msg except
             # print(e)
             return False
