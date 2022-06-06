@@ -377,7 +377,11 @@ class File:
                     sys.platform == "darwin"):
                 # downloads_path = str(Path.home()/"Downloads")
                 # downloads_path = str(os.path.join(Path.home(), "Downloads"))
-                downloads_path = str(os.path.join(Path.home(), "./Downloads/"))
+                downloads_path = None
+                if ('ru' == self.file_get_local_language()):
+                    downloads_path = str(os.path.join(Path.home(), "./Загрузки/"))
+                else:
+                    downloads_path = str(os.path.join(Path.home(), "./Downloads/"))
                 return downloads_path
             # if windows
             elif sys.platform in ("win", "win32", "win64", "cygwin"):
