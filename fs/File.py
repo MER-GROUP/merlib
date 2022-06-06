@@ -54,6 +54,7 @@ class File:
     '''
     class File - класс для обработки файлов
     методы:
+        file_create(file: str) -> bool
         file_create_dir(dir: str) -> bool
         file_delete(file: str) -> bool
         file_delete_empty_folder(file: str) -> bool
@@ -75,6 +76,24 @@ class File:
         file_list_console(arr: list) -> None   
         file_print_console_utf8(file: str) -> None 
     '''
+    # ---------------------------------------------------------------------------
+    # создать пустой файл
+    def file_create(self, file: str) -> bool:
+        '''
+        file_create(file: str) -> bool\n                      
+                создает пустой файл\n             
+                возвращаемое значение - bool (True - создано, False - ошибка)\n    
+        параметры:\n                                                
+                file: str - имя файла которое неоходимо создать\n                        
+        '''
+        try:
+            # создать файл и записать пустой список
+            if self.file_write(file, list()) is None:
+                return True
+        except (Exception) as e:
+            # show msg except
+            # print(e)
+            return False
     # ---------------------------------------------------------------------------
     # создать указанную папку/директорию
     def file_create_dir(self, dir: str) -> bool:
@@ -653,6 +672,10 @@ if __name__ == '__main__':
         # получить установленный по умолчанию язык операционной системы
         print('----------получить установленный по умолчанию язык операционной системы----------')
         print(f.file_get_local_language())
+        # ---------------------------------------------------------------------------
+        # создать пустой файл
+        print('----------создать пустой файл----------')
+        print(f.file_create('./temp/empty_file.txt'))
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
