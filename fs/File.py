@@ -213,7 +213,7 @@ class File:
             # определяем тип FILE_PATH
             # print('FILE_PATH :', type(FILE_PATH))
             # возвращаеи полное имя файла (директория + имя файла)
-            return FILE_PATH
+            return str(Path(FILE_PATH))
         except (BaseException) as e:
             return str(e)
     # ---------------------------------------------------------------------------
