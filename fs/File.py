@@ -213,7 +213,7 @@ class File:
             # определяем тип FILE_PATH
             # print('FILE_PATH :', type(FILE_PATH))
             # возвращаеи полное имя файла (директория + имя файла)
-            return FILE_PATH
+            return str(Path(FILE_PATH))
         except (BaseException) as e:
             return str(e)
     # ---------------------------------------------------------------------------
@@ -377,7 +377,11 @@ class File:
                     sys.platform == "darwin"):
                 # downloads_path = str(Path.home()/"Downloads")
                 # downloads_path = str(os.path.join(Path.home(), "Downloads"))
-                downloads_path = str(os.path.join(Path.home(), "./Downloads/"))
+                downloads_path = None
+                if ('ru' == self.file_get_local_language()):
+                    downloads_path = str(os.path.join(Path.home(), "./Загрузки/"))
+                else:
+                    downloads_path = str(os.path.join(Path.home(), "./Downloads/"))
                 return downloads_path
             # if windows
             elif sys.platform in ("win", "win32", "win64", "cygwin"):
@@ -431,7 +435,7 @@ class File:
                 import ctypes
                 windll = ctypes.windll.kernel32
                 windll.GetUserDefaultUILanguage()
-                language = locale.windows_locale[windll.GetUserDefaultUILanguage()]
+                language = locale.windows_locale[windll.GetUserDefaultUILanguage()].split('_')[0]
                 return language
             # if unknown
             else:
@@ -444,6 +448,7 @@ class File:
             return str(e)
     # ---------------------------------------------------------------------------
     # разрешить весь доступ к указанному файлу/директории
+    # работает только с файлофой системой unix (ext и т.д.)
     def file_set_access_open_all(self, name: str) -> bool:
         '''
         file_set_access_open_all(name: str) -> bool\n                      
@@ -469,6 +474,7 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # запретить весь доступ к указанному файлу/директории
+    # работает только с файлофой системой unix (ext и т.д.)
     def file_set_access_close_all(self, name: str) -> bool:
         '''
         file_set_access_close_all(name: str) -> bool\n                      
