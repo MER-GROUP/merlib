@@ -435,7 +435,7 @@ class File:
                 import ctypes
                 windll = ctypes.windll.kernel32
                 windll.GetUserDefaultUILanguage()
-                language = locale.windows_locale[windll.GetUserDefaultUILanguage()]
+                language = locale.windows_locale[windll.GetUserDefaultUILanguage()].split('_')[0]
                 return language
             # if unknown
             else:
