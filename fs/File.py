@@ -23,7 +23,8 @@ import sys
 # импортируем молуль os.path
 # dirname - определяем текущую директорию
 # join - объеденяем директорию + файл (правильный путь файла)
-from os.path import dirname, join
+# exists - проверяет существует ли файл или директория
+from os.path import dirname, join, exists
 # импортируем молуль os
 # os.stat(<file>).st_mode - получить состояние (права доступа) файла/папки в виде числа
 # os.path.join(Path.home(), "Downloads") - получить путь/директорию к папке Downloads
@@ -58,6 +59,7 @@ class File:
         file_delete(file: str) -> bool
         file_delete_empty_folder(file: str) -> bool
         file_delete_full_folder(file: str) -> bool
+        file_exists(file: str) -> bool
         file_name_init(folder: str, filename: str) -> str
         file_get_current_dir_files() -> list[str]
         file_get_dir_files(dir: str) -> list[str]
@@ -185,6 +187,28 @@ class File:
             # delete folder
             shutil.rmtree(dir_name)
             return True
+        except (Exception) as e:
+            # show msg except
+            # print(e)
+            return False
+    # ---------------------------------------------------------------------------
+    # проверка существования файла
+    def file_exists(self, file: str) -> bool:
+        '''
+        file_exists(file: str) -> bool\n                      
+                проверяет существования файла\n          
+                возвращаемое значение - bool (True - существует, False - ошибка)\n    
+        параметры:\n                                                
+                file: str - имя файла для проверки\n                     
+        '''
+        try:
+            # определить имя файла
+            file_name = self.file_name_init('', file)
+            # проверка существования файла
+            if exists(file_name):
+                return True
+            else:
+                return False
         except (Exception) as e:
             # show msg except
             # print(e)
@@ -784,6 +808,11 @@ if __name__ == '__main__':
         # получить установщик данного файла
         print('----------получить установщик данного файла----------')
         print(f.file_get_installer())
+        # ---------------------------------------------------------------------------
+        # проверка существования файла
+        print('----------проверка существования файла----------')
+        print(f.file_exists('./temp/test_read.txt'))
+        print(f.file_exists('./temp/test_read_2.txt'))
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
