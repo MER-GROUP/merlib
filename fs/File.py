@@ -60,6 +60,7 @@ class File:
         file_delete_empty_folder(file: str) -> bool
         file_delete_full_folder(file: str) -> bool
         file_exists(file: str) -> bool
+        file_exists_dir(dir: str) -> bool
         file_name_init(folder: str, filename: str) -> str
         file_get_current_dir_files() -> list[str]
         file_get_dir_files(dir: str) -> list[str]
@@ -192,11 +193,11 @@ class File:
             # print(e)
             return False
     # ---------------------------------------------------------------------------
-    # проверка существования файла
+    # проверка существование файла
     def file_exists(self, file: str) -> bool:
         '''
         file_exists(file: str) -> bool\n                      
-                проверяет существования файла\n          
+                проверяет существование файла\n          
                 возвращаемое значение - bool (True - существует, False - ошибка)\n    
         параметры:\n                                                
                 file: str - имя файла для проверки\n                     
@@ -206,6 +207,29 @@ class File:
             file_name = self.file_name_init('', file)
             # проверка существования файла
             if exists(file_name):
+                return True
+            else:
+                return False
+        except (Exception) as e:
+            # show msg except
+            # print(e)
+            return False
+    # ---------------------------------------------------------------------------
+    # проверка существования папки/директории
+    def file_exists_dir(self, dir: str) -> bool:
+        '''
+        file_exists_dir(dir: str) -> bool\n                      
+                проверяет существование папки/директории \n          
+                возвращаемое значение - bool (True - существует, False - ошибка)\n    
+        параметры:\n                                                
+                dir: str - имя папки/директории для проверки\n                     
+        '''
+        try:
+            # определить имя папки/директории
+            dir_name = self.file_name_init('', dir)
+            # проверка существования папки/директории
+            # if exists(dir_name):
+            if self.file_exists(dir_name):
                 return True
             else:
                 return False
@@ -813,6 +837,12 @@ if __name__ == '__main__':
         print('----------проверка существования файла----------')
         print(f.file_exists('./temp/test_read.txt'))
         print(f.file_exists('./temp/test_read_2.txt'))
+        # ---------------------------------------------------------------------------
+        # проверка существования папки/директории
+        print('----------проверка существования папки/директории----------')
+        f.file_create_dir('./temp/test/')
+        print(f.file_exists_dir('./temp/test/'))
+        print(f.file_exists_dir('./temp/test2/'))
         # ---------------------------------------------------------------------------
     # выполнить тест
     main()
