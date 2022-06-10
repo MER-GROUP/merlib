@@ -74,7 +74,7 @@ class File:
         file_set_access_close_all(name: str) -> bool
         file_read(file: str) -> list[str] 
         file_read_utf8(file: str) -> list[str]  
-        file_write(file: str, arr: list) -> None                ##########  
+        file_write(file: str, arr: list, curdir: str = __file__) -> None            ##########+  
         file_write_append(file: str, arr: list) -> None         ########## 
         file_write_dict(file: str, dictor: dict) -> None        ##########  
         file_list_console(arr: list) -> None                    ##########   
@@ -684,24 +684,27 @@ class File:
             return str(e)
     # ---------------------------------------------------------------------------
     # запись содержимого списка (list) в файл
-    def file_write(self, file: str, arr: list) -> None:
+    def file_write(self, file: str, arr: list, curdir: str = __file__) -> None:
         '''
-        file_write(file: str, arr: list) -> None\n                  
+        file_write(file: str, arr: list, curdir: str = __file__) -> None\n                  
                 запись содержимого списка (list) в файл\n             
                 возвращаемое значение - None (None)\n                 
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
                     для записи содержимого списка\n           
-                arr: list - список для записи в файл\n   
+                arr: list - список для записи в файл\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
         примеры:\n 
                 file = File()\n 
-                file.file_write('./temp/write.txt', ['test', 'rom', 'max'])\n                
+                file.file_write('./temp/write.txt', ['test', 'rom', 'max'], __file__)\n                
         '''
         try:
             # определить имя файла
-            file_name = self.file_init_name('', file)
+            file_name = self.file_init_name('', file, curdir)
             # в списке к концу строк добавляем \n (переход на новую строку)
-            for i in range(len(arr)):
+            for i in range(len(arr) - 1):
                 arr[i] += '\n'
             # создаем файл и записываем содержимое списка
             with open(file_name, 'w') as f:
@@ -845,12 +848,12 @@ if __name__ == '__main__':
         # print(file.file_create('./temp/test1.txt'))
         # print(file.file_create('./temp/test2.txt'))
         # print(file.file_create('./temp/max/test2.txt'))
-        # # ---------------------------------------------------------------------------
-        # # запись содержимого списка (list) в файл
-        # print('******************запись содержимого списка (list) в файл******************')
-        # print('++++++++++(file_write(file: str, arr: list) -> None)++++++++++')
-        # print(file.file_write('./temp/write.txt', ['test', 'rom', 'max']))
-        # # ---------------------------------------------------------------------------
+        # ---------------------------------------------------------------------------
+        # запись содержимого списка (list) в файл
+        print('******************запись содержимого списка (list) в файл******************')
+        print('++++++++++(file_write(file: str, arr: list, curdir: str = __file__) -> None)++++++++++')
+        print(file.file_write('./temp/write.txt', ['test', 'rom', 'max'], __file__))
+        # ---------------------------------------------------------------------------
         # # дозапись содержимого списка (list) в файл
         # print('******************дозапись содержимого списка (list) в файл******************')
         # print('++++++++++(file_write_append(file: str, arr: list) -> None)++++++++++')
