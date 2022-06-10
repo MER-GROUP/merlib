@@ -76,7 +76,7 @@ class File:
         file_read_utf8(file: str) -> list[str]  
         file_write(file: str, arr: list) -> None                ##########  
         file_write_append(file: str, arr: list) -> None         ########## 
-        file_write_dict(file: str, dictor: dict) -> None  
+        file_write_dict(file: str, dictor: dict) -> None        ##########  
         file_list_console(arr: list) -> None   
         file_print_console_utf8(file: str) -> None 
     '''
@@ -714,6 +714,7 @@ class File:
                     для дозаписи содержимого списка\n           
                 arr: list - список для дозаписи в файл\n  
         примеры:\n 
+                file = File()\n 
                 file.file_write_append('./temp/write.txt', ['1', '2', '3'])\n  
                 file.file_write_append('./temp/write.txt', [4, 5, 6]) # error\n               
         '''
@@ -738,7 +739,10 @@ class File:
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
                     для записи содержимого словаря\n          
-                dictor: dict - словарь для записи в файл\n            
+                dictor: dict - словарь для записи в файл\n   
+        примеры:\n 
+                file = File()\n 
+                file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft'))\n          
         '''
         try:
             # определить имя файла
@@ -840,6 +844,11 @@ if __name__ == '__main__':
         print('++++++++++(file_write_append(file: str, arr: list) -> None)++++++++++')
         print(file.file_write_append('./temp/write.txt', ['1', '2', '3']))
         print(file.file_write_append('./temp/write.txt', ['4', '5', '6']))
+        # ---------------------------------------------------------------------------
+        # запись содержимого словаря (dict) в файл
+        print('******************запись содержимого словаря (dict) в файл******************')
+        print('++++++++++(file_write_dict(file: str, dictor: dict) -> None)++++++++++')
+        print(file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft')))
         # ---------------------------------------------------------------------------
         # определяем текущую директорию, гбе будет храниться файл
         # print('инициализация полного имени файла')
