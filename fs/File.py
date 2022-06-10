@@ -54,7 +54,7 @@ class File:
     '''
     class File - класс для обработки файлов
     методы:
-        file_create(file: str) -> bool                          ##########
+        file_create(file: str, curdir: str = __file__) -> bool                      ##########+
         file_create_dir(dir: str) -> bool                       ##########
         file_delete(file: str) -> bool
         file_delete_empty_folder(file: str) -> bool
@@ -82,24 +82,27 @@ class File:
     '''
     # ---------------------------------------------------------------------------
     # создать пустой файл
-    def file_create(self, file: str) -> bool:
+    def file_create(self, file: str, curdir: str = __file__) -> bool:
         '''
-        file_create(file: str) -> bool\n                      
+        file_create(file: str, curdir: str = __file__) -> bool\n                      
                 создает пустой файл\n             
                 возвращаемое значение - bool (True - создано, False - ошибка)\n    
         параметры:\n                                                
-                file: str - имя файла которое неоходимо создать\n  
+                file: str - имя файла которое неоходимо создать\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
         примеры:\n 
                 file = File()\n 
-                file.file_create('./temp/test1.txt') # True\n 
-                file.file_create('./temp/test2.txt') # True\n 
-                file.file_create('./temp/max/test2.txt') # False\n                     
+                file.file_create('./temp/test1.txt', __file__) # True\n 
+                file.file_create('./temp/test2.txt', __file__) # True\n 
+                file.file_create('./temp/max/test2.txt', __file__) # False\n                     
         '''
         try:
             # инициализировать полное имя файла не нужно
             # т.к. оно инициализируется в file_write
             # создать файл и записать пустой список
-            if self.file_write(file, list()) is None:
+            if self.file_write(file, list(), curdir) is None:
                 return True
             else:
                 return False
@@ -841,13 +844,13 @@ if __name__ == '__main__':
         # print(file.file_create_dir('./temp/test1'))
         # print(file.file_create_dir('./temp/test2'))
         # print(file.file_create_dir('./temp/test2/test3/'))
-        # # ---------------------------------------------------------------------------
-        # # создать пустой файл
-        # print('******************создать пустой файл******************')
-        # print('++++++++++(file_create(file: str) -> bool)++++++++++')
-        # print(file.file_create('./temp/test1.txt'))
-        # print(file.file_create('./temp/test2.txt'))
-        # print(file.file_create('./temp/max/test2.txt'))
+        # ---------------------------------------------------------------------------
+        # создать пустой файл
+        print('******************создать пустой файл******************')
+        print('++++++++++(file_create(file: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_create('./temp/test1.txt', __file__))
+        print(file.file_create('./temp/test2.txt', __file__))
+        print(file.file_create('./temp/max/test2.txt', __file__))
         # ---------------------------------------------------------------------------
         # запись содержимого списка (list) в файл
         print('******************запись содержимого списка (list) в файл******************')
