@@ -55,7 +55,7 @@ class File:
     class File - класс для обработки файлов
     методы:
         file_create(file: str) -> bool
-        file_create_dir(dir: str) -> bool
+        file_create_dir(dir: str) -> bool                       ##########
         file_delete(file: str) -> bool
         file_delete_empty_folder(file: str) -> bool
         file_delete_full_folder(file: str) -> bool
@@ -108,7 +108,13 @@ class File:
                 создает указанную директорию\n             
                 возвращаемое значение - bool (True - создано, False - ошибка)\n    
         параметры:\n                                                
-                dir: str - имя директории которое неоходимо создать\n                        
+                dir: str - имя директории которое неоходимо создать\n   
+        примеры:   
+                file = File()
+                file.file_create_dir('./temp/')
+                file.file_create_dir('./temp/test1')
+                file.file_create_dir('./temp/test2')
+                file.file_create_dir('./temp/test2/test3/'))                 
         '''
         try:
             # определить имя создаваемой директории
@@ -795,6 +801,14 @@ if __name__ == '__main__':
         print(file.file_init_name('./temp/', './test.txt'))
         print(file.file_init_name('./temp/test/', './test.txt'))
         print(file.file_init_name('', ''))
+        # ---------------------------------------------------------------------------
+        # создать указанную директорию
+        print('******************создать указанную директорию******************')
+        print('++++++++++(file_create_dir(dir: str) -> bool )++++++++++')
+        print(file.file_create_dir('./temp/'))
+        print(file.file_create_dir('./temp/test1'))
+        print(file.file_create_dir('./temp/test2'))
+        print(file.file_create_dir('./temp/test2/test3/'))
         # ---------------------------------------------------------------------------
         # определяем текущую директорию, гбе будет храниться файл
         # print('инициализация полного имени файла')
