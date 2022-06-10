@@ -61,8 +61,8 @@ class File:
         file_delete_full_folder(file: str) -> bool
         file_exists(file: str) -> bool
         file_exists_dir(dir: str) -> bool
-        file_dir_init(folder: str, dir: str) -> str             ##########
-        file_name_init(folder: str, filename: str) -> str
+        file_init_dir(folder: str, dir: str) -> str             ##########
+        file_name_init(folder: str, filename: str) -> str       #########
         file_get_current_dir_files() -> list[str]
         file_get_dir_files(dir: str) -> list[str]
         file_get_current_access_dir_in_str() -> list[str]
@@ -242,7 +242,7 @@ class File:
     # инициализация полной директории
     def file_init_dir(self, folder: str, dir: str) -> str:
         '''
-        file_dir_init(folder: str, dir: str) -> str\n   
+        file_init_dir(folder: str, dir: str) -> str\n   
                 инициализация полной директории\n                                       
                 возвращаемое значение - str (строка)\n                
         параметры:\n                                                
