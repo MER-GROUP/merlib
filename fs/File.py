@@ -55,7 +55,7 @@ class File:
     class File - класс для обработки файлов
     методы:
         file_create(file: str, curdir: str = __file__) -> bool                      ##########+
-        file_create_dir(dir: str) -> bool                       ##########
+        file_create_dir(dir: str, curdir: str = __file__) -> bool                   ##########+
         file_delete(file: str) -> bool
         file_delete_empty_folder(file: str) -> bool
         file_delete_full_folder(file: str) -> bool
@@ -112,23 +112,26 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # создать указанную директорию
-    def file_create_dir(self, dir: str) -> bool:
+    def file_create_dir(self, dir: str, curdir: str = __file__) -> bool:
         '''
-        file_create_dir(dir: str) -> bool\n                      
+        file_create_dir(dir: str, curdir: str = __file__) -> bool\n                      
                 создает указанную директорию\n             
                 возвращаемое значение - bool (True - создано, False - ошибка)\n    
         параметры:\n                                                
-                dir: str - имя директории которое неоходимо создать\n   
+                dir: str - имя директории которое неоходимо создать\n 
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
         примеры:\n    
                 file = File()\n 
-                file.file_create_dir('./temp/')\n 
-                file.file_create_dir('./temp/test1')\n 
-                file.file_create_dir('./temp/test2')\n 
-                file.file_create_dir('./temp/test2/test3/'))\n                  
+                file.file_create_dir('./temp/', __file__)\n 
+                file.file_create_dir('./temp/test1/', __file__)\n 
+                file.file_create_dir('./temp/test2/', __file__)\n 
+                file.file_create_dir('./temp/test2/test3/', __file__))\n                  
         '''
         try:
             # определить имя создаваемой директории
-            dir_name = self.file_init_name('', dir)
+            dir_name = self.file_init_dir(dir, '', curdir)
             # создать директорию
             mkdir(dir_name)
             return True
@@ -838,12 +841,12 @@ if __name__ == '__main__':
         print(file.file_init_name('', '', __file__))
         # ---------------------------------------------------------------------------
         # создать указанную директорию
-        # print('******************создать указанную директорию******************')
-        # print('++++++++++(file_create_dir(dir: str) -> bool)++++++++++')
-        # print(file.file_create_dir('./temp/'))
-        # print(file.file_create_dir('./temp/test1'))
-        # print(file.file_create_dir('./temp/test2'))
-        # print(file.file_create_dir('./temp/test2/test3/'))
+        print('******************создать указанную директорию******************')
+        print('++++++++++(file_create_dir(dir: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_create_dir('./temp/', __file__))
+        print(file.file_create_dir('./temp/test1/', __file__))
+        print(file.file_create_dir('./temp/test2/', __file__))
+        print(file.file_create_dir('./temp/test2/test3/', __file__))
         # ---------------------------------------------------------------------------
         # создать пустой файл
         print('******************создать пустой файл******************')
