@@ -89,11 +89,11 @@ class File:
                 возвращаемое значение - bool (True - создано, False - ошибка)\n    
         параметры:\n                                                
                 file: str - имя файла которое неоходимо создать\n  
-        примеры:
-                file = File()
-                file.file_create('./temp/test1.txt') # True
-                file.file_create('./temp/test2.txt') # True
-                file.file_create('./temp/max/test2.txt') # False                    
+        примеры:\n 
+                file = File()\n 
+                file.file_create('./temp/test1.txt') # True\n 
+                file.file_create('./temp/test2.txt') # True\n 
+                file.file_create('./temp/max/test2.txt') # False\n                     
         '''
         try:
             # инициализировать полное имя файла не нужно
@@ -116,12 +116,12 @@ class File:
                 возвращаемое значение - bool (True - создано, False - ошибка)\n    
         параметры:\n                                                
                 dir: str - имя директории которое неоходимо создать\n   
-        примеры:   
-                file = File()
-                file.file_create_dir('./temp/')
-                file.file_create_dir('./temp/test1')
-                file.file_create_dir('./temp/test2')
-                file.file_create_dir('./temp/test2/test3/'))                 
+        примеры:\n    
+                file = File()\n 
+                file.file_create_dir('./temp/')\n 
+                file.file_create_dir('./temp/test1')\n 
+                file.file_create_dir('./temp/test2')\n 
+                file.file_create_dir('./temp/test2/test3/'))\n                  
         '''
         try:
             # определить имя создаваемой директории
