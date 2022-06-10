@@ -54,7 +54,7 @@ class File:
     '''
     class File - класс для обработки файлов
     методы:
-        file_create(file: str) -> bool
+        file_create(file: str) -> bool                          ##########
         file_create_dir(dir: str) -> bool                       ##########
         file_delete(file: str) -> bool
         file_delete_empty_folder(file: str) -> bool
@@ -88,7 +88,12 @@ class File:
                 создает пустой файл\n             
                 возвращаемое значение - bool (True - создано, False - ошибка)\n    
         параметры:\n                                                
-                file: str - имя файла которое неоходимо создать\n                        
+                file: str - имя файла которое неоходимо создать\n  
+        примеры:
+                file = File()
+                file.file_create('./temp/test1.txt') # True
+                file.file_create('./temp/test2.txt') # True
+                file.file_create('./temp/max/test2.txt') # False                    
         '''
         try:
             # инициализировать полное имя файла не нужно
@@ -96,6 +101,8 @@ class File:
             # создать файл и записать пустой список
             if self.file_write(file, list()) is None:
                 return True
+            else:
+                return False
         except (Exception) as e:
             # show msg except
             # print(e)
@@ -804,11 +811,18 @@ if __name__ == '__main__':
         # ---------------------------------------------------------------------------
         # создать указанную директорию
         print('******************создать указанную директорию******************')
-        print('++++++++++(file_create_dir(dir: str) -> bool )++++++++++')
+        print('++++++++++(file_create_dir(dir: str) -> bool)++++++++++')
         print(file.file_create_dir('./temp/'))
         print(file.file_create_dir('./temp/test1'))
         print(file.file_create_dir('./temp/test2'))
         print(file.file_create_dir('./temp/test2/test3/'))
+        # ---------------------------------------------------------------------------
+        # создать пустой файл
+        print('******************создать пустой файл******************')
+        print('++++++++++(file_create(file: str) -> bool)++++++++++')
+        print(file.file_create('./temp/test1.txt'))
+        print(file.file_create('./temp/test2.txt'))
+        print(file.file_create('./temp/max/test2.txt'))
         # ---------------------------------------------------------------------------
         # определяем текущую директорию, гбе будет храниться файл
         # print('инициализация полного имени файла')
