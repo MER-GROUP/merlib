@@ -62,7 +62,7 @@ class File:
         file_exists(file: str) -> bool
         file_exists_dir(dir: str) -> bool
         file_init_dir(folder: str, dir: str) -> str             ##########
-        file_init_name(folder: str, filename: str) -> str       ##########
+        file_init_name(folder: str, filename: str, curdir: str = __file__) -> str   ##########+
         file_get_current_dir_files() -> list[str]
         file_get_dir_files(dir: str) -> list[str]
         file_get_current_access_dir_in_str() -> list[str]
@@ -313,28 +313,31 @@ class File:
             return str(e)        
     # ---------------------------------------------------------------------------
     # инициализация полного имени файла (директория + имя файла)
-    def file_init_name(self, folder: str, filename: str) -> str:
+    def file_init_name(self, folder: str, filename: str, curdir: str = __file__) -> str:
         '''
-        file_init_name(folder: str, filename: str) -> str\n   
+        file_init_name(folder: str, filename: str, curdir: str = __file__) -> str\n   
                 инициализация полного имени файла\n                   
                     (директория + имя файла)\n                        
                 возвращаемое значение - str (строка)\n                
         параметры:\n                                                
                 folder: str - создать директорию в текущей директории\n    
-                filename: str - создать файл в директории folder\n  
+                filename: str - создать файл в директории folder\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
         примечание:\n
                 данный метод не используйте с методами данного класса\n
                     т.к. он в других методах вызывается по умолчанию\n
         примеры:\n
                 file = File()\n
-                dir1 = file.file_init_name('', './test.txt')\n
-                dir2 = (file.file_init_name('./temp/', './test.txt')\n
-                dir3 = (file.file_init_name('./temp/test/', './test.txt')\n
-                dir4 = (file.file_init_name('', '') # произойдет исключение\n
+                dir1 = file.file_init_name('', './test.txt', __file__)\n
+                dir2 = (file.file_init_name('./temp/', './test.txt', __file__)\n
+                dir3 = (file.file_init_name('./temp/test/', './test.txt', __file__)\n
+                dir4 = (file.file_init_name('', '', __file__) # произойдет исключение\n
         '''
         try:
             # определяем текущую директорию, гбе будет храниться файл
-            CURRENT_DIR = dirname(__file__)
+            CURRENT_DIR = dirname(curdir)
             # задаем имя папки (директории)
             FOLDER = folder
             # задаем имя файла для чтения/записи данных
@@ -820,52 +823,55 @@ if __name__ == '__main__':
         # инициализация полного имени файла (директория + имя файла)
         print('******************инициализация полного имени файла (директория + имя файла)******************')
         print('++++++++++(file_init_name(folder: str, filename: str) -> str)++++++++++')
-        print(file.file_init_name('', './test.txt'))
-        print(file.file_init_name('./temp/', './test.txt'))
-        print(file.file_init_name('./temp/test/', './test.txt'))
-        print(file.file_init_name('', ''))
+        print(file.file_init_name('', './test.txt', __file__))
+        print(file.file_init_name('./temp/', './test.txt', __file__))
+        print(file.file_init_name('./temp/test/', './test.txt', __file__))
+        print(file.file_init_name('', '', __file__))
         # ---------------------------------------------------------------------------
         # создать указанную директорию
-        print('******************создать указанную директорию******************')
-        print('++++++++++(file_create_dir(dir: str) -> bool)++++++++++')
-        print(file.file_create_dir('./temp/'))
-        print(file.file_create_dir('./temp/test1'))
-        print(file.file_create_dir('./temp/test2'))
-        print(file.file_create_dir('./temp/test2/test3/'))
+        # print('******************создать указанную директорию******************')
+        # print('++++++++++(file_create_dir(dir: str) -> bool)++++++++++')
+        # print(file.file_create_dir('./temp/'))
+        # print(file.file_create_dir('./temp/test1'))
+        # print(file.file_create_dir('./temp/test2'))
+        # print(file.file_create_dir('./temp/test2/test3/'))
+        # # ---------------------------------------------------------------------------
+        # # создать пустой файл
+        # print('******************создать пустой файл******************')
+        # print('++++++++++(file_create(file: str) -> bool)++++++++++')
+        # print(file.file_create('./temp/test1.txt'))
+        # print(file.file_create('./temp/test2.txt'))
+        # print(file.file_create('./temp/max/test2.txt'))
+        # # ---------------------------------------------------------------------------
+        # # запись содержимого списка (list) в файл
+        # print('******************запись содержимого списка (list) в файл******************')
+        # print('++++++++++(file_write(file: str, arr: list) -> None)++++++++++')
+        # print(file.file_write('./temp/write.txt', ['test', 'rom', 'max']))
+        # # ---------------------------------------------------------------------------
+        # # дозапись содержимого списка (list) в файл
+        # print('******************дозапись содержимого списка (list) в файл******************')
+        # print('++++++++++(file_write_append(file: str, arr: list) -> None)++++++++++')
+        # print(file.file_write_append('./temp/write.txt', ['1', '2', '3']))
+        # print(file.file_write_append('./temp/write.txt', ['4', '5', '6']))
+        # # ---------------------------------------------------------------------------
+        # # запись содержимого словаря (dict) в файл
+        # print('******************запись содержимого словаря (dict) в файл******************')
+        # print('++++++++++(file_write_dict(file: str, dictor: dict) -> None)++++++++++')
+        # print(file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft')))
+        # # ---------------------------------------------------------------------------
+        # # вывод в консоль содержимого списка (list)
+        # print('******************вывод в консоль содержимого списка (list)******************')
+        # print('++++++++++(file_list_console(arr: list) -> None)++++++++++')
+        # file.file_list_print_console([1, 2, 3])
+        # # ---------------------------------------------------------------------------
+        # # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
+        # print('******************вывод в консоль содержимого файла содержащий текст в utf-8 кодировке******************')
+        # print('++++++++++(file_print_console_utf8(file: str) -> None)++++++++++')
+        # file.file_print_console_utf8('./temp/dict.txt')
         # ---------------------------------------------------------------------------
-        # создать пустой файл
-        print('******************создать пустой файл******************')
-        print('++++++++++(file_create(file: str) -> bool)++++++++++')
-        print(file.file_create('./temp/test1.txt'))
-        print(file.file_create('./temp/test2.txt'))
-        print(file.file_create('./temp/max/test2.txt'))
-        # ---------------------------------------------------------------------------
-        # запись содержимого списка (list) в файл
-        print('******************запись содержимого списка (list) в файл******************')
-        print('++++++++++(file_write(file: str, arr: list) -> None)++++++++++')
-        print(file.file_write('./temp/write.txt', ['test', 'rom', 'max']))
-        # ---------------------------------------------------------------------------
-        # дозапись содержимого списка (list) в файл
-        print('******************дозапись содержимого списка (list) в файл******************')
-        print('++++++++++(file_write_append(file: str, arr: list) -> None)++++++++++')
-        print(file.file_write_append('./temp/write.txt', ['1', '2', '3']))
-        print(file.file_write_append('./temp/write.txt', ['4', '5', '6']))
-        # ---------------------------------------------------------------------------
-        # запись содержимого словаря (dict) в файл
-        print('******************запись содержимого словаря (dict) в файл******************')
-        print('++++++++++(file_write_dict(file: str, dictor: dict) -> None)++++++++++')
-        print(file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft')))
-        # ---------------------------------------------------------------------------
-        # вывод в консоль содержимого списка (list)
-        print('******************вывод в консоль содержимого списка (list)******************')
-        print('++++++++++(file_list_console(arr: list) -> None)++++++++++')
-        file.file_list_print_console([1, 2, 3])
-        # ---------------------------------------------------------------------------
-        # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
-        print('******************вывод в консоль содержимого файла содержащий текст в utf-8 кодировке******************')
-        print('++++++++++(file_print_console_utf8(file: str) -> None)++++++++++')
-        file.file_print_console_utf8('./temp/dict.txt')
-        # ---------------------------------------------------------------------------
+
+
+
         # определяем текущую директорию, гбе будет храниться файл
         # print('инициализация полного имени файла')
         # print('file_name_init(folder: str, filename: str) -> str')
