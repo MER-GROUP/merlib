@@ -687,9 +687,9 @@ class File:
                 file: str - имя файла которое неоходимо открыть\n     
                     для записи содержимого списка\n           
                 arr: list - список для записи в файл\n   
-        примеры:
-                file = File()
-                file.file_write('./temp/write.txt', ['test', 'rom', 'max'])               
+        примеры:\n 
+                file = File()\n 
+                file.file_write('./temp/write.txt', ['test', 'rom', 'max'])\n                
         '''
         try:
             # определить имя файла
