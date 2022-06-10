@@ -62,7 +62,7 @@ class File:
         file_exists(file: str) -> bool
         file_exists_dir(dir: str) -> bool
         file_init_dir(folder: str, dir: str) -> str             ##########
-        file_name_init(folder: str, filename: str) -> str       #########
+        file_init_name(folder: str, filename: str) -> str       ##########
         file_get_current_dir_files() -> list[str]
         file_get_dir_files(dir: str) -> list[str]
         file_get_current_access_dir_in_str() -> list[str]
@@ -250,7 +250,9 @@ class File:
                 dir: str - создать директорию в директории folder\n
         примечание:\n
                 вызов метода с пустыми параметрами folder='' и dir=''\n
-                инициализирует текущую директорию\n
+                    инициализирует текущую директорию\n
+                данный метод не используйте с методами данного класса\n
+                    т.к. он в других методах вызывается по умолчанию\n
         примеры:\n
                 file = File()\n
                 dir1 = file.file_init_dir('./temp/', './test/')\n
@@ -296,15 +298,24 @@ class File:
             return str(e)        
     # ---------------------------------------------------------------------------
     # инициализация полного имени файла (директория + имя файла)
-    def file_name_init(self, folder: str, filename: str) -> str:
+    def file_init_name(self, folder: str, filename: str) -> str:
         '''
-        file_name_init(folder: str, filename: str) -> str\n   
+        file_init_name(folder: str, filename: str) -> str\n   
                 инициализация полного имени файла\n                   
                     (директория + имя файла)\n                        
                 возвращаемое значение - str (строка)\n                
         параметры:\n                                                
-                folder: str - создать директорию в текущей папке\n    
-                filename: str - создать файл в директории folder\n    
+                folder: str - создать директорию в текущей директории\n    
+                filename: str - создать файл в директории folder\n  
+        примечание:\n
+                данный метод не используйте с методами данного класса\n
+                    т.к. он в других методах вызывается по умолчанию\n
+        примеры:\n
+                file = File()\n
+                dir1 = file.file_init_name('', './test.txt')\n
+                dir2 = (file.file_init_name('./temp/', './test.txt')\n
+                dir3 = (file.file_init_name('./temp/test/', './test.txt')\n
+                dir4 = (file.file_init_name('', '') # произойдет исключение\n
         '''
         try:
             # определяем текущую директорию, гбе будет храниться файл
@@ -314,11 +325,14 @@ class File:
             # задаем имя файла для чтения/записи данных
             FILENAME = filename
             # объединяем текущую директорию и файл
-            FILE_PATH = join(CURRENT_DIR, FOLDER + FILENAME)
+            FILE_PATH = str(Path(join(CURRENT_DIR, FOLDER + FILENAME)))
             # определяем тип FILE_PATH
             # print('FILE_PATH :', type(FILE_PATH))
             # возвращаеи полное имя файла (директория + имя файла)
-            return str(Path(FILE_PATH))
+            if filename is None or '' == filename:
+                raise BaseException('file name not specified (не указано имя файла)')
+            else:
+                return FILE_PATH
         except (BaseException) as e:
             return str(e)
     # ---------------------------------------------------------------------------
@@ -771,6 +785,14 @@ if __name__ == '__main__':
         print(file.file_init_dir('./temp/', ''))
         print(file.file_init_dir('', './test/'))
         print(file.file_init_dir('', ''))
+        # ---------------------------------------------------------------------------
+        # инициализация полного имени файла (директория + имя файла)
+        print('******************инициализация полного имени файла (директория + имя файла)******************')
+        print('++++++++++(file_init_name(folder: str, filename: str) -> str)++++++++++')
+        print(file.file_init_name('', './test.txt'))
+        print(file.file_init_name('./temp/', './test.txt'))
+        print(file.file_init_name('./temp/test/', './test.txt'))
+        print(file.file_init_name('', ''))
         # ---------------------------------------------------------------------------
         # определяем текущую директорию, гбе будет храниться файл
         # print('инициализация полного имени файла')
