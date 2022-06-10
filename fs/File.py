@@ -77,7 +77,7 @@ class File:
         file_write(file: str, arr: list) -> None                ##########  
         file_write_append(file: str, arr: list) -> None         ########## 
         file_write_dict(file: str, dictor: dict) -> None        ##########  
-        file_list_console(arr: list) -> None   
+        file_list_console(arr: list) -> None                    ##########   
         file_print_console_utf8(file: str) -> None 
     '''
     # ---------------------------------------------------------------------------
@@ -761,7 +761,10 @@ class File:
                 вывод в консоль содержимого списка (list)\n           
                 возвращаемое значение - None (None)\n                 
         параметры:\n                                                
-                arr: list - список для вывода в консоль\n          
+                arr: list - список для вывода в консоль\n 
+        примеры:\n 
+                file = File()\n 
+                file.file_list_print_console([1, 2, 3])\n          
         '''
         try:
             for line in arr:
@@ -849,6 +852,11 @@ if __name__ == '__main__':
         print('******************запись содержимого словаря (dict) в файл******************')
         print('++++++++++(file_write_dict(file: str, dictor: dict) -> None)++++++++++')
         print(file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft')))
+        # ---------------------------------------------------------------------------
+        # вывод в консоль содержимого списка (list)
+        print('******************вывод в консоль содержимого списка (list)******************')
+        print('++++++++++(file_list_console(arr: list) -> None)++++++++++')
+        file.file_list_print_console([1, 2, 3])
         # ---------------------------------------------------------------------------
         # определяем текущую директорию, гбе будет храниться файл
         # print('инициализация полного имени файла')
