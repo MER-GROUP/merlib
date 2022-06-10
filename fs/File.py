@@ -91,6 +91,8 @@ class File:
                 file: str - имя файла которое неоходимо создать\n                        
         '''
         try:
+            # инициализировать полное имя файла не нужно
+            # т.к. оно инициализируется в file_write
             # создать файл и записать пустой список
             if self.file_write(file, list()) is None:
                 return True
@@ -99,19 +101,19 @@ class File:
             # print(e)
             return False
     # ---------------------------------------------------------------------------
-    # создать указанную папку/директорию
+    # создать указанную директорию
     def file_create_dir(self, dir: str) -> bool:
         '''
         file_create_dir(dir: str) -> bool\n                      
-                создает указанную папку/директорию\n             
+                создает указанную директорию\n             
                 возвращаемое значение - bool (True - создано, False - ошибка)\n    
         параметры:\n                                                
-                dir: str - имя папки/директории которое неоходимо создать\n                        
+                dir: str - имя директории которое неоходимо создать\n                        
         '''
         try:
-            # определить имя создаваемой папки/директории
-            dir_name = self.file_name_init('', dir)
-            # создать папку/директорию
+            # определить имя создаваемой директории
+            dir_name = self.file_init_name('', dir)
+            # создать директорию
             mkdir(dir_name)
             return True
         except (Exception) as e:
@@ -131,14 +133,14 @@ class File:
         try:
             try:
                 # определить имя удаляемого файла
-                file_name = self.file_name_init('', file)
+                file_name = self.file_init_name('', file)
                 # delete file
                 remove(file_name)
                 # return
                 return True
             except(FileNotFoundError, OSError) as e:
                 # определить имя удаляемого файла
-                file_name = self.file_name_init('', file)
+                file_name = self.file_init_name('', file)
                 # указывает путь у файлу
                 file_name_path = Path(file_name)
                 # удаляем файл
@@ -150,19 +152,19 @@ class File:
             # print(e)
             return False
     # ---------------------------------------------------------------------------
-    # удаление пустой папки/директории с носителя
+    # удаление пустой директории с носителя
     def file_delete_empty_folder(self, dir: str) -> bool:
         '''
         file_delete_empty_folder(file: str) -> bool\n                      
-                удаление пустой папки/директории с носителя\n             
+                удаление пустой директории с носителя\n             
                 возвращаемое значение - bool (True - удалено, False - ошибка)\n    
         параметры:\n                                                
-                dir: str - имя пустой папки/директории которое\n   
+                dir: str - имя пустой директории которое\n   
                     неоходимо удалить с носителя\n                        
         '''
         try:
             # определить имя удаляемой папки/директории
-            dir_name = self.file_name_init('', dir)
+            dir_name = self.file_init_name('', dir)
             # delete folder
             rmdir(dir_name)
             return True
@@ -171,21 +173,21 @@ class File:
             # print(e)
             return False
     # ---------------------------------------------------------------------------
-    # удаление непустой папки/директории с носителя
-    # также удаляет пустую папку/директорию
+    # удаление непустой директории с носителя
+    # также удаляет пустую директорию
     def file_delete_full_folder(self, dir: str) -> bool:
         '''
         file_delete_full_folder(file: str) -> bool\n                      
-                удаление непустой папки/директории с носителя\n  
-                    (также удаляет пустую папку/директорию)\n            
+                удаление непустой директории с носителя\n  
+                    (также удаляет пустую директорию)\n            
                 возвращаемое значение - bool (True - удалено, False - ошибка)\n    
         параметры:\n                                                
-                dir: str - имя непустой папки/директории которое\n   
+                dir: str - имя непустой директории которое\n   
                     неоходимо удалить с носителя\n                        
         '''
         try:
-            # определить имя удаляемой папки/директории
-            dir_name = self.file_name_init('', dir)
+            # определить имя удаляемой директории
+            dir_name = self.file_init_name('', dir)
             # delete folder
             shutil.rmtree(dir_name)
             return True
@@ -205,7 +207,7 @@ class File:
         '''
         try:
             # определить имя файла
-            file_name = self.file_name_init('', file)
+            file_name = self.file_init_name('', file)
             # проверка существования файла
             if exists(file_name):
                 return True
@@ -216,19 +218,19 @@ class File:
             # print(e)
             return False
     # ---------------------------------------------------------------------------
-    # проверка существования папки/директории
+    # проверка существования директории
     def file_exists_dir(self, dir: str) -> bool:
         '''
         file_exists_dir(dir: str) -> bool\n                      
-                проверяет существование папки/директории \n          
+                проверяет существование директории \n          
                 возвращаемое значение - bool (True - существует, False - ошибка)\n    
         параметры:\n                                                
-                dir: str - имя папки/директории для проверки\n                     
+                dir: str - имя директории для проверки\n                     
         '''
         try:
-            # определить имя папки/директории
-            dir_name = self.file_name_init('', dir)
-            # проверка существования папки/директории
+            # определить имя директории
+            dir_name = self.file_init_name('', dir)
+            # проверка существования директории
             # if exists(dir_name):
             if self.file_exists(dir_name):
                 return True
@@ -362,7 +364,7 @@ class File:
         '''
         try:
             # определить имя директории
-            dir_name = self.file_name_init('', dir)
+            dir_name = self.file_init_dir(dir, '')
             # получить все файлы и папки в указанной директории
             files_arr = listdir(dir_name)
             return files_arr
@@ -469,11 +471,11 @@ class File:
         except (BaseException) as e:
             return str(e)
     # ---------------------------------------------------------------------------
-    # получить путь/директорию к папке Downloads
+    # получить директорию к папке Downloads
     def file_get_path_to_downloads(self) -> str:
         '''
         file_get_path_to_downloads() -> str\n                       
-                получает путь/директорию к папке Downloads\n 
+                получает директорию к папке Downloads\n 
                 возвращаемое значение - str (строка)\n   
         параметры:\n                                              
                 нет параметров\n                        
@@ -579,7 +581,7 @@ class File:
         '''
         try:
             # определить имя файла/директории
-            dir_file_name = self.file_name_init('', name)
+            dir_file_name = self.file_init_name('', name)
             # определяем текущие права файла
             # permissions = os.stat(dir_file_name).st_mode
             # Convert a file's mode to a string of the form '-rwxrwxrwx'
@@ -605,7 +607,7 @@ class File:
         '''
         try:
             # определить имя файла/директории
-            dir_file_name = self.file_name_init('', name)
+            dir_file_name = self.file_init_name('', name)
             # определяем текущие права файла
             # permissions = os.stat(dir_file_name).st_mode
             # Convert a file's mode to a string of the form '-rwxrwxrwx'
@@ -631,7 +633,7 @@ class File:
         '''
         try:
             # определить имя файла
-            file_name = self.file_name_init('', file)
+            file_name = self.file_init_name('', file)
             # открыть файл и прочитать построчно
             with open(file_name, 'r') as f:
                 return f.readlines()
@@ -650,7 +652,7 @@ class File:
         '''
         try:
             # определить имя файла
-            file_name = self.file_name_init('', file)
+            file_name = self.file_init_name('', file)
             # var
             str_byte = None
             # открыть файл и прочитать текст в utf-8 кодировке
@@ -675,7 +677,7 @@ class File:
         '''
         try:
             # определить имя файла
-            file_name = self.file_name_init('', file)
+            file_name = self.file_init_name('', file)
             # в списке к концу строк добавляем \n (переход на новую строку)
             for i in range(len(arr)):
                 arr[i] += '\n'
@@ -698,7 +700,7 @@ class File:
         '''
         try:
             # определить имя файла
-            file_name = self.file_name_init('', file)
+            file_name = self.file_init_name('', file)
             # в списке к концу строк добавляем \n (переход на новую строку)
             for i in range(len(arr)):
                 arr[i] += '\n'
@@ -721,7 +723,7 @@ class File:
         '''
         try:
             # определить имя файла
-            file_name = self.file_name_init('', file)
+            file_name = self.file_init_name('', file)
             # создать файл и записать содержимое словаря (хэш таблицы)
             with open(file_name, 'w') as f:
                 for k,v in dictor.items():
@@ -761,7 +763,7 @@ class File:
         '''
         try:
             # определить имя файла
-            file_name = self.file_name_init('', file)
+            file_name = self.file_init_name('', file)
             # открыть файл, скопировать содержимое в консоль (терминал)
             with open(file_name, 'r', encoding='utf-8') as f:
                 shutil.copyfileobj(f, sys.stdout)
