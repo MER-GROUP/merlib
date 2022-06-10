@@ -61,7 +61,7 @@ class File:
         file_delete_full_folder(file: str) -> bool
         file_exists(file: str) -> bool
         file_exists_dir(dir: str) -> bool
-        file_init_dir(folder: str, dir: str) -> str             ##########
+        file_init_dir(folder: str, dir: str, curdir: str = __file__) -> str         ##########+
         file_init_name(folder: str, filename: str, curdir: str = __file__) -> str   ##########+
         file_get_current_dir_files() -> list[str]
         file_get_dir_files(dir: str) -> list[str]
@@ -255,14 +255,17 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # инициализация полной директории
-    def file_init_dir(self, folder: str, dir: str) -> str:
+    def file_init_dir(self, folder: str, dir: str, curdir: str = __file__) -> str:
         '''
-        file_init_dir(folder: str, dir: str) -> str\n   
+        file_init_dir(folder: str, dir: str, curdir: str = __file__) -> str\n   
                 инициализация полной директории\n                                       
                 возвращаемое значение - str (строка)\n                
         параметры:\n                                                
                 folder: str - создать директорию в текущей директории\n    
                 dir: str - создать директорию в директории folder\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n
         примечание:\n
                 вызов метода с пустыми параметрами folder='' и dir=''\n
                     инициализирует текущую директорию\n
@@ -270,14 +273,14 @@ class File:
                     т.к. он в других методах вызывается по умолчанию\n
         примеры:\n
                 file = File()\n
-                dir1 = file.file_init_dir('./temp/', './test/')\n
-                dir2 = file.file_init_dir('./temp/', '')\n
-                dir3 = file.file_init_dir('', './test/')\n
-                dir4 = file.file_init_dir('', '') # текущая директория\n
+                dir1 = file.file_init_dir('./temp/', './test/', __file__)\n
+                dir2 = file.file_init_dir('./temp/', '', __file__)\n
+                dir3 = file.file_init_dir('', './test/', __file__)\n
+                dir4 = file.file_init_dir('', '', __file__) # текущая директория\n
         '''
         try:
             # определяем текущую директорию, гбе будет храниться файл
-            CURRENT_DIR = dirname(__file__)
+            CURRENT_DIR = dirname(curdir)
             # задаем имя папки (директории)
             FOLDER = folder
             # задаем имя директории в директории folder
@@ -814,15 +817,15 @@ if __name__ == '__main__':
         # ---------------------------------------------------------------------------
         # инициализация полной директории
         print('******************инициализация полной директории******************')
-        print('++++++++++(file_dir_init(folder: str, dir: str) -> str)++++++++++')
-        print(file.file_init_dir('./temp/', './test/'))
-        print(file.file_init_dir('./temp/', ''))
-        print(file.file_init_dir('', './test/'))
-        print(file.file_init_dir('', ''))
+        print('++++++++++(file_init_dir(folder: str, dir: str, curdir: str = __file__) -> str) -> str)++++++++++')
+        print(file.file_init_dir('./temp/', './test/', __file__))
+        print(file.file_init_dir('./temp/', '', __file__))
+        print(file.file_init_dir('', './test/', __file__))
+        print(file.file_init_dir('', '', __file__))
         # ---------------------------------------------------------------------------
         # инициализация полного имени файла (директория + имя файла)
         print('******************инициализация полного имени файла (директория + имя файла)******************')
-        print('++++++++++(file_init_name(folder: str, filename: str) -> str)++++++++++')
+        print('++++++++++(file_init_name(folder: str, filename: str, curdir: str = __file__) -> str)++++++++++')
         print(file.file_init_name('', './test.txt', __file__))
         print(file.file_init_name('./temp/', './test.txt', __file__))
         print(file.file_init_name('./temp/test/', './test.txt', __file__))
