@@ -75,7 +75,7 @@ class File:
         file_read(file: str) -> list[str] 
         file_read_utf8(file: str) -> list[str]  
         file_write(file: str, arr: list) -> None                ##########  
-        file_write_append(file: str, arr: list) -> None 
+        file_write_append(file: str, arr: list) -> None         ########## 
         file_write_dict(file: str, dictor: dict) -> None  
         file_list_console(arr: list) -> None   
         file_print_console_utf8(file: str) -> None 
@@ -712,7 +712,10 @@ class File:
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
                     для дозаписи содержимого списка\n           
-                arr: list - список для дозаписи в файл\n                
+                arr: list - список для дозаписи в файл\n  
+        примеры:\n 
+                file.file_write_append('./temp/write.txt', ['1', '2', '3'])\n  
+                file.file_write_append('./temp/write.txt', [4, 5, 6]) # error\n               
         '''
         try:
             # определить имя файла
@@ -831,6 +834,12 @@ if __name__ == '__main__':
         print('******************запись содержимого списка (list) в файл******************')
         print('++++++++++(file_write(file: str, arr: list) -> None)++++++++++')
         print(file.file_write('./temp/write.txt', ['test', 'rom', 'max']))
+        # ---------------------------------------------------------------------------
+        # дозапись содержимого списка (list) в файл
+        print('******************дозапись содержимого списка (list) в файл******************')
+        print('++++++++++(file_write_append(file: str, arr: list) -> None)++++++++++')
+        print(file.file_write_append('./temp/write.txt', ['1', '2', '3']))
+        print(file.file_write_append('./temp/write.txt', ['4', '5', '6']))
         # ---------------------------------------------------------------------------
         # определяем текущую директорию, гбе будет храниться файл
         # print('инициализация полного имени файла')
