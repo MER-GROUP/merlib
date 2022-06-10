@@ -54,15 +54,15 @@ class File:
     '''
     class File - класс для обработки файлов
     методы:
-        file_create(file: str) -> bool                          ##########
-        file_create_dir(dir: str) -> bool                       ##########
+        file_create(file: str, curdir: str = __file__) -> bool                      ##########+
+        file_create_dir(dir: str, curdir: str = __file__) -> bool                   ##########+
         file_delete(file: str) -> bool
         file_delete_empty_folder(file: str) -> bool
         file_delete_full_folder(file: str) -> bool
         file_exists(file: str) -> bool
         file_exists_dir(dir: str) -> bool
-        file_init_dir(folder: str, dir: str) -> str             ##########
-        file_init_name(folder: str, filename: str) -> str       ##########
+        file_init_dir(folder: str, dir: str, curdir: str = __file__) -> str         ##########+
+        file_init_name(folder: str, filename: str, curdir: str = __file__) -> str   ##########+
         file_get_current_dir_files() -> list[str]
         file_get_dir_files(dir: str) -> list[str]
         file_get_current_access_dir_in_str() -> list[str]
@@ -74,7 +74,7 @@ class File:
         file_set_access_close_all(name: str) -> bool
         file_read(file: str) -> list[str] 
         file_read_utf8(file: str) -> list[str]  
-        file_write(file: str, arr: list) -> None                ##########  
+        file_write(file: str, arr: list, curdir: str = __file__) -> None            ##########+  
         file_write_append(file: str, arr: list) -> None         ########## 
         file_write_dict(file: str, dictor: dict) -> None        ##########  
         file_list_console(arr: list) -> None                    ##########   
@@ -82,24 +82,27 @@ class File:
     '''
     # ---------------------------------------------------------------------------
     # создать пустой файл
-    def file_create(self, file: str) -> bool:
+    def file_create(self, file: str, curdir: str = __file__) -> bool:
         '''
-        file_create(file: str) -> bool\n                      
+        file_create(file: str, curdir: str = __file__) -> bool\n                      
                 создает пустой файл\n             
                 возвращаемое значение - bool (True - создано, False - ошибка)\n    
         параметры:\n                                                
-                file: str - имя файла которое неоходимо создать\n  
+                file: str - имя файла которое неоходимо создать\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
         примеры:\n 
                 file = File()\n 
-                file.file_create('./temp/test1.txt') # True\n 
-                file.file_create('./temp/test2.txt') # True\n 
-                file.file_create('./temp/max/test2.txt') # False\n                     
+                file.file_create('./temp/test1.txt', __file__) # True\n 
+                file.file_create('./temp/test2.txt', __file__) # True\n 
+                file.file_create('./temp/max/test2.txt', __file__) # False\n                     
         '''
         try:
             # инициализировать полное имя файла не нужно
             # т.к. оно инициализируется в file_write
             # создать файл и записать пустой список
-            if self.file_write(file, list()) is None:
+            if self.file_write(file, list(), curdir) is None:
                 return True
             else:
                 return False
@@ -109,23 +112,26 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # создать указанную директорию
-    def file_create_dir(self, dir: str) -> bool:
+    def file_create_dir(self, dir: str, curdir: str = __file__) -> bool:
         '''
-        file_create_dir(dir: str) -> bool\n                      
+        file_create_dir(dir: str, curdir: str = __file__) -> bool\n                      
                 создает указанную директорию\n             
                 возвращаемое значение - bool (True - создано, False - ошибка)\n    
         параметры:\n                                                
-                dir: str - имя директории которое неоходимо создать\n   
+                dir: str - имя директории которое неоходимо создать\n 
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
         примеры:\n    
                 file = File()\n 
-                file.file_create_dir('./temp/')\n 
-                file.file_create_dir('./temp/test1')\n 
-                file.file_create_dir('./temp/test2')\n 
-                file.file_create_dir('./temp/test2/test3/'))\n                  
+                file.file_create_dir('./temp/', __file__)\n 
+                file.file_create_dir('./temp/test1/', __file__)\n 
+                file.file_create_dir('./temp/test2/', __file__)\n 
+                file.file_create_dir('./temp/test2/test3/', __file__))\n                  
         '''
         try:
             # определить имя создаваемой директории
-            dir_name = self.file_init_name('', dir)
+            dir_name = self.file_init_dir(dir, '', curdir)
             # создать директорию
             mkdir(dir_name)
             return True
@@ -255,14 +261,17 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # инициализация полной директории
-    def file_init_dir(self, folder: str, dir: str) -> str:
+    def file_init_dir(self, folder: str, dir: str, curdir: str = __file__) -> str:
         '''
-        file_init_dir(folder: str, dir: str) -> str\n   
+        file_init_dir(folder: str, dir: str, curdir: str = __file__) -> str\n   
                 инициализация полной директории\n                                       
                 возвращаемое значение - str (строка)\n                
         параметры:\n                                                
                 folder: str - создать директорию в текущей директории\n    
                 dir: str - создать директорию в директории folder\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n
         примечание:\n
                 вызов метода с пустыми параметрами folder='' и dir=''\n
                     инициализирует текущую директорию\n
@@ -270,14 +279,14 @@ class File:
                     т.к. он в других методах вызывается по умолчанию\n
         примеры:\n
                 file = File()\n
-                dir1 = file.file_init_dir('./temp/', './test/')\n
-                dir2 = file.file_init_dir('./temp/', '')\n
-                dir3 = file.file_init_dir('', './test/')\n
-                dir4 = file.file_init_dir('', '') # текущая директория\n
+                dir1 = file.file_init_dir('./temp/', './test/', __file__)\n
+                dir2 = file.file_init_dir('./temp/', '', __file__)\n
+                dir3 = file.file_init_dir('', './test/', __file__)\n
+                dir4 = file.file_init_dir('', '', __file__) # текущая директория\n
         '''
         try:
             # определяем текущую директорию, гбе будет храниться файл
-            CURRENT_DIR = dirname(__file__)
+            CURRENT_DIR = dirname(curdir)
             # задаем имя папки (директории)
             FOLDER = folder
             # задаем имя директории в директории folder
@@ -313,28 +322,31 @@ class File:
             return str(e)        
     # ---------------------------------------------------------------------------
     # инициализация полного имени файла (директория + имя файла)
-    def file_init_name(self, folder: str, filename: str) -> str:
+    def file_init_name(self, folder: str, filename: str, curdir: str = __file__) -> str:
         '''
-        file_init_name(folder: str, filename: str) -> str\n   
+        file_init_name(folder: str, filename: str, curdir: str = __file__) -> str\n   
                 инициализация полного имени файла\n                   
                     (директория + имя файла)\n                        
                 возвращаемое значение - str (строка)\n                
         параметры:\n                                                
                 folder: str - создать директорию в текущей директории\n    
-                filename: str - создать файл в директории folder\n  
+                filename: str - создать файл в директории folder\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
         примечание:\n
                 данный метод не используйте с методами данного класса\n
                     т.к. он в других методах вызывается по умолчанию\n
         примеры:\n
                 file = File()\n
-                dir1 = file.file_init_name('', './test.txt')\n
-                dir2 = (file.file_init_name('./temp/', './test.txt')\n
-                dir3 = (file.file_init_name('./temp/test/', './test.txt')\n
-                dir4 = (file.file_init_name('', '') # произойдет исключение\n
+                dir1 = file.file_init_name('', './test.txt', __file__)\n
+                dir2 = (file.file_init_name('./temp/', './test.txt', __file__)\n
+                dir3 = (file.file_init_name('./temp/test/', './test.txt', __file__)\n
+                dir4 = (file.file_init_name('', '', __file__) # произойдет исключение\n
         '''
         try:
             # определяем текущую директорию, гбе будет храниться файл
-            CURRENT_DIR = dirname(__file__)
+            CURRENT_DIR = dirname(curdir)
             # задаем имя папки (директории)
             FOLDER = folder
             # задаем имя файла для чтения/записи данных
@@ -678,24 +690,27 @@ class File:
             return str(e)
     # ---------------------------------------------------------------------------
     # запись содержимого списка (list) в файл
-    def file_write(self, file: str, arr: list) -> None:
+    def file_write(self, file: str, arr: list, curdir: str = __file__) -> None:
         '''
-        file_write(file: str, arr: list) -> None\n                  
+        file_write(file: str, arr: list, curdir: str = __file__) -> None\n                  
                 запись содержимого списка (list) в файл\n             
                 возвращаемое значение - None (None)\n                 
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
                     для записи содержимого списка\n           
-                arr: list - список для записи в файл\n   
+                arr: list - список для записи в файл\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
         примеры:\n 
                 file = File()\n 
-                file.file_write('./temp/write.txt', ['test', 'rom', 'max'])\n                
+                file.file_write('./temp/write.txt', ['test', 'rom', 'max'], __file__)\n                
         '''
         try:
             # определить имя файла
-            file_name = self.file_init_name('', file)
+            file_name = self.file_init_name('', file, curdir)
             # в списке к концу строк добавляем \n (переход на новую строку)
-            for i in range(len(arr)):
+            for i in range(len(arr) - 1):
                 arr[i] += '\n'
             # создаем файл и записываем содержимое списка
             with open(file_name, 'w') as f:
@@ -811,61 +826,64 @@ if __name__ == '__main__':
         # ---------------------------------------------------------------------------
         # инициализация полной директории
         print('******************инициализация полной директории******************')
-        print('++++++++++(file_dir_init(folder: str, dir: str) -> str)++++++++++')
-        print(file.file_init_dir('./temp/', './test/'))
-        print(file.file_init_dir('./temp/', ''))
-        print(file.file_init_dir('', './test/'))
-        print(file.file_init_dir('', ''))
+        print('++++++++++(file_init_dir(folder: str, dir: str, curdir: str = __file__) -> str) -> str)++++++++++')
+        print(file.file_init_dir('./temp/', './test/', __file__))
+        print(file.file_init_dir('./temp/', '', __file__))
+        print(file.file_init_dir('', './test/', __file__))
+        print(file.file_init_dir('', '', __file__))
         # ---------------------------------------------------------------------------
         # инициализация полного имени файла (директория + имя файла)
         print('******************инициализация полного имени файла (директория + имя файла)******************')
-        print('++++++++++(file_init_name(folder: str, filename: str) -> str)++++++++++')
-        print(file.file_init_name('', './test.txt'))
-        print(file.file_init_name('./temp/', './test.txt'))
-        print(file.file_init_name('./temp/test/', './test.txt'))
-        print(file.file_init_name('', ''))
+        print('++++++++++(file_init_name(folder: str, filename: str, curdir: str = __file__) -> str)++++++++++')
+        print(file.file_init_name('', './test.txt', __file__))
+        print(file.file_init_name('./temp/', './test.txt', __file__))
+        print(file.file_init_name('./temp/test/', './test.txt', __file__))
+        print(file.file_init_name('', '', __file__))
         # ---------------------------------------------------------------------------
         # создать указанную директорию
         print('******************создать указанную директорию******************')
-        print('++++++++++(file_create_dir(dir: str) -> bool)++++++++++')
-        print(file.file_create_dir('./temp/'))
-        print(file.file_create_dir('./temp/test1'))
-        print(file.file_create_dir('./temp/test2'))
-        print(file.file_create_dir('./temp/test2/test3/'))
+        print('++++++++++(file_create_dir(dir: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_create_dir('./temp/', __file__))
+        print(file.file_create_dir('./temp/test1/', __file__))
+        print(file.file_create_dir('./temp/test2/', __file__))
+        print(file.file_create_dir('./temp/test2/test3/', __file__))
         # ---------------------------------------------------------------------------
         # создать пустой файл
         print('******************создать пустой файл******************')
-        print('++++++++++(file_create(file: str) -> bool)++++++++++')
-        print(file.file_create('./temp/test1.txt'))
-        print(file.file_create('./temp/test2.txt'))
-        print(file.file_create('./temp/max/test2.txt'))
+        print('++++++++++(file_create(file: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_create('./temp/test1.txt', __file__))
+        print(file.file_create('./temp/test2.txt', __file__))
+        print(file.file_create('./temp/max/test2.txt', __file__))
         # ---------------------------------------------------------------------------
         # запись содержимого списка (list) в файл
         print('******************запись содержимого списка (list) в файл******************')
-        print('++++++++++(file_write(file: str, arr: list) -> None)++++++++++')
-        print(file.file_write('./temp/write.txt', ['test', 'rom', 'max']))
+        print('++++++++++(file_write(file: str, arr: list, curdir: str = __file__) -> None)++++++++++')
+        print(file.file_write('./temp/write.txt', ['test', 'rom', 'max'], __file__))
         # ---------------------------------------------------------------------------
-        # дозапись содержимого списка (list) в файл
-        print('******************дозапись содержимого списка (list) в файл******************')
-        print('++++++++++(file_write_append(file: str, arr: list) -> None)++++++++++')
-        print(file.file_write_append('./temp/write.txt', ['1', '2', '3']))
-        print(file.file_write_append('./temp/write.txt', ['4', '5', '6']))
+        # # дозапись содержимого списка (list) в файл
+        # print('******************дозапись содержимого списка (list) в файл******************')
+        # print('++++++++++(file_write_append(file: str, arr: list) -> None)++++++++++')
+        # print(file.file_write_append('./temp/write.txt', ['1', '2', '3']))
+        # print(file.file_write_append('./temp/write.txt', ['4', '5', '6']))
+        # # ---------------------------------------------------------------------------
+        # # запись содержимого словаря (dict) в файл
+        # print('******************запись содержимого словаря (dict) в файл******************')
+        # print('++++++++++(file_write_dict(file: str, dictor: dict) -> None)++++++++++')
+        # print(file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft')))
+        # # ---------------------------------------------------------------------------
+        # # вывод в консоль содержимого списка (list)
+        # print('******************вывод в консоль содержимого списка (list)******************')
+        # print('++++++++++(file_list_console(arr: list) -> None)++++++++++')
+        # file.file_list_print_console([1, 2, 3])
+        # # ---------------------------------------------------------------------------
+        # # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
+        # print('******************вывод в консоль содержимого файла содержащий текст в utf-8 кодировке******************')
+        # print('++++++++++(file_print_console_utf8(file: str) -> None)++++++++++')
+        # file.file_print_console_utf8('./temp/dict.txt')
         # ---------------------------------------------------------------------------
-        # запись содержимого словаря (dict) в файл
-        print('******************запись содержимого словаря (dict) в файл******************')
-        print('++++++++++(file_write_dict(file: str, dictor: dict) -> None)++++++++++')
-        print(file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft')))
-        # ---------------------------------------------------------------------------
-        # вывод в консоль содержимого списка (list)
-        print('******************вывод в консоль содержимого списка (list)******************')
-        print('++++++++++(file_list_console(arr: list) -> None)++++++++++')
-        file.file_list_print_console([1, 2, 3])
-        # ---------------------------------------------------------------------------
-        # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
-        print('******************вывод в консоль содержимого файла содержащий текст в utf-8 кодировке******************')
-        print('++++++++++(file_print_console_utf8(file: str) -> None)++++++++++')
-        file.file_print_console_utf8('./temp/dict.txt')
-        # ---------------------------------------------------------------------------
+
+
+
         # определяем текущую директорию, гбе будет храниться файл
         # print('инициализация полного имени файла')
         # print('file_name_init(folder: str, filename: str) -> str')
