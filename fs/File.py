@@ -74,7 +74,7 @@ class File:
         file_set_access_close_all(name: str) -> bool
         file_read(file: str) -> list[str] 
         file_read_utf8(file: str) -> list[str]  
-        file_write(file: str, arr: list) -> None  
+        file_write(file: str, arr: list) -> None                ##########  
         file_write_append(file: str, arr: list) -> None 
         file_write_dict(file: str, dictor: dict) -> None  
         file_list_console(arr: list) -> None   
@@ -686,7 +686,10 @@ class File:
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
                     для записи содержимого списка\n           
-                arr: list - список для записи в файл\n                
+                arr: list - список для записи в файл\n   
+        примеры:
+                file = File()
+                file.file_write('./temp/write.txt', ['test', 'rom', 'max'])               
         '''
         try:
             # определить имя файла
@@ -823,6 +826,11 @@ if __name__ == '__main__':
         print(file.file_create('./temp/test1.txt'))
         print(file.file_create('./temp/test2.txt'))
         print(file.file_create('./temp/max/test2.txt'))
+        # ---------------------------------------------------------------------------
+        # запись содержимого списка (list) в файл
+        print('******************запись содержимого списка (list) в файл******************')
+        print('++++++++++(file_write(file: str, arr: list) -> None)++++++++++')
+        print(file.file_write('./temp/write.txt', ['test', 'rom', 'max']))
         # ---------------------------------------------------------------------------
         # определяем текущую директорию, гбе будет храниться файл
         # print('инициализация полного имени файла')
