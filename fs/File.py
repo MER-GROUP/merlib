@@ -59,7 +59,7 @@ class File:
         file_create(file: str, curdir: str = __file__) -> bool                      ##########+
         file_create_dir(dir: str, curdir: str = __file__) -> bool                   ##########+
         file_delete(file: str, curdir: str = __file__) -> bool                      ##########+
-        file_delete_empty_folder(file: str) -> bool
+        file_delete_empty_folder(dir: str, curdir: str = __file__) -> bool          ##########+
         file_delete_full_folder(file: str) -> bool
         file_exists(file: str, curdir: str = __file__) -> bool                      ##########+
         file_exists_dir(dir: str, curdir: str = __file__) -> bool                   ##########+
@@ -227,18 +227,26 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # удаление пустой директории с носителя
-    def file_delete_empty_folder(self, dir: str) -> bool:
+    def file_delete_empty_folder(self, dir: str, curdir: str = __file__) -> bool:
         '''
-        file_delete_empty_folder(file: str) -> bool\n                      
+        file_delete_empty_folder(dir: str, curdir: str = __file__) -> bool\n                      
                 удаление пустой директории с носителя\n             
                 возвращаемое значение - bool (True - удалено, False - ошибка)\n    
         параметры:\n                                                
                 dir: str - имя пустой директории которое\n   
-                    неоходимо удалить с носителя\n                        
+                    неоходимо удалить с носителя\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
+        примеры:\n    
+                file = File()\n 
+                file.file_delete_empty_folder('./temp/test1/', __file__)\n                         
+                file.file_delete_empty_folder('./temp/test2/', __file__)\n                         
+                file.file_delete_empty_folder('./temp/test3/', __file__)\n                         
         '''
         try:
-            # определить имя удаляемой папки/директории
-            dir_name = self.file_init_name('', dir)
+            # определить имя удаляемой пустой директории
+            dir_name = self.file_init_dir(dir, '', curdir)
             # delete folder
             rmdir(dir_name)
             return True
@@ -1041,6 +1049,13 @@ if __name__ == '__main__':
         print('++++++++++(file_delete(file: str, curdir: str = __file__) -> bool)++++++++++')
         print(file.file_delete('./temp/write.txt', __file__))
         print(file.file_delete('./temp/write2.txt', __file__))
+        # ---------------------------------------------------------------------------
+        # удаление пустой директории с носителя
+        print('******************удаление пустой директории с носителя******************')
+        print('++++++++++(file_delete_empty_folder(dir: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_delete_empty_folder('./temp/test1/', __file__))
+        print(file.file_delete_empty_folder('./temp/test2/', __file__))
+        print(file.file_delete_empty_folder('./temp/test3/', __file__))
         # ---------------------------------------------------------------------------
 
 
