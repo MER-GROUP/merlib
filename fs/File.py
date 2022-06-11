@@ -75,7 +75,7 @@ class File:
         file_read(file: str) -> list[str] 
         file_read_utf8(file: str) -> list[str]  
         file_write(file: str, arr: list, curdir: str = __file__) -> None            ##########+  
-        file_write_append(file: str, arr: list) -> None         ########## 
+        file_write_append(file: str, arr: list, curdir: str = __file__) -> None     ##########+ 
         file_write_dict(file: str, dictor: dict) -> None        ##########  
         file_list_console(arr: list) -> None                    ##########   
         file_print_console_utf8(file: str) -> None              ########## 
@@ -710,7 +710,7 @@ class File:
             # определить имя файла
             file_name = self.file_init_name('', file, curdir)
             # в списке к концу строк добавляем \n (переход на новую строку)
-            for i in range(len(arr) - 1):
+            for i in range(len(arr)):
                 arr[i] += '\n'
             # создаем файл и записываем содержимое списка
             with open(file_name, 'w') as f:
@@ -719,23 +719,26 @@ class File:
             return str(e)
     # ---------------------------------------------------------------------------
     # дозапись содержимого списка (list) в файл
-    def file_write_append(self, file: str, arr: list) -> None:
+    def file_write_append(self, file: str, arr: list, curdir: str = __file__) -> None:
         '''
-        file_write_append(file: str, arr: list) -> None\n                  
+        file_write_append(file: str, arr: list, curdir: str = __file__) -> None\n                  
                 дозапись содержимого списка (list) в файл\n             
                 возвращаемое значение - None (None)\n                 
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
                     для дозаписи содержимого списка\n           
-                arr: list - список для дозаписи в файл\n  
+                arr: list - список для дозаписи в файл\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
         примеры:\n 
                 file = File()\n 
-                file.file_write_append('./temp/write.txt', ['1', '2', '3'])\n  
-                file.file_write_append('./temp/write.txt', [4, 5, 6]) # error\n               
+                file.file_write_append('./temp/write.txt', ['1', '2', '3'], __file__)\n  
+                file.file_write_append('./temp/write.txt', [4, 5, 6], __file__) # error\n               
         '''
         try:
             # определить имя файла
-            file_name = self.file_init_name('', file)
+            file_name = self.file_init_name('', file, curdir)
             # в списке к концу строк добавляем \n (переход на новую строку)
             for i in range(len(arr)):
                 arr[i] += '\n'
@@ -860,12 +863,12 @@ if __name__ == '__main__':
         print('++++++++++(file_write(file: str, arr: list, curdir: str = __file__) -> None)++++++++++')
         print(file.file_write('./temp/write.txt', ['test', 'rom', 'max'], __file__))
         # ---------------------------------------------------------------------------
-        # # дозапись содержимого списка (list) в файл
-        # print('******************дозапись содержимого списка (list) в файл******************')
-        # print('++++++++++(file_write_append(file: str, arr: list) -> None)++++++++++')
-        # print(file.file_write_append('./temp/write.txt', ['1', '2', '3']))
-        # print(file.file_write_append('./temp/write.txt', ['4', '5', '6']))
-        # # ---------------------------------------------------------------------------
+        # дозапись содержимого списка (list) в файл
+        print('******************дозапись содержимого списка (list) в файл******************')
+        print('++++++++++(file_write_append(file: str, arr: list, curdir: str = __file__) -> None)++++++++++')
+        print(file.file_write_append('./temp/write.txt', ['1', '2', '3'], __file__))
+        print(file.file_write_append('./temp/write.txt', ['4', '5', '6'], __file__))
+        # ---------------------------------------------------------------------------
         # # запись содержимого словаря (dict) в файл
         # print('******************запись содержимого словаря (dict) в файл******************')
         # print('++++++++++(file_write_dict(file: str, dictor: dict) -> None)++++++++++')
@@ -1033,4 +1036,12 @@ if __name__ == '__main__':
         # # ---------------------------------------------------------------------------
     # выполнить тест
     main()
-# *****************************************************************************************
+# *****************************************************************************************1
+2
+34
+5
+61
+2
+34
+5
+6
