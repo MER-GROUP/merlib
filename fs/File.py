@@ -70,7 +70,7 @@ class File:
         file_get_current_access_dir_in_str() -> list[str]
         file_get_current_access_dir_in_int() -> list[int]
         file_get_installer() -> str
-        file_get_path_to_downloads() -> str
+        file_get_path_to_downloads() -> str                                         ##########+
         file_get_local_language() -> str                                            ##########+
         file_set_access_open_all(name: str, curdir: str = __file__) -> bool         ##########+
         file_set_access_close_all(name: str, curdir: str = __file__) -> bool        ##########+
@@ -551,7 +551,10 @@ class File:
                 получает директорию к папке Downloads\n 
                 возвращаемое значение - str (строка)\n   
         параметры:\n                                              
-                нет параметров\n                        
+                нет параметров\n
+        примеры:\n 
+                file = File()\n 
+                path = file.file_get_path_to_downloads()\n                        
         '''
         try:
             # создаем свое исключение
@@ -606,7 +609,10 @@ class File:
                 получает установленный по умолчанию язык операционной системы\n 
                 возвращаемое значение - str (строка)\n   
         параметры:\n                                              
-                нет параметров\n                        
+                нет параметров\n
+        примеры:\n 
+                file = File()\n 
+                lang = file.file_get_local_language()\n                          
         '''
         try:
             # создаем свое исключение
@@ -946,6 +952,11 @@ if __name__ == '__main__':
         print('******************получить установленный по умолчанию язык операционной системы******************')
         print('++++++++++(file_get_local_language() -> str)++++++++++')
         print(file.file_get_local_language())
+        # ---------------------------------------------------------------------------
+        # получить директорию к папке Downloads
+        print('******************получить директорию к папке Downloads******************')
+        print('++++++++++(file_get_path_to_downloads() -> str)++++++++++')
+        print(file.file_get_path_to_downloads())
         # ---------------------------------------------------------------------------
 
 
