@@ -54,6 +54,7 @@ class File:
     '''
     class File - класс для обработки файлов
     методы:
+        file_console_print_file_utf8(file: str, curdir: str = __file__) -> None     ##########+
         file_console_print_list(arr: list) -> None                                  ##########+
         file_create(file: str, curdir: str = __file__) -> bool                      ##########+
         file_create_dir(dir: str, curdir: str = __file__) -> bool                   ##########+
@@ -77,10 +78,35 @@ class File:
         file_read_utf8(file: str) -> list[str]  
         file_write(file: str, arr: list, curdir: str = __file__) -> None            ##########+  
         file_write_append(file: str, arr: list, curdir: str = __file__) -> None     ##########+ 
-        file_write_dict(file: str, dictor: dict, curdir: str = __file__) -> None    ##########+  
-           
-        file_print_console_utf8(file: str) -> None              ########## 
+        file_write_dict(file: str, dictor: dict, curdir: str = __file__) -> None    ##########+           
     '''
+    # ---------------------------------------------------------------------------
+    # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
+    # (аналог type filename в cmd.exe)
+    def file_console_print_file_utf8(self, file: str, curdir: str = __file__) -> None:
+        '''
+        file_console_print_file_utf8(file: str, curdir: str = __file__) -> None\n                
+                вывод в консоль содержимого файла содержащий\n        
+                    текст в utf-8 кодировке\n                         
+                возвращаемое значение - None (None)\n                 
+        параметры:\n                                                
+                file: str - имя файла которое неоходимо открыть,\n    
+                    прочитать и вывести в консоль\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n    
+        примеры:\n
+                file = File()\n 
+                file.file_print_console_utf8('./temp/dict.txt', __file__)\n         
+        '''
+        try:
+            # определить имя файла
+            file_name = self.file_init_name('', file, curdir)
+            # открыть файл, скопировать содержимое в консоль (терминал)
+            with open(file_name, 'r', encoding='utf-8') as f:
+                shutil.copyfileobj(f, sys.stdout)
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # вывод в консоль содержимого списка (list)
     def file_console_print_list(self, arr: list) -> None:
@@ -797,30 +823,6 @@ class File:
         except (BaseException) as e:
             return str(e)
     # ---------------------------------------------------------------------------
-    # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
-    # (аналог type filename в cmd.exe)
-    def file_print_console_utf8(self, file: str) -> None:
-        '''
-        file_print_console_utf8(file: str) -> None\n                
-                вывод в консоль содержимого файла содержащий\n        
-                    текст в utf-8 кодировке\n                         
-                возвращаемое значение - None (None)\n                 
-        параметры:\n                                                
-                file: str - имя файла которое неоходимо открыть,\n    
-                    прочитать и вывести в консоль\n  
-        примеры:\n
-                file = File()\n 
-                file.file_print_console_utf8('./temp/dict.txt')\n         
-        '''
-        try:
-            # определить имя файла
-            file_name = self.file_init_name('', file)
-            # открыть файл, скопировать содержимое в консоль (терминал)
-            with open(file_name, 'r', encoding='utf-8') as f:
-                shutil.copyfileobj(f, sys.stdout)
-        except (BaseException) as e:
-            return str(e)
-    # ---------------------------------------------------------------------------
 # *****************************************************************************************
 # тест
 # если не модуль, то выполнить
@@ -883,10 +885,10 @@ if __name__ == '__main__':
         print('++++++++++(file_console_print_list(arr: list) -> None)++++++++++')
         file.file_console_print_list([1, 2, 3])
         # ---------------------------------------------------------------------------
-        # # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
-        # print('******************вывод в консоль содержимого файла содержащий текст в utf-8 кодировке******************')
-        # print('++++++++++(file_print_console_utf8(file: str) -> None)++++++++++')
-        # file.file_print_console_utf8('./temp/dict.txt')
+        # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
+        print('******************вывод в консоль содержимого файла содержащий текст в utf-8 кодировке******************')
+        print('++++++++++(file_console_print_file_utf8(file: str, curdir: str = __file__) -> None)++++++++++')
+        file.file_console_print_file_utf8('./temp/dict.txt', __file__)
         # ---------------------------------------------------------------------------
 
 
