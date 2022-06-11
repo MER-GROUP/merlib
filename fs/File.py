@@ -68,7 +68,7 @@ class File:
         file_get_current_dir_files() -> list[str]
         file_get_dir_files(dir: str) -> list[str]
         file_get_current_access_dir_in_str() -> list[str]
-        file_get_current_access_dir_in_int() -> list[int]
+        file_get_current_access_dir_in_int() -> list[int]                           ##########+
         file_get_installer() -> str                                                 ##########+
         file_get_path_to_downloads() -> str                                         ##########+
         file_get_local_language() -> str                                            ##########+
@@ -476,7 +476,10 @@ class File:
                     в текущей директории в виде int (777)\n 
                 возвращаемое значение - list[int] (список чисел)\n    
         параметры:\n                                              
-                нет параметров\n                        
+                нет параметров\n
+        примеры:\n 
+                file = File()\n 
+                arr = file.file_get_current_access_dir_in_int()\n                         
         '''
         try:
             # массив установленных разрешений для файлов и папок
@@ -965,6 +968,11 @@ if __name__ == '__main__':
         print('******************получить установщик данного файла******************')
         print('++++++++++(file_get_installer() -> str)++++++++++')
         print(file.file_get_installer())
+        # ---------------------------------------------------------------------------
+        # получить все установленные права доступа файлов в текущей директории в виде int (777)
+        print('******************получить все установленные права доступа файлов в текущей директории в виде int (777)******************')
+        print('++++++++++(file_get_current_access_dir_in_int() -> list[int])++++++++++')
+        print(file.file_get_current_access_dir_in_int())
         # ---------------------------------------------------------------------------
 
 
