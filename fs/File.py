@@ -72,7 +72,7 @@ class File:
         file_get_installer() -> str
         file_get_path_to_downloads() -> str
         file_get_local_language() -> str
-        file_set_access_open_all(name: str) -> bool
+        file_set_access_open_all(name: str, curdir: str = __file__) -> bool         ##########+
         file_set_access_close_all(name: str, curdir: str = __file__) -> bool        ##########+
         file_read(file: str, curdir: str = __file__) -> list[str]                   ##########+ 
         file_read_utf8(file: str, curdir: str = __file__) -> list[str]              ##########+ 
@@ -644,17 +644,24 @@ class File:
     # ---------------------------------------------------------------------------
     # разрешить весь доступ к указанному файлу/директории
     # работает только с файлофой системой unix (ext и т.д.)
-    def file_set_access_open_all(self, name: str) -> bool:
+    def file_set_access_open_all(self, name: str, curdir: str = __file__) -> bool:
         '''
-        file_set_access_open_all(name: str) -> bool\n                      
+        file_set_access_open_all(name: str, curdir: str = __file__) -> bool\n                      
                 разрешает весь доступ к указанному файлу/директории\n             
                 возвращаемое значение - bool (True - доступ разрешен, False - ошибка)\n    
         параметры:\n                                                
-                name: str - имя папки/директории к которому нужно разрешить доступ\n                        
+                name: str - имя папки/директории к которому нужно разрешить доступ\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
+        примеры:\n 
+                file = File()\n 
+                file.file_set_access_open_all('./temp/test2.txt', __file__)\n 
+                file.file_set_access_open_all('./temp/test2/', __file__)\n                       
         '''
         try:
             # определить имя файла/директории
-            dir_file_name = self.file_init_name('', name)
+            dir_file_name = self.file_init_name('', name, curdir)
             # определяем текущие права файла
             # permissions = os.stat(dir_file_name).st_mode
             # Convert a file's mode to a string of the form '-rwxrwxrwx'
@@ -928,6 +935,12 @@ if __name__ == '__main__':
         print(file.file_set_access_close_all('./temp/test2.txt', __file__))
         print(file.file_set_access_close_all('./temp/test1/', __file__))
         print(file.file_set_access_close_all('./temp/test2/', __file__))
+        # ---------------------------------------------------------------------------
+        # разрешить весь доступ к указанному файлу/директории
+        print('******************разрешить весь доступ к указанному файлу/директории******************')
+        print('++++++++++(file_set_access_open_all(name: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_set_access_open_all('./temp/test2.txt', __file__))
+        print(file.file_set_access_open_all('./temp/test2/', __file__))
         # ---------------------------------------------------------------------------
 
 
