@@ -67,7 +67,7 @@ class File:
         file_init_name(folder: str, filename: str, curdir: str = __file__) -> str   ##########+
         file_get_current_dir_files() -> list[str]
         file_get_dir_files(dir: str) -> list[str]
-        file_get_current_access_dir_in_str() -> list[str]
+        file_get_current_access_dir_in_str() -> list[str]                           ##########+
         file_get_current_access_dir_in_int() -> list[int]                           ##########+
         file_get_installer() -> str                                                 ##########+
         file_get_path_to_downloads() -> str                                         ##########+
@@ -453,7 +453,10 @@ class File:
                     в текущей директории в виде str (rwx)\n 
                 возвращаемое значение - list[str] (список строк)\n    
         параметры:\n                                              
-                нет параметров\n                        
+                нет параметров\n
+        примеры:\n 
+                file = File()\n 
+                arr = file.file_get_current_access_dir_in_str()\n                         
         '''
         try:
             # массив установленных разрешений для файлов и папок
@@ -973,6 +976,11 @@ if __name__ == '__main__':
         print('******************получить все установленные права доступа файлов в текущей директории в виде int (777)******************')
         print('++++++++++(file_get_current_access_dir_in_int() -> list[int])++++++++++')
         print(file.file_get_current_access_dir_in_int())
+        # ---------------------------------------------------------------------------
+        # получить все установленные права доступа файлов в текущей директории в виде str (rwx)
+        print('******************получить все установленные права доступа файлов в текущей директории в виде str (rwx)******************')
+        print('++++++++++(file_get_current_access_dir_in_str() -> list[str])++++++++++')
+        print(file.file_get_current_access_dir_in_str())
         # ---------------------------------------------------------------------------
 
 
