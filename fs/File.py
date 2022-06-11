@@ -71,7 +71,7 @@ class File:
         file_get_current_access_dir_in_int() -> list[int]
         file_get_installer() -> str
         file_get_path_to_downloads() -> str
-        file_get_local_language() -> str
+        file_get_local_language() -> str                                            ##########+
         file_set_access_open_all(name: str, curdir: str = __file__) -> bool         ##########+
         file_set_access_close_all(name: str, curdir: str = __file__) -> bool        ##########+
         file_read(file: str, curdir: str = __file__) -> list[str]                   ##########+ 
@@ -941,6 +941,11 @@ if __name__ == '__main__':
         print('++++++++++(file_set_access_open_all(name: str, curdir: str = __file__) -> bool)++++++++++')
         print(file.file_set_access_open_all('./temp/test2.txt', __file__))
         print(file.file_set_access_open_all('./temp/test2/', __file__))
+        # ---------------------------------------------------------------------------
+        # получить установленный по умолчанию язык операционной системы
+        print('******************получить установленный по умолчанию язык операционной системы******************')
+        print('++++++++++(file_get_local_language() -> str)++++++++++')
+        print(file.file_get_local_language())
         # ---------------------------------------------------------------------------
 
 
