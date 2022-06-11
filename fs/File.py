@@ -61,7 +61,7 @@ class File:
         file_delete(file: str) -> bool
         file_delete_empty_folder(file: str) -> bool
         file_delete_full_folder(file: str) -> bool
-        file_exists(file: str) -> bool
+        file_exists(file: str, curdir: str = __file__) -> bool                      ##########+
         file_exists_dir(dir: str, curdir: str = __file__) -> bool                   ##########+
         file_init_dir(folder: str, dir: str, curdir: str = __file__) -> str         ##########+
         file_init_name(folder: str, filename: str, curdir: str = __file__) -> str   ##########+
@@ -264,17 +264,24 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # проверка существование файла
-    def file_exists(self, file: str) -> bool:
+    def file_exists(self, file: str, curdir: str = __file__) -> bool:
         '''
-        file_exists(file: str) -> bool\n                      
+        file_exists(file: str, curdir: str = __file__) -> bool\n                      
                 проверяет существование файла\n          
                 возвращаемое значение - bool (True - существует, False - ошибка)\n    
         параметры:\n                                                
-                file: str - имя файла для проверки\n                     
+                file: str - имя файла для проверки\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
+        примеры:\n 
+                file = File()\n 
+                file.file_exists('./temp/test2.txt', __file__)\n 
+                file.file_exists('./temp/test3.txt', __file__)\n                     
         '''
         try:
             # определить имя файла
-            file_name = self.file_init_name('', file)
+            file_name = self.file_init_name('', file, curdir)
             # проверка существования файла
             if exists(file_name):
                 return True
@@ -1015,6 +1022,12 @@ if __name__ == '__main__':
         print('++++++++++(file_exists_dir(dir: str, curdir: str = __file__) -> bool)++++++++++')
         print(file.file_exists_dir('./temp/test2/', __file__))
         print(file.file_exists_dir('./temp/test3/', __file__))
+        # ---------------------------------------------------------------------------
+        # проверка существование файла
+        print('******************проверка существование файла******************')
+        print('++++++++++(file_exists(file: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_exists('./temp/test2.txt', __file__))
+        print(file.file_exists('./temp/test3.txt', __file__))
         # ---------------------------------------------------------------------------
 
 
