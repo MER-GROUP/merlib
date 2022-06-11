@@ -65,7 +65,7 @@ class File:
         file_exists_dir(dir: str) -> bool
         file_init_dir(folder: str, dir: str, curdir: str = __file__) -> str         ##########+
         file_init_name(folder: str, filename: str, curdir: str = __file__) -> str   ##########+
-        file_get_current_dir_files() -> list[str]
+        file_get_current_dir_files() -> list[str]                                   ##########+
         file_get_dir_files(dir: str, curdir: str = __file__) -> list[str]           ##########+
         file_get_current_access_dir_in_str() -> list[str]                           ##########+
         file_get_current_access_dir_in_int() -> list[int]                           ##########+
@@ -418,7 +418,10 @@ class File:
                 получает все файлы и папки в текущей директории\n             
                 возвращаемое значение - list[str] (список строк)\n    
         параметры:\n                                            
-                нет параметров\n                        
+                нет параметров\n 
+        примеры:\n 
+                file = File()\n 
+                arr = file.file_get_current_dir_files()\n                                       
         '''
         try:
             files_arr = listdir()
@@ -994,6 +997,11 @@ if __name__ == '__main__':
         print('++++++++++(file_get_dir_files(dir: str, curdir: str = __file__) -> list[str])++++++++++')
         print(file.file_get_dir_files('./temp/', __file__))
         print(file.file_get_dir_files('', __file__))
+        # ---------------------------------------------------------------------------
+        # получить все файлы и папки в текущей директории
+        print('******************получить все файлы и папки в текущей директории******************')
+        print('++++++++++(file_get_current_dir_files() -> list[str])++++++++++')
+        print(file.file_get_current_dir_files())
         # ---------------------------------------------------------------------------
 
 
