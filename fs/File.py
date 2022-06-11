@@ -69,7 +69,7 @@ class File:
         file_get_dir_files(dir: str) -> list[str]
         file_get_current_access_dir_in_str() -> list[str]
         file_get_current_access_dir_in_int() -> list[int]
-        file_get_installer() -> str
+        file_get_installer() -> str                                                 ##########+
         file_get_path_to_downloads() -> str                                         ##########+
         file_get_local_language() -> str                                            ##########+
         file_set_access_open_all(name: str, curdir: str = __file__) -> bool         ##########+
@@ -503,7 +503,10 @@ class File:
         возвращаемое значение для остальных ОС\n 
                 unknown - источник установки неизвестен\n 
         параметры:\n                                              
-                нет параметров\n                        
+                нет параметров\n
+        примеры:\n 
+                file = File()\n 
+                installer = file.file_get_installer()\n                        
         '''
         try:
             # создаем свое исключение
@@ -957,6 +960,11 @@ if __name__ == '__main__':
         print('******************получить директорию к папке Downloads******************')
         print('++++++++++(file_get_path_to_downloads() -> str)++++++++++')
         print(file.file_get_path_to_downloads())
+        # ---------------------------------------------------------------------------
+        # получить установщик данного файла
+        print('******************получить установщик данного файла******************')
+        print('++++++++++(file_get_installer() -> str)++++++++++')
+        print(file.file_get_installer())
         # ---------------------------------------------------------------------------
 
 
