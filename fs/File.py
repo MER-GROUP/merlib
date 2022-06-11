@@ -66,7 +66,7 @@ class File:
         file_init_dir(folder: str, dir: str, curdir: str = __file__) -> str         ##########+
         file_init_name(folder: str, filename: str, curdir: str = __file__) -> str   ##########+
         file_get_current_dir_files() -> list[str]
-        file_get_dir_files(dir: str) -> list[str]
+        file_get_dir_files(dir: str, curdir: str = __file__) -> list[str]           ##########+
         file_get_current_access_dir_in_str() -> list[str]                           ##########+
         file_get_current_access_dir_in_int() -> list[int]                           ##########+
         file_get_installer() -> str                                                 ##########+
@@ -427,17 +427,24 @@ class File:
             return str(e)
     # ---------------------------------------------------------------------------
     # получить все файлы и папки в указанной директории
-    def file_get_dir_files(self, dir: str) -> list[str]:
+    def file_get_dir_files(self, dir: str, curdir: str = __file__) -> list[str]:
         '''
-        file_get_dir_files(dir: str) -> list[str]\n               
+        file_get_dir_files(dir: str, curdir: str = __file__) -> list[str]\n               
                 получает все файлы и папки в указанной директории\n           
                 возвращаемое значение - list[str] (список строк)\n                
         параметры:\n                                                
-                dir: str - имя директории которую необходимо показать\n                
+                dir: str - имя директории которую необходимо показать\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
+        примеры:\n 
+                file = File()\n 
+                arr = file.file_get_dir_files('./temp/', __file__)\n                
+                arr = file.file_get_dir_files('', __file__)\n                
         '''
         try:
             # определить имя директории
-            dir_name = self.file_init_dir(dir, '')
+            dir_name = self.file_init_dir(dir, '', curdir)
             # получить все файлы и папки в указанной директории
             files_arr = listdir(dir_name)
             return files_arr
@@ -981,6 +988,12 @@ if __name__ == '__main__':
         print('******************получить все установленные права доступа файлов в текущей директории в виде str (rwx)******************')
         print('++++++++++(file_get_current_access_dir_in_str() -> list[str])++++++++++')
         print(file.file_get_current_access_dir_in_str())
+        # ---------------------------------------------------------------------------
+        # получить все файлы и папки в указанной директории
+        print('******************получить все файлы и папки в указанной директории******************')
+        print('++++++++++(file_get_dir_files(dir: str, curdir: str = __file__) -> list[str])++++++++++')
+        print(file.file_get_dir_files('./temp/', __file__))
+        print(file.file_get_dir_files('', __file__))
         # ---------------------------------------------------------------------------
 
 
