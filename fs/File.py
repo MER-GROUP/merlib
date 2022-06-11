@@ -54,6 +54,7 @@ class File:
     '''
     class File - класс для обработки файлов
     методы:
+        file_console_print_list(arr: list) -> None                                  ##########+
         file_create(file: str, curdir: str = __file__) -> bool                      ##########+
         file_create_dir(dir: str, curdir: str = __file__) -> bool                   ##########+
         file_delete(file: str) -> bool
@@ -77,9 +78,30 @@ class File:
         file_write(file: str, arr: list, curdir: str = __file__) -> None            ##########+  
         file_write_append(file: str, arr: list, curdir: str = __file__) -> None     ##########+ 
         file_write_dict(file: str, dictor: dict, curdir: str = __file__) -> None    ##########+  
-        file_list_console(arr: list) -> None                    ##########   
+           
         file_print_console_utf8(file: str) -> None              ########## 
     '''
+    # ---------------------------------------------------------------------------
+    # вывод в консоль содержимого списка (list)
+    def file_console_print_list(self, arr: list) -> None:
+        '''
+        file_console_print_list(arr: list) -> None\n                      
+                вывод в консоль содержимого списка (list)\n           
+                возвращаемое значение - None (None)\n                 
+        параметры:\n                                                
+                arr: list - список для вывода в консоль\n 
+        примеры:\n 
+                file = File()\n 
+                file.file_list_print_console([1, 2, 3])\n          
+        '''
+        try:
+            for line in arr:
+                # print(line.strip())
+                # print(repr(line))
+                # print(line, end='')
+                print(line)
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # создать пустой файл
     def file_create(self, file: str, curdir: str = __file__) -> bool:
@@ -775,27 +797,6 @@ class File:
         except (BaseException) as e:
             return str(e)
     # ---------------------------------------------------------------------------
-    # вывод в консоль содержимого списка (list)
-    def file_list_print_console(self, arr: list) -> None:
-        '''
-        file_list_console(arr: list) -> None\n                      
-                вывод в консоль содержимого списка (list)\n           
-                возвращаемое значение - None (None)\n                 
-        параметры:\n                                                
-                arr: list - список для вывода в консоль\n 
-        примеры:\n 
-                file = File()\n 
-                file.file_list_print_console([1, 2, 3])\n          
-        '''
-        try:
-            for line in arr:
-                # print(line.strip())
-                # print(repr(line))
-                # print(line, end='')
-                print(line)
-        except (BaseException) as e:
-            return str(e)
-    # ---------------------------------------------------------------------------
     # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
     # (аналог type filename в cmd.exe)
     def file_print_console_utf8(self, file: str) -> None:
@@ -877,11 +878,11 @@ if __name__ == '__main__':
         print('++++++++++(file_write_dict(file: str, dictor: dict, curdir: str = __file__) -> None)++++++++++')
         print(file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft'), __file__))
         # ---------------------------------------------------------------------------
-        # # вывод в консоль содержимого списка (list)
-        # print('******************вывод в консоль содержимого списка (list)******************')
-        # print('++++++++++(file_list_console(arr: list) -> None)++++++++++')
-        # file.file_list_print_console([1, 2, 3])
-        # # ---------------------------------------------------------------------------
+        # вывод в консоль содержимого списка (list)
+        print('******************вывод в консоль содержимого списка (list)******************')
+        print('++++++++++(file_console_print_list(arr: list) -> None)++++++++++')
+        file.file_console_print_list([1, 2, 3])
+        # ---------------------------------------------------------------------------
         # # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
         # print('******************вывод в консоль содержимого файла содержащий текст в utf-8 кодировке******************')
         # print('++++++++++(file_print_console_utf8(file: str) -> None)++++++++++')
