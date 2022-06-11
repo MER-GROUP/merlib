@@ -75,7 +75,7 @@ class File:
         file_set_access_open_all(name: str) -> bool
         file_set_access_close_all(name: str) -> bool
         file_read(file: str, curdir: str = __file__) -> list[str]                   ##########+ 
-        file_read_utf8(file: str) -> list[str]  
+        file_read_utf8(file: str, curdir: str = __file__) -> list[str]              ##########+ 
         file_write(file: str, arr: list, curdir: str = __file__) -> None            ##########+  
         file_write_append(file: str, arr: list, curdir: str = __file__) -> None     ##########+ 
         file_write_dict(file: str, dictor: dict, curdir: str = __file__) -> None    ##########+           
@@ -708,7 +708,7 @@ class File:
                     __file__ - путь данного файла в текущей директории (magic method)\n   
         примеры:\n 
                 file = File()\n 
-                arr = file.file_read('./temp/dict.txt', __file__)                           
+                arr = file.file_read('./temp/dict.txt', __file__)\n                           
         '''
         try:
             # определить имя файла
@@ -720,18 +720,24 @@ class File:
             return str(e)
     # ---------------------------------------------------------------------------
     # чтение содержимого файла содержащий текст в utf-8 кодировке
-    def file_read_utf8(self, file: str) -> list[str]:
+    def file_read_utf8(self, file: str, curdir: str = __file__) -> list[str]:
         '''
-        file_read_utf8(file: str) -> list[str]\n                    
+        file_read_utf8(file: str, curdir: str = __file__) -> list[str]\n                    
                 читает информацию из файла в utf-8 кодировке\n        
                 возвращаемое значение - list[str] (список строк)\n    
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
-                    и прочитать\n                             
+                    и прочитать\n 
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
+        примеры:\n 
+                file = File()\n 
+                arr = file.file_read_utf8('./temp/dict.txt', __file__)\n                           
         '''
         try:
             # определить имя файла
-            file_name = self.file_init_name('', file)
+            file_name = self.file_init_name('', file, curdir)
             # var
             str_byte = None
             # открыть файл и прочитать текст в utf-8 кодировке
@@ -900,6 +906,11 @@ if __name__ == '__main__':
         print('******************чтение содержимого файла построчно******************')
         print('++++++++++(file_read(file: str, curdir: str = __file__) -> list[str])++++++++++')
         print(file.file_read('./temp/dict.txt', __file__))
+        # ---------------------------------------------------------------------------
+        # чтение содержимого файла содержащий текст в utf-8 кодировке
+        print('******************чтение содержимого файла содержащий текст в utf-8 кодировке******************')
+        print('++++++++++(file_read_utf8(file: str, curdir: str = __file__) -> list[str])++++++++++')
+        print(file.file_read_utf8('./temp/dict.txt', __file__))
         # ---------------------------------------------------------------------------
 
 
