@@ -76,7 +76,7 @@ class File:
         file_read_utf8(file: str) -> list[str]  
         file_write(file: str, arr: list, curdir: str = __file__) -> None            ##########+  
         file_write_append(file: str, arr: list, curdir: str = __file__) -> None     ##########+ 
-        file_write_dict(file: str, dictor: dict) -> None        ##########  
+        file_write_dict(file: str, dictor: dict, curdir: str = __file__) -> None    ##########+  
         file_list_console(arr: list) -> None                    ##########   
         file_print_console_utf8(file: str) -> None              ########## 
     '''
@@ -749,22 +749,25 @@ class File:
             return str(e)
     # ---------------------------------------------------------------------------
     # запись содержимого словаря (dict) в файл
-    def file_write_dict(self, file: str, dictor: dict) -> None:
+    def file_write_dict(self, file: str, dictor: dict, curdir: str = __file__) -> None:
         '''
-        file_write_dict(file: str, dictor: dict) -> None\n          
+        file_write_dict(file: str, dictor: dict, curdir: str = __file__) -> None\n          
                 запись содержимого словаря (dict) в файл\n            
                 возвращаемое значение - None (None)\n                 
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
                     для записи содержимого словаря\n          
-                dictor: dict - словарь для записи в файл\n   
+                dictor: dict - словарь для записи в файл\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n    
         примеры:\n 
                 file = File()\n 
-                file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft'))\n          
+                file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft'), __file__)\n          
         '''
         try:
             # определить имя файла
-            file_name = self.file_init_name('', file)
+            file_name = self.file_init_name('', file, curdir)
             # создать файл и записать содержимое словаря (хэш таблицы)
             with open(file_name, 'w') as f:
                 for k,v in dictor.items():
@@ -869,11 +872,11 @@ if __name__ == '__main__':
         print(file.file_write_append('./temp/write.txt', ['1', '2', '3'], __file__))
         print(file.file_write_append('./temp/write.txt', ['4', '5', '6'], __file__))
         # ---------------------------------------------------------------------------
-        # # запись содержимого словаря (dict) в файл
-        # print('******************запись содержимого словаря (dict) в файл******************')
-        # print('++++++++++(file_write_dict(file: str, dictor: dict) -> None)++++++++++')
-        # print(file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft')))
-        # # ---------------------------------------------------------------------------
+        # запись содержимого словаря (dict) в файл
+        print('******************запись содержимого словаря (dict) в файл******************')
+        print('++++++++++(file_write_dict(file: str, dictor: dict, curdir: str = __file__) -> None)++++++++++')
+        print(file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft'), __file__))
+        # ---------------------------------------------------------------------------
         # # вывод в консоль содержимого списка (list)
         # print('******************вывод в консоль содержимого списка (list)******************')
         # print('++++++++++(file_list_console(arr: list) -> None)++++++++++')
