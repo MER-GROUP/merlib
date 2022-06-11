@@ -62,7 +62,7 @@ class File:
         file_delete_empty_folder(file: str) -> bool
         file_delete_full_folder(file: str) -> bool
         file_exists(file: str) -> bool
-        file_exists_dir(dir: str) -> bool
+        file_exists_dir(dir: str, curdir: str = __file__) -> bool                   ##########+
         file_init_dir(folder: str, dir: str, curdir: str = __file__) -> str         ##########+
         file_init_name(folder: str, filename: str, curdir: str = __file__) -> str   ##########+
         file_get_current_dir_files() -> list[str]                                   ##########+
@@ -286,17 +286,24 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # проверка существования директории
-    def file_exists_dir(self, dir: str) -> bool:
+    def file_exists_dir(self, dir: str, curdir: str = __file__) -> bool:
         '''
-        file_exists_dir(dir: str) -> bool\n                      
+        file_exists_dir(dir: str, curdir: str = __file__) -> bool\n                      
                 проверяет существование директории \n          
                 возвращаемое значение - bool (True - существует, False - ошибка)\n    
         параметры:\n                                                
-                dir: str - имя директории для проверки\n                     
+                dir: str - имя директории для проверки\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
+        примеры:\n 
+                file = File()\n 
+                file.file_exists_dir('./temp/test2/', __file__)\n 
+                file.file_exists_dir('./temp/test3/', __file__)\n                      
         '''
         try:
             # определить имя директории
-            dir_name = self.file_init_name('', dir)
+            dir_name = self.file_init_dir(dir, '', curdir)
             # проверка существования директории
             # if exists(dir_name):
             if self.file_exists(dir_name):
@@ -1002,6 +1009,12 @@ if __name__ == '__main__':
         print('******************получить все файлы и папки в текущей директории******************')
         print('++++++++++(file_get_current_dir_files() -> list[str])++++++++++')
         print(file.file_get_current_dir_files())
+        # ---------------------------------------------------------------------------
+        # проверка существования директории
+        print('******************проверка существования директории******************')
+        print('++++++++++(file_exists_dir(dir: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_exists_dir('./temp/test2/', __file__))
+        print(file.file_exists_dir('./temp/test3/', __file__))
         # ---------------------------------------------------------------------------
 
 
