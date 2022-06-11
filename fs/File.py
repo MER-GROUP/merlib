@@ -74,7 +74,7 @@ class File:
         file_get_local_language() -> str
         file_set_access_open_all(name: str) -> bool
         file_set_access_close_all(name: str) -> bool
-        file_read(file: str) -> list[str] 
+        file_read(file: str, curdir: str = __file__) -> list[str]                   ##########+ 
         file_read_utf8(file: str) -> list[str]  
         file_write(file: str, arr: list, curdir: str = __file__) -> None            ##########+  
         file_write_append(file: str, arr: list, curdir: str = __file__) -> None     ##########+ 
@@ -695,18 +695,24 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # чтение содержимого файла построчно
-    def file_read(self, file: str) -> list[str]:
+    def file_read(self, file: str, curdir: str = __file__) -> list[str]:
         '''
-        file_read(file: str) -> list[str]\n                         
+        file_read(file: str, curdir: str = __file__) -> list[str]\n                         
                 читает информацию из файла построчно\n                
                 возвращаемое значение - list[str] (список строк)\n    
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
-                    и прочитать\n                             
+                    и прочитать\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
+        примеры:\n 
+                file = File()\n 
+                arr = file.file_read('./temp/dict.txt', __file__)                           
         '''
         try:
             # определить имя файла
-            file_name = self.file_init_name('', file)
+            file_name = self.file_init_name('', file, curdir)
             # открыть файл и прочитать построчно
             with open(file_name, 'r') as f:
                 return f.readlines()
@@ -889,6 +895,11 @@ if __name__ == '__main__':
         print('******************вывод в консоль содержимого файла содержащий текст в utf-8 кодировке******************')
         print('++++++++++(file_console_print_file_utf8(file: str, curdir: str = __file__) -> None)++++++++++')
         file.file_console_print_file_utf8('./temp/dict.txt', __file__)
+        # ---------------------------------------------------------------------------
+        # чтение содержимого файла построчно
+        print('******************чтение содержимого файла построчно******************')
+        print('++++++++++(file_read(file: str, curdir: str = __file__) -> list[str])++++++++++')
+        print(file.file_read('./temp/dict.txt', __file__))
         # ---------------------------------------------------------------------------
 
 
