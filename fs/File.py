@@ -54,32 +54,80 @@ class File:
     '''
     class File - класс для обработки файлов
     методы:
+        file_console_print_file_utf8(file: str, curdir: str = __file__) -> None     ##########+
+        file_console_print_list(arr: list) -> None                                  ##########+
         file_create(file: str, curdir: str = __file__) -> bool                      ##########+
         file_create_dir(dir: str, curdir: str = __file__) -> bool                   ##########+
-        file_delete(file: str) -> bool
-        file_delete_empty_folder(file: str) -> bool
-        file_delete_full_folder(file: str) -> bool
-        file_exists(file: str) -> bool
-        file_exists_dir(dir: str) -> bool
+        file_delete(file: str, curdir: str = __file__) -> bool                      ##########+
+        file_delete_empty_folder(dir: str, curdir: str = __file__) -> bool          ##########+
+        file_delete_full_folder(dir: str, curdir: str = __file__) -> bool           ##########+
+        file_exists(file: str, curdir: str = __file__) -> bool                      ##########+
+        file_exists_dir(dir: str, curdir: str = __file__) -> bool                   ##########+
         file_init_dir(folder: str, dir: str, curdir: str = __file__) -> str         ##########+
         file_init_name(folder: str, filename: str, curdir: str = __file__) -> str   ##########+
-        file_get_current_dir_files() -> list[str]
-        file_get_dir_files(dir: str) -> list[str]
-        file_get_current_access_dir_in_str() -> list[str]
-        file_get_current_access_dir_in_int() -> list[int]
-        file_get_installer() -> str
-        file_get_path_to_downloads() -> str
-        file_get_local_language() -> str
-        file_set_access_open_all(name: str) -> bool
-        file_set_access_close_all(name: str) -> bool
-        file_read(file: str) -> list[str] 
-        file_read_utf8(file: str) -> list[str]  
+        file_get_current_dir_files() -> list[str]                                   ##########+
+        file_get_dir_files(dir: str, curdir: str = __file__) -> list[str]           ##########+
+        file_get_current_access_dir_in_str() -> list[str]                           ##########+
+        file_get_current_access_dir_in_int() -> list[int]                           ##########+
+        file_get_installer() -> str                                                 ##########+
+        file_get_path_to_downloads() -> str                                         ##########+
+        file_get_local_language() -> str                                            ##########+
+        file_set_access_open_all(name: str, curdir: str = __file__) -> bool         ##########+
+        file_set_access_close_all(name: str, curdir: str = __file__) -> bool        ##########+
+        file_read(file: str, curdir: str = __file__) -> list[str]                   ##########+ 
+        file_read_utf8(file: str, curdir: str = __file__) -> list[str]              ##########+ 
         file_write(file: str, arr: list, curdir: str = __file__) -> None            ##########+  
-        file_write_append(file: str, arr: list) -> None         ########## 
-        file_write_dict(file: str, dictor: dict) -> None        ##########  
-        file_list_console(arr: list) -> None                    ##########   
-        file_print_console_utf8(file: str) -> None              ########## 
+        file_write_append(file: str, arr: list, curdir: str = __file__) -> None     ##########+ 
+        file_write_dict(file: str, dictor: dict, curdir: str = __file__) -> None    ##########+           
     '''
+    # ---------------------------------------------------------------------------
+    # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
+    # (аналог type filename в cmd.exe)
+    def file_console_print_file_utf8(self, file: str, curdir: str = __file__) -> None:
+        '''
+        file_console_print_file_utf8(file: str, curdir: str = __file__) -> None\n                
+                вывод в консоль содержимого файла содержащий\n        
+                    текст в utf-8 кодировке\n                         
+                возвращаемое значение - None (None)\n                 
+        параметры:\n                                                
+                file: str - имя файла которое неоходимо открыть,\n    
+                    прочитать и вывести в консоль\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n    
+        примеры:\n
+                file = File()\n 
+                file.file_print_console_utf8('./temp/dict.txt', __file__)\n         
+        '''
+        try:
+            # определить имя файла
+            file_name = self.file_init_name('', file, curdir)
+            # открыть файл, скопировать содержимое в консоль (терминал)
+            with open(file_name, 'r', encoding='utf-8') as f:
+                shutil.copyfileobj(f, sys.stdout)
+        except (BaseException) as e:
+            return str(e)
+    # ---------------------------------------------------------------------------
+    # вывод в консоль содержимого списка (list)
+    def file_console_print_list(self, arr: list) -> None:
+        '''
+        file_console_print_list(arr: list) -> None\n                      
+                вывод в консоль содержимого списка (list)\n           
+                возвращаемое значение - None (None)\n                 
+        параметры:\n                                                
+                arr: list - список для вывода в консоль\n 
+        примеры:\n 
+                file = File()\n 
+                file.file_list_print_console([1, 2, 3])\n          
+        '''
+        try:
+            for line in arr:
+                # print(line.strip())
+                # print(repr(line))
+                # print(line, end='')
+                print(line)
+        except (BaseException) as e:
+            return str(e)
     # ---------------------------------------------------------------------------
     # создать пустой файл
     def file_create(self, file: str, curdir: str = __file__) -> bool:
@@ -141,25 +189,32 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # удаление файла с носителя
-    def file_delete(self, file: str) -> bool:
+    def file_delete(self, file: str, curdir: str = __file__) -> bool:
         '''
-        file_delete(file: str) -> bool\n                      
+        file_delete(file: str, curdir: str = __file__) -> bool\n                      
                 удаление файла с носителя\n             
                 возвращаемое значение - bool (True - удалено, False - ошибка)\n    
         параметры:\n                                                
-                file: str - имя файла которое неоходимо удалить с носителя\n                        
+                file: str - имя файла которое неоходимо удалить с носителя\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
+        примеры:\n    
+                file = File()\n 
+                file.file_delete('./temp/write.txt', __file__)\n                         
+                file.file_delete('./temp/write2.txt', __file__)\n                         
         '''
         try:
             try:
                 # определить имя удаляемого файла
-                file_name = self.file_init_name('', file)
+                file_name = self.file_init_name('', file, curdir)
                 # delete file
                 remove(file_name)
                 # return
                 return True
             except(FileNotFoundError, OSError) as e:
                 # определить имя удаляемого файла
-                file_name = self.file_init_name('', file)
+                file_name = self.file_init_name('', file, curdir)
                 # указывает путь у файлу
                 file_name_path = Path(file_name)
                 # удаляем файл
@@ -172,18 +227,26 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # удаление пустой директории с носителя
-    def file_delete_empty_folder(self, dir: str) -> bool:
+    def file_delete_empty_folder(self, dir: str, curdir: str = __file__) -> bool:
         '''
-        file_delete_empty_folder(file: str) -> bool\n                      
+        file_delete_empty_folder(dir: str, curdir: str = __file__) -> bool\n                      
                 удаление пустой директории с носителя\n             
                 возвращаемое значение - bool (True - удалено, False - ошибка)\n    
         параметры:\n                                                
                 dir: str - имя пустой директории которое\n   
-                    неоходимо удалить с носителя\n                        
+                    неоходимо удалить с носителя\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
+        примеры:\n    
+                file = File()\n 
+                file.file_delete_empty_folder('./temp/test1/', __file__)\n                         
+                file.file_delete_empty_folder('./temp/test2/', __file__)\n                         
+                file.file_delete_empty_folder('./temp/test3/', __file__)\n                         
         '''
         try:
-            # определить имя удаляемой папки/директории
-            dir_name = self.file_init_name('', dir)
+            # определить имя удаляемой пустой директории
+            dir_name = self.file_init_dir(dir, '', curdir)
             # delete folder
             rmdir(dir_name)
             return True
@@ -194,19 +257,26 @@ class File:
     # ---------------------------------------------------------------------------
     # удаление непустой директории с носителя
     # также удаляет пустую директорию
-    def file_delete_full_folder(self, dir: str) -> bool:
+    def file_delete_full_folder(self, dir: str, curdir: str = __file__) -> bool:
         '''
-        file_delete_full_folder(file: str) -> bool\n                      
+        file_delete_full_folder(dir: str, curdir: str = __file__) -> bool\n                      
                 удаление непустой директории с носителя\n  
                     (также удаляет пустую директорию)\n            
                 возвращаемое значение - bool (True - удалено, False - ошибка)\n    
         параметры:\n                                                
                 dir: str - имя непустой директории которое\n   
-                    неоходимо удалить с носителя\n                        
+                    неоходимо удалить с носителя\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
+        примеры:\n    
+                file = File()\n 
+                file.file_delete_full_folder('./temp/test1/', __file__)\n                         
+                file.file_delete_full_folder('./temp/test2/', __file__)\n                                               
         '''
         try:
             # определить имя удаляемой директории
-            dir_name = self.file_init_name('', dir)
+            dir_name = self.file_init_dir(dir, '', curdir)
             # delete folder
             shutil.rmtree(dir_name)
             return True
@@ -216,17 +286,24 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # проверка существование файла
-    def file_exists(self, file: str) -> bool:
+    def file_exists(self, file: str, curdir: str = __file__) -> bool:
         '''
-        file_exists(file: str) -> bool\n                      
+        file_exists(file: str, curdir: str = __file__) -> bool\n                      
                 проверяет существование файла\n          
                 возвращаемое значение - bool (True - существует, False - ошибка)\n    
         параметры:\n                                                
-                file: str - имя файла для проверки\n                     
+                file: str - имя файла для проверки\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
+        примеры:\n 
+                file = File()\n 
+                file.file_exists('./temp/test2.txt', __file__)\n 
+                file.file_exists('./temp/test3.txt', __file__)\n                     
         '''
         try:
             # определить имя файла
-            file_name = self.file_init_name('', file)
+            file_name = self.file_init_name('', file, curdir)
             # проверка существования файла
             if exists(file_name):
                 return True
@@ -238,17 +315,24 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # проверка существования директории
-    def file_exists_dir(self, dir: str) -> bool:
+    def file_exists_dir(self, dir: str, curdir: str = __file__) -> bool:
         '''
-        file_exists_dir(dir: str) -> bool\n                      
+        file_exists_dir(dir: str, curdir: str = __file__) -> bool\n                      
                 проверяет существование директории \n          
                 возвращаемое значение - bool (True - существует, False - ошибка)\n    
         параметры:\n                                                
-                dir: str - имя директории для проверки\n                     
+                dir: str - имя директории для проверки\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
+        примеры:\n 
+                file = File()\n 
+                file.file_exists_dir('./temp/test2/', __file__)\n 
+                file.file_exists_dir('./temp/test3/', __file__)\n                      
         '''
         try:
             # определить имя директории
-            dir_name = self.file_init_name('', dir)
+            dir_name = self.file_init_dir(dir, '', curdir)
             # проверка существования директории
             # if exists(dir_name):
             if self.file_exists(dir_name):
@@ -370,7 +454,10 @@ class File:
                 получает все файлы и папки в текущей директории\n             
                 возвращаемое значение - list[str] (список строк)\n    
         параметры:\n                                            
-                нет параметров\n                        
+                нет параметров\n 
+        примеры:\n 
+                file = File()\n 
+                arr = file.file_get_current_dir_files()\n                                       
         '''
         try:
             files_arr = listdir()
@@ -379,17 +466,24 @@ class File:
             return str(e)
     # ---------------------------------------------------------------------------
     # получить все файлы и папки в указанной директории
-    def file_get_dir_files(self, dir: str) -> list[str]:
+    def file_get_dir_files(self, dir: str, curdir: str = __file__) -> list[str]:
         '''
-        file_get_dir_files(dir: str) -> list[str]\n               
+        file_get_dir_files(dir: str, curdir: str = __file__) -> list[str]\n               
                 получает все файлы и папки в указанной директории\n           
                 возвращаемое значение - list[str] (список строк)\n                
         параметры:\n                                                
-                dir: str - имя директории которую необходимо показать\n                
+                dir: str - имя директории которую необходимо показать\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
+        примеры:\n 
+                file = File()\n 
+                arr = file.file_get_dir_files('./temp/', __file__)\n                
+                arr = file.file_get_dir_files('', __file__)\n                
         '''
         try:
             # определить имя директории
-            dir_name = self.file_init_dir(dir, '')
+            dir_name = self.file_init_dir(dir, '', curdir)
             # получить все файлы и папки в указанной директории
             files_arr = listdir(dir_name)
             return files_arr
@@ -405,7 +499,10 @@ class File:
                     в текущей директории в виде str (rwx)\n 
                 возвращаемое значение - list[str] (список строк)\n    
         параметры:\n                                              
-                нет параметров\n                        
+                нет параметров\n
+        примеры:\n 
+                file = File()\n 
+                arr = file.file_get_current_access_dir_in_str()\n                         
         '''
         try:
             # массив установленных разрешений для файлов и папок
@@ -428,7 +525,10 @@ class File:
                     в текущей директории в виде int (777)\n 
                 возвращаемое значение - list[int] (список чисел)\n    
         параметры:\n                                              
-                нет параметров\n                        
+                нет параметров\n
+        примеры:\n 
+                file = File()\n 
+                arr = file.file_get_current_access_dir_in_int()\n                         
         '''
         try:
             # массив установленных разрешений для файлов и папок
@@ -455,7 +555,10 @@ class File:
         возвращаемое значение для остальных ОС\n 
                 unknown - источник установки неизвестен\n 
         параметры:\n                                              
-                нет параметров\n                        
+                нет параметров\n
+        примеры:\n 
+                file = File()\n 
+                installer = file.file_get_installer()\n                        
         '''
         try:
             # создаем свое исключение
@@ -503,7 +606,10 @@ class File:
                 получает директорию к папке Downloads\n 
                 возвращаемое значение - str (строка)\n   
         параметры:\n                                              
-                нет параметров\n                        
+                нет параметров\n
+        примеры:\n 
+                file = File()\n 
+                path = file.file_get_path_to_downloads()\n                        
         '''
         try:
             # создаем свое исключение
@@ -558,7 +664,10 @@ class File:
                 получает установленный по умолчанию язык операционной системы\n 
                 возвращаемое значение - str (строка)\n   
         параметры:\n                                              
-                нет параметров\n                        
+                нет параметров\n
+        примеры:\n 
+                file = File()\n 
+                lang = file.file_get_local_language()\n                          
         '''
         try:
             # создаем свое исключение
@@ -596,17 +705,24 @@ class File:
     # ---------------------------------------------------------------------------
     # разрешить весь доступ к указанному файлу/директории
     # работает только с файлофой системой unix (ext и т.д.)
-    def file_set_access_open_all(self, name: str) -> bool:
+    def file_set_access_open_all(self, name: str, curdir: str = __file__) -> bool:
         '''
-        file_set_access_open_all(name: str) -> bool\n                      
+        file_set_access_open_all(name: str, curdir: str = __file__) -> bool\n                      
                 разрешает весь доступ к указанному файлу/директории\n             
                 возвращаемое значение - bool (True - доступ разрешен, False - ошибка)\n    
         параметры:\n                                                
-                name: str - имя папки/директории к которому нужно разрешить доступ\n                        
+                name: str - имя папки/директории к которому нужно разрешить доступ\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
+        примеры:\n 
+                file = File()\n 
+                file.file_set_access_open_all('./temp/test2.txt', __file__)\n 
+                file.file_set_access_open_all('./temp/test2/', __file__)\n                       
         '''
         try:
             # определить имя файла/директории
-            dir_file_name = self.file_init_name('', name)
+            dir_file_name = self.file_init_name('', name, curdir)
             # определяем текущие права файла
             # permissions = os.stat(dir_file_name).st_mode
             # Convert a file's mode to a string of the form '-rwxrwxrwx'
@@ -622,17 +738,26 @@ class File:
     # ---------------------------------------------------------------------------
     # запретить весь доступ к указанному файлу/директории
     # работает только с файлофой системой unix (ext и т.д.)
-    def file_set_access_close_all(self, name: str) -> bool:
+    def file_set_access_close_all(self, name: str, curdir: str = __file__) -> bool:
         '''
-        file_set_access_close_all(name: str) -> bool\n                      
+        file_set_access_close_all(name: str, curdir: str = __file__) -> bool\n                      
                 запрещает весь доступ к указанному файлу/директории\n             
                 возвращаемое значение - bool (True - доступ запрещен, False - ошибка)\n    
         параметры:\n                                                
-                name: str - имя папки/директории к которому нужно запретить доступ\n                        
+                name: str - имя папки/директории к которому нужно запретить доступ\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
+        примеры:\n 
+                file = File()\n 
+                file.file_set_access_close_all('./temp/test1.txt', __file__)\n 
+                file.file_set_access_close_all('./temp/test2.txt', __file__)\n 
+                file.file_set_access_close_all('./temp/test1/', __file__)\n 
+                file.file_set_access_close_all('./temp/test2/', __file__)\n                         
         '''
         try:
             # определить имя файла/директории
-            dir_file_name = self.file_init_name('', name)
+            dir_file_name = self.file_init_name('', name, curdir)
             # определяем текущие права файла
             # permissions = os.stat(dir_file_name).st_mode
             # Convert a file's mode to a string of the form '-rwxrwxrwx'
@@ -647,18 +772,24 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # чтение содержимого файла построчно
-    def file_read(self, file: str) -> list[str]:
+    def file_read(self, file: str, curdir: str = __file__) -> list[str]:
         '''
-        file_read(file: str) -> list[str]\n                         
+        file_read(file: str, curdir: str = __file__) -> list[str]\n                         
                 читает информацию из файла построчно\n                
                 возвращаемое значение - list[str] (список строк)\n    
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
-                    и прочитать\n                             
+                    и прочитать\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
+        примеры:\n 
+                file = File()\n 
+                arr = file.file_read('./temp/dict.txt', __file__)\n                           
         '''
         try:
             # определить имя файла
-            file_name = self.file_init_name('', file)
+            file_name = self.file_init_name('', file, curdir)
             # открыть файл и прочитать построчно
             with open(file_name, 'r') as f:
                 return f.readlines()
@@ -666,18 +797,24 @@ class File:
             return str(e)
     # ---------------------------------------------------------------------------
     # чтение содержимого файла содержащий текст в utf-8 кодировке
-    def file_read_utf8(self, file: str) -> list[str]:
+    def file_read_utf8(self, file: str, curdir: str = __file__) -> list[str]:
         '''
-        file_read_utf8(file: str) -> list[str]\n                    
+        file_read_utf8(file: str, curdir: str = __file__) -> list[str]\n                    
                 читает информацию из файла в utf-8 кодировке\n        
                 возвращаемое значение - list[str] (список строк)\n    
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
-                    и прочитать\n                             
+                    и прочитать\n 
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
+        примеры:\n 
+                file = File()\n 
+                arr = file.file_read_utf8('./temp/dict.txt', __file__)\n                           
         '''
         try:
             # определить имя файла
-            file_name = self.file_init_name('', file)
+            file_name = self.file_init_name('', file, curdir)
             # var
             str_byte = None
             # открыть файл и прочитать текст в utf-8 кодировке
@@ -710,7 +847,7 @@ class File:
             # определить имя файла
             file_name = self.file_init_name('', file, curdir)
             # в списке к концу строк добавляем \n (переход на новую строку)
-            for i in range(len(arr) - 1):
+            for i in range(len(arr)):
                 arr[i] += '\n'
             # создаем файл и записываем содержимое списка
             with open(file_name, 'w') as f:
@@ -719,23 +856,26 @@ class File:
             return str(e)
     # ---------------------------------------------------------------------------
     # дозапись содержимого списка (list) в файл
-    def file_write_append(self, file: str, arr: list) -> None:
+    def file_write_append(self, file: str, arr: list, curdir: str = __file__) -> None:
         '''
-        file_write_append(file: str, arr: list) -> None\n                  
+        file_write_append(file: str, arr: list, curdir: str = __file__) -> None\n                  
                 дозапись содержимого списка (list) в файл\n             
                 возвращаемое значение - None (None)\n                 
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
                     для дозаписи содержимого списка\n           
-                arr: list - список для дозаписи в файл\n  
+                arr: list - список для дозаписи в файл\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n   
         примеры:\n 
                 file = File()\n 
-                file.file_write_append('./temp/write.txt', ['1', '2', '3'])\n  
-                file.file_write_append('./temp/write.txt', [4, 5, 6]) # error\n               
+                file.file_write_append('./temp/write.txt', ['1', '2', '3'], __file__)\n  
+                file.file_write_append('./temp/write.txt', [4, 5, 6], __file__) # error\n               
         '''
         try:
             # определить имя файла
-            file_name = self.file_init_name('', file)
+            file_name = self.file_init_name('', file, curdir)
             # в списке к концу строк добавляем \n (переход на новую строку)
             for i in range(len(arr)):
                 arr[i] += '\n'
@@ -746,71 +886,29 @@ class File:
             return str(e)
     # ---------------------------------------------------------------------------
     # запись содержимого словаря (dict) в файл
-    def file_write_dict(self, file: str, dictor: dict) -> None:
+    def file_write_dict(self, file: str, dictor: dict, curdir: str = __file__) -> None:
         '''
-        file_write_dict(file: str, dictor: dict) -> None\n          
+        file_write_dict(file: str, dictor: dict, curdir: str = __file__) -> None\n          
                 запись содержимого словаря (dict) в файл\n            
                 возвращаемое значение - None (None)\n                 
         параметры:\n                                                
                 file: str - имя файла которое неоходимо открыть\n     
                     для записи содержимого словаря\n          
-                dictor: dict - словарь для записи в файл\n   
+                dictor: dict - словарь для записи в файл\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n    
         примеры:\n 
                 file = File()\n 
-                file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft'))\n          
+                file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft'), __file__)\n          
         '''
         try:
             # определить имя файла
-            file_name = self.file_init_name('', file)
+            file_name = self.file_init_name('', file, curdir)
             # создать файл и записать содержимое словаря (хэш таблицы)
             with open(file_name, 'w') as f:
                 for k,v in dictor.items():
                     f.write(f'{k} {v}\n')
-        except (BaseException) as e:
-            return str(e)
-    # ---------------------------------------------------------------------------
-    # вывод в консоль содержимого списка (list)
-    def file_list_print_console(self, arr: list) -> None:
-        '''
-        file_list_console(arr: list) -> None\n                      
-                вывод в консоль содержимого списка (list)\n           
-                возвращаемое значение - None (None)\n                 
-        параметры:\n                                                
-                arr: list - список для вывода в консоль\n 
-        примеры:\n 
-                file = File()\n 
-                file.file_list_print_console([1, 2, 3])\n          
-        '''
-        try:
-            for line in arr:
-                # print(line.strip())
-                # print(repr(line))
-                # print(line, end='')
-                print(line)
-        except (BaseException) as e:
-            return str(e)
-    # ---------------------------------------------------------------------------
-    # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
-    # (аналог type filename в cmd.exe)
-    def file_print_console_utf8(self, file: str) -> None:
-        '''
-        file_print_console_utf8(file: str) -> None\n                
-                вывод в консоль содержимого файла содержащий\n        
-                    текст в utf-8 кодировке\n                         
-                возвращаемое значение - None (None)\n                 
-        параметры:\n                                                
-                file: str - имя файла которое неоходимо открыть,\n    
-                    прочитать и вывести в консоль\n  
-        примеры:\n
-                file = File()\n 
-                file.file_print_console_utf8('./temp/dict.txt')\n         
-        '''
-        try:
-            # определить имя файла
-            file_name = self.file_init_name('', file)
-            # открыть файл, скопировать содержимое в консоль (терминал)
-            with open(file_name, 'r', encoding='utf-8') as f:
-                shutil.copyfileobj(f, sys.stdout)
         except (BaseException) as e:
             return str(e)
     # ---------------------------------------------------------------------------
@@ -860,177 +958,118 @@ if __name__ == '__main__':
         print('++++++++++(file_write(file: str, arr: list, curdir: str = __file__) -> None)++++++++++')
         print(file.file_write('./temp/write.txt', ['test', 'rom', 'max'], __file__))
         # ---------------------------------------------------------------------------
-        # # дозапись содержимого списка (list) в файл
-        # print('******************дозапись содержимого списка (list) в файл******************')
-        # print('++++++++++(file_write_append(file: str, arr: list) -> None)++++++++++')
-        # print(file.file_write_append('./temp/write.txt', ['1', '2', '3']))
-        # print(file.file_write_append('./temp/write.txt', ['4', '5', '6']))
-        # # ---------------------------------------------------------------------------
-        # # запись содержимого словаря (dict) в файл
-        # print('******************запись содержимого словаря (dict) в файл******************')
-        # print('++++++++++(file_write_dict(file: str, dictor: dict) -> None)++++++++++')
-        # print(file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft')))
-        # # ---------------------------------------------------------------------------
-        # # вывод в консоль содержимого списка (list)
-        # print('******************вывод в консоль содержимого списка (list)******************')
-        # print('++++++++++(file_list_console(arr: list) -> None)++++++++++')
-        # file.file_list_print_console([1, 2, 3])
-        # # ---------------------------------------------------------------------------
-        # # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
-        # print('******************вывод в консоль содержимого файла содержащий текст в utf-8 кодировке******************')
-        # print('++++++++++(file_print_console_utf8(file: str) -> None)++++++++++')
-        # file.file_print_console_utf8('./temp/dict.txt')
+        # дозапись содержимого списка (list) в файл
+        print('******************дозапись содержимого списка (list) в файл******************')
+        print('++++++++++(file_write_append(file: str, arr: list, curdir: str = __file__) -> None)++++++++++')
+        print(file.file_write_append('./temp/write.txt', ['1', '2', '3'], __file__))
+        print(file.file_write_append('./temp/write.txt', ['4', '5', '6'], __file__))
         # ---------------------------------------------------------------------------
-
-
-
-        # определяем текущую директорию, гбе будет храниться файл
-        # print('инициализация полного имени файла')
-        # print('file_name_init(folder: str, filename: str) -> str')
-        # file_name = file.file_name_init()
+        # запись содержимого словаря (dict) в файл
+        print('******************запись содержимого словаря (dict) в файл******************')
+        print('++++++++++(file_write_dict(file: str, dictor: dict, curdir: str = __file__) -> None)++++++++++')
+        print(file.file_write_dict('./temp/dict.txt', dict(max='ramanenka', lara='croft'), __file__))
         # ---------------------------------------------------------------------------
-        # # ---------------------------------------------------------------------------
-        # # определяем текущую директорию, гбе будет храниться файл
-        # CURRENT_DIR = dirname(__file__)
-        # # задаем имя папки (директории)
-        # FOLDER = './temp/'
-        # # задаем имя файла для чтения данных
-        # FILENAME_READ = 'test_read.txt'
-        # # объединяем текущую директорию и файл для чтения
-        # FILE_PATH_READ = join(CURRENT_DIR, FOLDER + FILENAME_READ)
-        # # задаем имя файла для вывода результатов
-        # FILENAME_WRITE = 'test_write.txt'
-        # # объединяем текущую директорию и файл для записи
-        # FILE_PATH_WRITE = join(CURRENT_DIR, FOLDER + FILENAME_WRITE)
-        # # создаем объект
-        # f = File()
-        # # ---------------------------------------------------------------------------
-        # # чтение файла построчно
-        # print('----------чтение файла построчно----------')
-        # arr = f.file_read(FILE_PATH_READ)
-        # # вывод в консоль
-        # print(*arr, sep='')
-        # # ---------------------------------------------------------------------------
-        # # чтение содержимого файла содержащий текст в utf-8 кодировке
-        # print('----------чтение содержимого файла содержащий текст в utf-8 кодировке----------')
-        # arr = f.file_read_utf8(FILE_PATH_READ)
-        # # вывод в консоль
-        # print(*arr, sep='\n')
-        # # ---------------------------------------------------------------------------
-        # # запись содержимого списка (list) в файл
-        # print('----------запись содержимого списка (list) в файл----------')
-        # f.file_write(FILE_PATH_WRITE, arr)
-        # print('запись содержимого произведена')
-        # # ---------------------------------------------------------------------------
-        # # дозапись содержимого списка (list) в файл
-        # print('----------запись содержимого списка (list) в файл----------')
-        # f.file_write_append(FILE_PATH_WRITE, ['a', 'b', 'c'])
-        # print('дозапись содержимого произведена')
-        # # ---------------------------------------------------------------------------
-        # # запись содержимого словаря (dict) в файл
-        # print('----------запись содержимого словаря (dict) в файл----------')
-        # dictor = dict(zip((1, 2, 3, 4, 5),('a', 'b', 'c', 'd', 'e')))
-        # f.file_write_dict(FILE_PATH_WRITE, dictor)
-        # print('запись содержимого произведена')
-        # # ---------------------------------------------------------------------------
-        # # вывод в консоль содержимого списка (list)
-        # print('----------вывод в консоль содержимого списка (list)----------')
-        # arr = list(range(10, 21))
-        # f.file_list_print_console(arr)
-        # # ---------------------------------------------------------------------------
-        # # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
-        # print('----------вывод в консоль содержимого файла содержащий текст в utf-8 кодировке----------')
-        # f.file_print_console_utf8(FILE_PATH_READ)
-        # # ---------------------------------------------------------------------------
-        # # инициализация полного имени файла (директория + имя файла)
-        # print('----------инициализация полного имени файла (директория + имя файла)----------')
-        # file_name = f.file_name_init('./temp/', 'test_read.txt')
-        # print(file_name)
-        # print(type(file_name))
-        # # ---------------------------------------------------------------------------
-        # # удаление файла с носителя
-        # file_name = f.file_name_init('./temp/', 'test_write.txt')
-        # print('----------удаление файла с носителя----------')
-        # if (f.file_delete(file_name)):
-        #     print(f'Файл {file_name} удален')
-        # else:
-        #     print('Ошибка удаления')
-        # # ---------------------------------------------------------------------------
-        # # получить все файлы и папки в текущей директории
-        # print('----------получить все файлы и папки в текущей директории----------')
-        # print(f.file_get_current_dir_files())
-        # # ---------------------------------------------------------------------------
-        # # получить все установленные права доступа файлов виде str (rwx)
-        # print('----------получить все установленные права доступа файлов виде str (rwx)----------')
-        # print(f.file_get_current_access_dir_in_str())
-        # # ---------------------------------------------------------------------------
-        # # получить все установленные права доступа файлов виде int (777)
-        # print('----------получить все установленные права доступа файлов виде int (777)----------')
-        # print(f.file_get_current_access_dir_in_int())
-        # # ---------------------------------------------------------------------------
-        # # создать указанную папку/директорию
-        # print('----------создать указанную папку/директорию----------')
-        # f.file_create_dir('./temp/new_dir_1/')
-        # dir = f.file_name_init('./temp/', './new_dir_2/')
-        # f.file_create_dir(dir)
-        # print(f.file_get_current_dir_files())
-        # # ---------------------------------------------------------------------------
-        # # разрешить весь доступ к указанному файлу/директории
-        # print('----------разрешить весь доступ к указанному файлу/директории----------')
-        # f.file_delete('./temp/open.txt')
-        # f.file_write('./temp/open.txt', ['test'])
-        # f.file_set_access_open_all('./temp/open.txt')
-        # # ---------------------------------------------------------------------------
-        # # запретить весь доступ к указанному файлу/директории
-        # print('----------запретить весь доступ к указанному файлу/директории----------')
-        # f.file_set_access_close_all('./temp/open.txt')
-        # # ---------------------------------------------------------------------------
-        # # получить все файлы и папки в указанной директории
-        # print('----------получить все файлы и папки в указанной директории----------')
-        # print(f.file_get_dir_files('./temp/'))
-        # # ---------------------------------------------------------------------------
-        # # удаление пустой папки/директории с носителя
-        # print('----------удаление пустой папки/директории с носителя----------')
-        # if (f.file_delete_empty_folder('./temp/new_dir_2/')):
-        #     print('Пустая директория удалена')
-        # else:
-        #     print('Ошибка удаления')
-        # # ---------------------------------------------------------------------------
-        # # удаление непустой папки/директории с носителя
-        # # также удаляет пустую папку/директорию
-        # print('----------удаление непустой папки/директории с носителя----------')
-        # if (f.file_delete_full_folder('./temp/new_dir_1/')):
-        #     print('Непустая директория удалена')
-        # else:
-        #     print('Ошибка удаления')
-        # # ---------------------------------------------------------------------------
-        # # получить путь/директорию к папке Downloads
-        # print('----------получить путь/директорию к папке Downloads----------')
-        # print(f.file_get_path_to_downloads())
-        # # ---------------------------------------------------------------------------
-        # # получить установленный по умолчанию язык операционной системы
-        # print('----------получить установленный по умолчанию язык операционной системы----------')
-        # print(f.file_get_local_language())
-        # # ---------------------------------------------------------------------------
-        # # создать пустой файл
-        # print('----------создать пустой файл----------')
-        # print(f.file_create('./temp/empty_file.txt'))
-        # # ---------------------------------------------------------------------------
-        # # получить установщик данного файла
-        # print('----------получить установщик данного файла----------')
-        # print(f.file_get_installer())
-        # # ---------------------------------------------------------------------------
-        # # проверка существования файла
-        # print('----------проверка существования файла----------')
-        # print(f.file_exists('./temp/test_read.txt'))
-        # print(f.file_exists('./temp/test_read_2.txt'))
-        # # ---------------------------------------------------------------------------
-        # # проверка существования папки/директории
-        # print('----------проверка существования папки/директории----------')
-        # f.file_create_dir('./temp/test/')
-        # print(f.file_exists_dir('./temp/test/'))
-        # print(f.file_exists_dir('./temp/test2/'))
-        # # ---------------------------------------------------------------------------
+        # вывод в консоль содержимого списка (list)
+        print('******************вывод в консоль содержимого списка (list)******************')
+        print('++++++++++(file_console_print_list(arr: list) -> None)++++++++++')
+        file.file_console_print_list([1, 2, 3])
+        # ---------------------------------------------------------------------------
+        # вывод в консоль содержимого файла содержащий текст в utf-8 кодировке 
+        print('******************вывод в консоль содержимого файла содержащий текст в utf-8 кодировке******************')
+        print('++++++++++(file_console_print_file_utf8(file: str, curdir: str = __file__) -> None)++++++++++')
+        file.file_console_print_file_utf8('./temp/dict.txt', __file__)
+        # ---------------------------------------------------------------------------
+        # чтение содержимого файла построчно
+        print('******************чтение содержимого файла построчно******************')
+        print('++++++++++(file_read(file: str, curdir: str = __file__) -> list[str])++++++++++')
+        print(file.file_read('./temp/dict.txt', __file__))
+        # ---------------------------------------------------------------------------
+        # чтение содержимого файла содержащий текст в utf-8 кодировке
+        print('******************чтение содержимого файла содержащий текст в utf-8 кодировке******************')
+        print('++++++++++(file_read_utf8(file: str, curdir: str = __file__) -> list[str])++++++++++')
+        print(file.file_read_utf8('./temp/dict.txt', __file__))
+        # ---------------------------------------------------------------------------
+        # запретить весь доступ к указанному файлу/директории
+        print('******************запретить весь доступ к указанному файлу/директории******************')
+        print('++++++++++(file_set_access_close_all(name: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_set_access_close_all('./temp/test1.txt', __file__))
+        print(file.file_set_access_close_all('./temp/test2.txt', __file__))
+        print(file.file_set_access_close_all('./temp/test1/', __file__))
+        print(file.file_set_access_close_all('./temp/test2/', __file__))
+        # ---------------------------------------------------------------------------
+        # разрешить весь доступ к указанному файлу/директории
+        print('******************разрешить весь доступ к указанному файлу/директории******************')
+        print('++++++++++(file_set_access_open_all(name: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_set_access_open_all('./temp/test2.txt', __file__))
+        print(file.file_set_access_open_all('./temp/test2/', __file__))
+        # ---------------------------------------------------------------------------
+        # получить установленный по умолчанию язык операционной системы
+        print('******************получить установленный по умолчанию язык операционной системы******************')
+        print('++++++++++(file_get_local_language() -> str)++++++++++')
+        print(file.file_get_local_language())
+        # ---------------------------------------------------------------------------
+        # получить директорию к папке Downloads
+        print('******************получить директорию к папке Downloads******************')
+        print('++++++++++(file_get_path_to_downloads() -> str)++++++++++')
+        print(file.file_get_path_to_downloads())
+        # ---------------------------------------------------------------------------
+        # получить установщик данного файла
+        print('******************получить установщик данного файла******************')
+        print('++++++++++(file_get_installer() -> str)++++++++++')
+        print(file.file_get_installer())
+        # ---------------------------------------------------------------------------
+        # получить все установленные права доступа файлов в текущей директории в виде int (777)
+        print('******************получить все установленные права доступа файлов в текущей директории в виде int (777)******************')
+        print('++++++++++(file_get_current_access_dir_in_int() -> list[int])++++++++++')
+        print(file.file_get_current_access_dir_in_int())
+        # ---------------------------------------------------------------------------
+        # получить все установленные права доступа файлов в текущей директории в виде str (rwx)
+        print('******************получить все установленные права доступа файлов в текущей директории в виде str (rwx)******************')
+        print('++++++++++(file_get_current_access_dir_in_str() -> list[str])++++++++++')
+        print(file.file_get_current_access_dir_in_str())
+        # ---------------------------------------------------------------------------
+        # получить все файлы и папки в указанной директории
+        print('******************получить все файлы и папки в указанной директории******************')
+        print('++++++++++(file_get_dir_files(dir: str, curdir: str = __file__) -> list[str])++++++++++')
+        print(file.file_get_dir_files('./temp/', __file__))
+        print(file.file_get_dir_files('', __file__))
+        # ---------------------------------------------------------------------------
+        # получить все файлы и папки в текущей директории
+        print('******************получить все файлы и папки в текущей директории******************')
+        print('++++++++++(file_get_current_dir_files() -> list[str])++++++++++')
+        print(file.file_get_current_dir_files())
+        # ---------------------------------------------------------------------------
+        # проверка существования директории
+        print('******************проверка существования директории******************')
+        print('++++++++++(file_exists_dir(dir: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_exists_dir('./temp/test2/', __file__))
+        print(file.file_exists_dir('./temp/test3/', __file__))
+        # ---------------------------------------------------------------------------
+        # проверка существование файла
+        print('******************проверка существование файла******************')
+        print('++++++++++(file_exists(file: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_exists('./temp/test2.txt', __file__))
+        print(file.file_exists('./temp/test3.txt', __file__))
+        # ---------------------------------------------------------------------------
+        # удаление файла с носителя
+        print('******************удаление файла с носителя******************')
+        print('++++++++++(file_delete(file: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_delete('./temp/write.txt', __file__))
+        print(file.file_delete('./temp/write2.txt', __file__))
+        # ---------------------------------------------------------------------------
+        # удаление пустой директории с носителя
+        print('******************удаление пустой директории с носителя******************')
+        print('++++++++++(file_delete_empty_folder(dir: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_delete_empty_folder('./temp/test1/', __file__))
+        print(file.file_delete_empty_folder('./temp/test2/', __file__))
+        print(file.file_delete_empty_folder('./temp/test3/', __file__))
+        # ---------------------------------------------------------------------------
+        # удаление непустой директории с носителя
+        print('******************удаление непустой директории с носителя******************')
+        print('++++++++++(file_delete_full_folder(dir: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_delete_full_folder('./temp/test1/', __file__))
+        print(file.file_delete_full_folder('./temp/test2/', __file__))
+        # ---------------------------------------------------------------------------
     # выполнить тест
     main()
 # *****************************************************************************************
