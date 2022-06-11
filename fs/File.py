@@ -58,7 +58,7 @@ class File:
         file_console_print_list(arr: list) -> None                                  ##########+
         file_create(file: str, curdir: str = __file__) -> bool                      ##########+
         file_create_dir(dir: str, curdir: str = __file__) -> bool                   ##########+
-        file_delete(file: str) -> bool
+        file_delete(file: str, curdir: str = __file__) -> bool                      ##########+
         file_delete_empty_folder(file: str) -> bool
         file_delete_full_folder(file: str) -> bool
         file_exists(file: str, curdir: str = __file__) -> bool                      ##########+
@@ -189,25 +189,32 @@ class File:
             return False
     # ---------------------------------------------------------------------------
     # удаление файла с носителя
-    def file_delete(self, file: str) -> bool:
+    def file_delete(self, file: str, curdir: str = __file__) -> bool:
         '''
-        file_delete(file: str) -> bool\n                      
+        file_delete(file: str, curdir: str = __file__) -> bool\n                      
                 удаление файла с носителя\n             
                 возвращаемое значение - bool (True - удалено, False - ошибка)\n    
         параметры:\n                                                
-                file: str - имя файла которое неоходимо удалить с носителя\n                        
+                file: str - имя файла которое неоходимо удалить с носителя\n
+                curdir: str = __file__ - параметр по умолчанию,\n
+                    который нужно передавать явно если данный класс вложен (nested),\n
+                    __file__ - путь данного файла в текущей директории (magic method)\n  
+        примеры:\n    
+                file = File()\n 
+                file.file_delete('./temp/write.txt', __file__)\n                         
+                file.file_delete('./temp/write2.txt', __file__)\n                         
         '''
         try:
             try:
                 # определить имя удаляемого файла
-                file_name = self.file_init_name('', file)
+                file_name = self.file_init_name('', file, curdir)
                 # delete file
                 remove(file_name)
                 # return
                 return True
             except(FileNotFoundError, OSError) as e:
                 # определить имя удаляемого файла
-                file_name = self.file_init_name('', file)
+                file_name = self.file_init_name('', file, curdir)
                 # указывает путь у файлу
                 file_name_path = Path(file_name)
                 # удаляем файл
@@ -1028,6 +1035,12 @@ if __name__ == '__main__':
         print('++++++++++(file_exists(file: str, curdir: str = __file__) -> bool)++++++++++')
         print(file.file_exists('./temp/test2.txt', __file__))
         print(file.file_exists('./temp/test3.txt', __file__))
+        # ---------------------------------------------------------------------------
+        # удаление файла с носителя
+        print('******************удаление файла с носителя******************')
+        print('++++++++++(file_delete(file: str, curdir: str = __file__) -> bool)++++++++++')
+        print(file.file_delete('./temp/write.txt', __file__))
+        print(file.file_delete('./temp/write2.txt', __file__))
         # ---------------------------------------------------------------------------
 
 
