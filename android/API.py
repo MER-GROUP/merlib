@@ -8,7 +8,7 @@ class API - класс для манипуляции (действия) с API �
     android
     java
 
-Реализация методов класса - Максим Романенко (Red Alert) - 2022г.
+Реализация методов класса - Макс Романенко (Red Alert) - 2022г.
 '''
 # *****************************************************************************************
 # platform - определение операционки
@@ -92,18 +92,18 @@ if 'android' == platform:
 # API - манипуляции (действия) с API опепационных систем
 class API:
     '''
-    class API - класс для манипуляции (действия) с API ОС Android
-    методы:
-        package_name_show(self) -> str
-        package_name_installer_show(self) -> str
-        path_absolute_show(self) -> str
-        path_full_show(self) -> str
-        path_files_app_show(self) -> str
-        path_to_primary_external_storage_show(self) -> str
-        files_app_show(self) -> str
-        language_show(self) -> str
-        sdk_show(self) -> str
-        vibrator_run(self, time=0.5) -> bool
+    class API - класс для манипуляции (действия) с API ОС Android\n
+    методы:\n
+        package_name_show(self) -> str\n
+        package_name_installer_show(self) -> str\n
+        path_absolute_show(self) -> str\n
+        path_full_show(self) -> str\n
+        path_files_app_show(self) -> str\n
+        path_to_primary_external_storage_show(self) -> str\n
+        files_app_show(self) -> str\n
+        language_show(self) -> str\n
+        sdk_show(self) -> str\n
+        vibrator_run(self, time=0.5) -> bool\n
     '''
     # ---------------------------------------------------------------------------
     # Android:
@@ -112,6 +112,12 @@ class API:
     #   Возвращает имя пакета этого приложения.
     #   https://developer.android.com/reference/android/content/Context#getPackageName()
     def package_name_show(self) -> str:
+        '''
+        Eng:\n
+        Returns the application name.\n
+        Rus:\n
+        Возвращает имя приложения.\n
+        '''
         if 'android' == platform:
             try:
                 return str(
@@ -163,6 +169,12 @@ class API:
     #   Возвращает имя пакета этого приложения.
     #   https://developer.android.com/reference/android/content/Context#getPackageName()
     def package_name_installer_show(self) -> str:
+        '''
+        Eng:\n
+        Returns the name of the application installer.\n
+        Rus:\n
+        Возвращает имя установщика приложения.\n
+        '''
         if 'android' == platform:
             try:
                 # if (30 > int(self.sdk_show())):
@@ -203,6 +215,12 @@ class API:
     #   Возвращает абсолютный путь к этому файлу.
     #   https://developer.android.com/reference/java/io/File#getAbsolutePath()
     def path_absolute_show(self) -> str:
+        '''
+        Eng:\n
+        Returns the absolute path to the application.\n
+        Rus:\n
+        Возвращает абсолютный путь к приложению.\n
+        '''
         if 'android' == platform:
             try:
                 return str(
@@ -224,6 +242,12 @@ class API:
     #   По этому пути хранится копия приложения - base.apk
     #   A copy of the application is stored on this path - base.apk
     def path_full_show(self) -> str:
+        '''
+        Eng:\n
+        Returns the full path to the copy of the base.apk application.\n
+        Rus:\n
+        Возвращает полный путь к копии приложения base.apk.\n
+        '''
         if 'android' == platform:
             try:
                 return str(
@@ -250,6 +274,12 @@ class API:
     #   Возвращает абсолютный путь к этому файлу.
     #   https://developer.android.com/reference/java/io/File#getAbsolutePath()
     def path_files_app_show(self) -> str:
+        '''
+        Eng:\n
+        Returns the path to files created in the application.\n
+        Rus:\n
+        Возвращает путь к файлам созданных в приложении.\n
+        '''
         if 'android' == platform:
             try:
                 return str(
@@ -269,6 +299,12 @@ class API:
     #   получает путь к внутреннему хранилицу в Android.
     #   https:?
     def path_to_primary_external_storage_show(self) -> str:
+        '''
+        Eng:\n
+        Gets the path to the internal storage in Android.\n
+        Rus:\n
+        Возвращает путь к внутреннему хранилицу в Android.\n
+        '''
         if 'android' == platform:
             try:
                 return str(
@@ -290,6 +326,12 @@ class API:
     #   связанные с этим пакетом приложений Contexts.
     #   https://developer.android.com/reference/android/content/Context#fileList()
     def files_app_show(self) -> str:
+        '''
+        Eng:\n
+        Returns files associated with this application package.\n
+        Rus:\n
+        Возвращает файлы, связанные с этим пакетом приложений.\n
+        '''
         if 'android' == platform:
             try:
                 return str(
@@ -317,6 +359,12 @@ class API:
     #   Возвращает имя языка локали, подходящее для отображения пользователю.
     #   https://developer.android.com/reference/java/util/Locale#getDisplayLanguage()
     def language_show(self) -> str:
+        '''
+        Eng:\n
+        Returns a name for the locale's language.\n
+        Rus:\n
+        Возвращает язык ОС установленный по умолчанию.\n
+        '''
         if 'android' == platform:
             try:
                 return str(
@@ -337,6 +385,12 @@ class API:
     #    на этом аппаратном устройстве.
     #   https://developer.android.com/reference/android/os/Build.VERSION#SDK_INT
     def sdk_show(self) -> str:
+        '''
+        Eng:\n
+        The SDK version of the software currently running on this hardware device.\n
+        Rus:\n
+        Версия SDK программного обеспечения.\n
+        '''
         if 'android' == platform:
             try:
                 return str(
@@ -367,9 +421,12 @@ class API:
     #   https://github.com/kivy/plyer/blob/master/plyer/facades/vibrator.py
     def vibrator_run(self, time=0.5) -> bool:
         '''
-        Ask the vibrator to vibrate for the given period.
-
-        :param time: Time to vibrate for, in seconds. Default is '0.5'.
+        Eng:\n
+        Ask the vibrator to vibrate for the given period.\n
+        :param time: Time to vibrate for, in seconds. Default is '0.5'.\n
+        Rus:\n
+        Вибрация устройства в течение заданного периода времени.\n
+        :параметр time: Время для вибрации в секундах. Значение по умолчанию равно "0.5".\n
         '''
         if 'android' == platform:
             try:
