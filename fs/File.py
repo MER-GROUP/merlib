@@ -567,6 +567,8 @@ class File:
                 pass
             # if android
             if hasattr(sys, 'getandroidapilevel'):
+                # api_version - определение версии SDK программного обеспечения
+                from android import api_version
                 # получить установщик данного файла
                 from jnius import autoclass, cast, JavaException
                 try:
@@ -575,10 +577,21 @@ class File:
                     Context = cast('android.content.Context', Activity.getApplicationContext())
                     # получить установщик данного файла
                     # на Android <= 29 SDK API
-                    return str(
-                        Context.getPackageManager().getInstallerPackageName(
-                            str(Context.getPackageName())
+                    if 30 > api_version: 
+                        return str(
+                            Context.getPackageManager().getInstallerPackageName(
+                                str(
+                                    Context.getPackageName()
+                                )
                             )
+                        )
+                    else:
+                        return str(
+                            Context.getPackageManager().getInstallSourceInfo(
+                                str(
+                                    Context.getPackageName()
+                                )
+                            ).getInstallingPackageName()
                         )
                 except (BaseException) as e:
                     return ('BaseException: ' + str(e))
