@@ -1,3 +1,15 @@
+'''
+class API - класс для манипуляции (действия) с API ОС Android
+
+Дополнительные сторонние модули для обработки файлов
+    kivy
+    pyjnius
+    plyer
+    android
+    java
+
+Реализация методов класса - Максим Романенко (Red Alert) - 2022г.
+'''
 # *****************************************************************************************
 # platform - определение операционки
 from kivy.utils import platform
@@ -79,6 +91,20 @@ if 'android' == platform:
 # *****************************************************************************************
 # API - манипуляции (действия) с API опепационных систем
 class API:
+    '''
+    class API - класс для манипуляции (действия) с API ОС Android
+    методы:
+        package_name_show(self) -> str
+        package_name_installer_show(self) -> str
+        path_absolute_show(self) -> str
+        path_full_show(self) -> str
+        path_files_app_show(self) -> str
+        path_to_primary_external_storage_show(self) -> str
+        files_app_show(self) -> str
+        language_show(self) -> str
+        sdk_show(self) -> str
+        vibrator_run(self, time=0.5) -> bool
+    '''
     # ---------------------------------------------------------------------------
     # Android:
     # getPackageName() -> abstract String:
