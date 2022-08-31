@@ -82,9 +82,9 @@
 <!-- 
 [![Product Name Screen Shot][product-screenshot]](https://example.com) 
 -->
-**merlib is a program that shows system information about the application and the Android OS.**
+**merlib is modules and classes in Python/Cython/C for everyday work.**
 
-[*merlib - это программа которая показывает системную информацию о приложении и ОС Android.*]
+[*merlib - это модули и классы на Python/Cython/C для повседневной работы.*]
 
 <p align="right">(<a href="#top">back to top [вернуться к началу]</a>)</p>
 <!-- ------------------------------------------------------------------------------------------->
@@ -112,7 +112,6 @@ This section should list any major frameworks/libraries used to bootstrap your p
 * [![Kivy][Kivy.org]][Kivy-url]
 * [![Plyer][Plyer.org]][Plyer-url]
 * [![Pyjnius][Pyjnius.org]][Pyjnius-url]
-* [![Buildozer][Buildozer.org]][Pyjnius-url]
 * [![Debian][Debian.org]][Debian-url]
 * [![VSCode][VSCode.org]][VSCode-url]
 * [![Git][Git.org]][Git-url]
@@ -133,22 +132,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
   ```sh
   git clone https://github.com/MER-GROUP/merlib.git
   ```
-2. Go to the program folder [*Перейдите в папку с программой*]:
-  ```sh
-  cd merlib
-  ```
-3. Install the necessary components [*Установите необходимые компоненты*]:
-  ```sh
-  pip install -Ur requirements.txt
-  ```
-
-### **Installation [Установка]**
-
-1. Building a project on Android [*Создание проекта на Android*]:
-   ```sh
-   buildozer -v android debug
-   ```
-2. If the project has not been assembled, it means that the Bulldozer program libraries are not installed. Follow the link [https://github.com/kivy/buildozer](https://github.com/kivy/buildozer) and read what needs to be done [*Если проект не был собран, это означает, что библиотеки программ Bulldozer не установлены. Перейдите по ссылке [https://github.com/kivy/buildozer](https://github.com/kivy/buildozer) и прочитайте, что нужно сделать*].
+2. Copy it into your project and use it as regular classes [*Скопируйте в ваш проект и используйте как обычные классы*]
 
 <p align="right">(<a href="#top">back to top [вернуться к началу]</a>)</p>
 <!-- ------------------------------------------------------------------------------------------->
@@ -156,9 +140,22 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- USAGE EXAMPLES ---------------------------------------------------------------------------->
 ## **Usage [Использование]**
 
-**The program is simple and intuitive to use and does not need instructions.**
+1. Example of exporting a method from a class [*Пример вывоза метода из класса*]:
+   ```sh
+   from merlib.fs.File import File 
+   file = File()
+   file.file_create('./test.txt', __file__)
+   file.file_create('test.txt', __file__)
+   ```
 
-[*Программа проста и интуитивно понятна в использовании и не нуждается в инструкциях.*]
+2. The classes are documented in detail [*Классы подробно задокументированы*]:
+   ```sh
+   from merlib.fs.File import File 
+   file = File()
+   print(file.file_create.__doc__)
+   ```
+
+3. The name of the class corresponds to its implementation [*Наименование класса соответствует его реализации*]
 
 <p align="right">(<a href="#top">back to top [вернуться к началу]</a>)</p>
 <!-- ------------------------------------------------------------------------------------------->
@@ -166,16 +163,16 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- ROADMAP ----------------------------------------------------------------------------------->
 ## **Roadmap [История изменений]**
 
-- [x] SDK version [*Версия SDK*]
-- [x] App package name [*Имя пакета App*]
-- [x] Installer name [*Имя установщика App*]
-- [x] Absolute app path [*Абсолютный путь App*]
-- [x] Full app path [*Полный путь App*]
-- [x] Files app [*Файлы App*]
-- [x] Path app files [*Путь к файлам App*]
-- [x] Hdd path [*Путь к Hdd*]
-- [x] OS language [*Язык ОС*]
-- [x] Device vibration [*Вибрация устройства*]
+- [x] merlib.android.API [*работа с API ОС Android*]
+- [x] merlib.cython.alg.BogoSort.BogoSort [*алгоритм болотной сортировки*]
+- [x] merlib.cython.alg.MonteCarlo.MonteCarlo [*алгоритм Монте Карло*]
+- [x] merlib.cython.example.cython_test_factorial [*пример написания алгоритма на Cython*]
+- [x] merlib.fs.File [*работа с файлами*]
+- [x] merlib.kivy.Design [*работа с объектами фреймворка kivy*]
+- [x] merlib.net.MacAddress [*получение мак адреса устройства*]
+- [x] merlib.sys.OsName [*получение имени ОС*]
+- [x] merlib.sys.OsUniqueNum [*получение уникального номера устройства*]
+- [x] merlib.sys.Translate [*работа с локализацией*]
 - [ ] Multi-language Support [*Поддержка нескольких языков*]
     - [ ] English
     - [ ] Русский
