@@ -340,6 +340,7 @@ class API:
         if 'android' == platform:
             try:
                 return str(
+                    # test
                     # 'VERSION.SDK_INT: ' + str(VERSION.SDK_INT) + '\n' +
                     # 'api_version: ' + str(api_version)
                     str(VERSION.SDK_INT)
