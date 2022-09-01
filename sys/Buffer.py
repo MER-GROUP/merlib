@@ -27,8 +27,8 @@ class Buffer:
     '''
     # ---------------------------------------------------------------------------
     # vars
-    # блокировка буфера обмена выключена
-    check_lock = False
+    # блокировка буфера обмена включена
+    check_lock = True
     # для потока Timer
     timer = None
     # для теста метода Lock
@@ -87,9 +87,11 @@ class Buffer:
         try:
             # test #########################################
             print(f'__lock_private is work {self.step}') ###
+            print(f'check_lock = {self.check_lock}') #######
             self.step += 1 #################################
-            self.timer = Timer(0.5, self.__lock_private)
-            self.timer.start()
+            if self.check_lock:
+                self.timer = Timer(0.5, self.__lock_private)
+                self.timer.start()
         except (Exception) as e:
             return str(e)
     # ---------------------------------------------------------------------------
@@ -102,7 +104,10 @@ class Buffer:
         Снимает с блокировки буфер обмена.\n
         '''
         try:
+            self.check_lock = False
             self.timer.cancel()
+            # # test #########################################
+            # print(f'check_lock = {self.check_lock}') #######
         except (Exception) as e:
             return str(e)
     # ---------------------------------------------------------------------------
@@ -120,15 +125,20 @@ if __name__ == '__main__':
     print(f'{clipboard.paste()}')
     print('-------------------------------------')
     print('+++++copy_info_get+++++')
-    print(Buffer().copy_info_get())
+    buffer = Buffer()
+    print(buffer.copy_info_get())
     print('-------------------------------------')
     print('+++++copy_info_set+++++')
-    Buffer().copy_info_set('Max Ramanenka')
-    print(Buffer().copy_info_get())
+    buffer.copy_info_set('Max Ramanenka')
+    print(buffer.copy_info_get())
     print('-------------------------------------')
     print('+++++lock+++++')
-    print(Buffer().lock())
+    print(buffer.lock())
     print('-------------------------------------')
     print('+++++sleep+++++')
     sleep(5)
+    print('-------------------------------------')
+    print('+++++unlock+++++')
+    buffer.unlock()
+    print('unlock is work')
 # *****************************************************************************************
