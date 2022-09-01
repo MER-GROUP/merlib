@@ -33,7 +33,12 @@ class Keyboard:
         Показать кнопку которая была нажата.\n
         '''
         try:
-            pass
+            # блок `with` слушает события до выхода 
+            # до остановки слушателя
+            with keyboard.Listener(
+                    on_press=on_press,
+                    on_release=on_release) as listener:
+                listener.join()
         except (Exception) as e:
             return str(e)
     # ---------------------------------------------------------------------------
