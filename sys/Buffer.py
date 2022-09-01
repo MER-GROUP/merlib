@@ -24,6 +24,8 @@ class Buffer:
     методы:\n
         copy_info_get(self) -> str\n
         copy_info_set(self, info: str) -> None\n
+        lock(self) -> None\n
+        unlock(self) -> None\n
     '''
     # ---------------------------------------------------------------------------
     # vars
