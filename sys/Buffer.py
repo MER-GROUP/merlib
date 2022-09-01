@@ -92,7 +92,9 @@ class Buffer:
             print(f'check_lock = {self.check_lock}') #######
             self.step += 1 #################################
             # algorithm
-            pass
+            if not self.info_buf == self.copy_info_get():
+                self.copy_info_set(self.info_buf)
+            # timer
             if self.check_lock:
                 self.timer = Timer(0.5, self.__lock_private)
                 self.timer.start()
