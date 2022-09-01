@@ -17,7 +17,7 @@ from threading import Timer
 # sleep - пауза во времени
 from time import sleep
 # *****************************************************************************************
-# Buffer - автоматическая локализация программы на родной язык
+# Buffer - класс для работы с буфером обмена информации
 class Buffer:
     '''
     class Buffer - класс для работы с буфером обмена информации\n
@@ -87,10 +87,10 @@ class Buffer:
         Алгоритм для метода lock.\n
         '''
         try:
-            # test #########################################
-            print(f'__lock_private is work {self.step}') ###
-            print(f'check_lock = {self.check_lock}') #######
-            self.step += 1 #################################
+            # # test #########################################
+            # print(f'__lock_private is work {self.step}') ###
+            # print(f'check_lock = {self.check_lock}') #######
+            # self.step += 1 #################################
             # algorithm
             if not self.info_buf == self.copy_info_get():
                 self.copy_info_set(self.info_buf)
@@ -142,7 +142,7 @@ if __name__ == '__main__':
     print(buffer.lock())
     print('-------------------------------------')
     print('+++++sleep+++++')
-    sleep(5)
+    sleep(10)
     print('-------------------------------------')
     print('+++++unlock+++++')
     buffer.unlock()
