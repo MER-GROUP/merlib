@@ -163,16 +163,17 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- ROADMAP ----------------------------------------------------------------------------------->
 ## **Roadmap [История изменений]**
 
-- [x] merlib.android.API [*работа с API ОС Android*]
-- [x] merlib.cython.alg.BogoSort.BogoSort [*алгоритм болотной сортировки*]
-- [x] merlib.cython.alg.MonteCarlo.MonteCarlo [*алгоритм Монте Карло*]
-- [x] merlib.cython.example.cython_test_factorial [*пример написания алгоритма на Cython*]
-- [x] merlib.fs.File [*работа с файлами*]
-- [x] merlib.kivy.Design [*работа с объектами фреймворка kivy*]
-- [x] merlib.net.MacAddress [*получение мак адреса устройства*]
-- [x] merlib.sys.OsName [*получение имени ОС*]
-- [x] merlib.sys.OsUniqueNum [*получение уникального номера устройства*]
-- [x] merlib.sys.Translate [*работа с локализацией*]
+- [ ] merlib.android.API [*работа с API ОС Android*]
+- [ ] merlib.cython.alg.BogoSort.BogoSort [*алгоритм болотной сортировки*]
+- [ ] merlib.cython.alg.MonteCarlo.MonteCarlo [*алгоритм Монте Карло*]
+- [ ] merlib.cython.example.cython_test_factorial [*пример написания алгоритма на Cython*]
+- [ ] merlib.fs.File [*работа с файлами*]
+- [ ] merlib.kivy.Design [*работа с объектами фреймворка kivy*]
+- [ ] merlib.net.MacAddress [*получение мак адреса устройства*]
+- [x] merlib.sys.Buffer [*работа с буфером обмена информации*]
+- [ ] merlib.sys.OsName [*получение имени ОС*]
+- [ ] merlib.sys.OsUniqueNum [*получение уникального номера устройства*]
+- [ ] merlib.sys.Translate [*работа с локализацией*]
 - [ ] Multi-language Support [*Поддержка нескольких языков*]
     - [ ] English
     - [ ] Русский
