@@ -27,9 +27,7 @@ class Buffer:
         Возвращает из буфера обмена информации последнюю скопированную информацию.\n
         '''
         try:
-            # test
-            print('11111111' + clipboard.copy())###
-            return clipboard.copy()
+            return clipboard.paste()
         except (Exception) as e:
             return str(e)
     # ---------------------------------------------------------------------------
@@ -44,7 +42,7 @@ class Buffer:
         :параметр info: информация которую нужно вставить в буфер обмена.\n
         '''
         try:
-            clipboard.paste(info)
+            clipboard.copy(info)
         except (Exception) as e:
             return str(e)
     # ---------------------------------------------------------------------------
@@ -62,10 +60,9 @@ if __name__ == '__main__':
     print(f'{clipboard.paste()}')
     print('-------------------------------------')
     print('+++++copy_info_get+++++')
-    buffer = Buffer()
-    print(buffer.copy_info_get())
+    print(Buffer().copy_info_get())
     print('-------------------------------------')
-    # print('+++++copy_info_set+++++')
-    # buffer.copy_info_set('Max Ramanenka')
-    # print(buffer.copy_info_get())
+    print('+++++copy_info_set+++++')
+    Buffer().copy_info_set('Max Ramanenka')
+    print(Buffer().copy_info_get())
 # *****************************************************************************************
