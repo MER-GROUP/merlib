@@ -33,6 +33,8 @@ class Buffer:
     timer = None
     # для теста метода Lock
     step = int()
+    # первоначальная информация из буфера обмена
+    info_buf = clipboard.paste()
     # ---------------------------------------------------------------------------
     # Возвращает из буфера обмена информации последнюю скопированную информацию
     def copy_info_get(self) -> str:
@@ -71,7 +73,7 @@ class Buffer:
         Блокирует буфер обмена (запрет копирования).\n
         '''
         try:
-            self.timer = Timer(0.5, self.__lock_private)
+            self.timer = Timer(0.1, self.__lock_private)
             self.timer.start()
         except (Exception) as e:
             return str(e)
@@ -89,6 +91,8 @@ class Buffer:
             print(f'__lock_private is work {self.step}') ###
             print(f'check_lock = {self.check_lock}') #######
             self.step += 1 #################################
+            # algorithm
+            pass
             if self.check_lock:
                 self.timer = Timer(0.5, self.__lock_private)
                 self.timer.start()
