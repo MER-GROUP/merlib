@@ -48,16 +48,22 @@ class Keyboard:
             return str(e)
 
     # для прослушивания клавиатуры
-    def __on_press(key):
+    def __on_press(self, key):
         try:
             # если нажата кнопка print_screen
             if key == keyboard.Key.print_screen:
-                # test
-                print('Exit programm ...')
+                # test #######################
+                print('Exit programm ...') ###
                 # остановить слушатель клавиатуры
-                ListenerPrintScreen.stop()
+                ListenerPrintScreen.stop
                 # выход из программы
                 exit()
+            # test ###########################################################
+            else:                                                          ### 
+                try:                                                       ###
+                    print(f'Нажата буквенно-цифровая клавиша: {key.char}') ###
+                except AttributeError:                                     ###
+                    print(f'Нажата специальная клавиша: {key}')            ###
         except AttributeError as e:
             return str(e)
     # ---------------------------------------------------------------------------
@@ -66,7 +72,7 @@ class Keyboard:
 # если не модуль то выполнить программу
 if __name__ == '__main__':
     print('-------------------------------------')
-    print('+++++method+++++')
+    print('+++++print_screen_is_exit+++++')
     # method
-    pass
+    Keyboard().print_screen_is_exit()
 # *****************************************************************************************
