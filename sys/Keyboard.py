@@ -52,18 +52,18 @@ class Keyboard:
         try:
             # если нажата кнопка print_screen
             if key == keyboard.Key.print_screen:
-                # test #######################
-                print('Exit programm ...') ###
+                # # test #######################
+                # print('Exit programm ...') ###
                 # остановить слушатель клавиатуры
                 ListenerPrintScreen.stop
                 # выход из программы
                 exit()
-            # test ###########################################################
-            else:                                                          ### 
-                try:                                                       ###
-                    print(f'Нажата буквенно-цифровая клавиша: {key.char}') ###
-                except AttributeError:                                     ###
-                    print(f'Нажата специальная клавиша: {key}')            ###
+            # # test ###########################################################
+            # else:                                                          ### 
+            #     try:                                                       ###
+            #         print(f'Нажата буквенно-цифровая клавиша: {key.char}') ###
+            #     except AttributeError:                                     ###
+            #         print(f'Нажата специальная клавиша: {key}')            ###
         except AttributeError as e:
             return str(e)
     # ---------------------------------------------------------------------------
