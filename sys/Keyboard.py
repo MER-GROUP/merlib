@@ -2,7 +2,7 @@
 class Keyboard - класс для работы с клавиатурай устройства
 
 Дополнительные сторонние модули для обработки файлов
-    нет
+    pynput
 
 Реализация методов класса - Макс Романенко (Red Alert) - 2022г.
 '''
@@ -13,59 +13,52 @@ from pynput.keyboard import Key, Controller
 # Мониторинг клавиатуры
 from pynput import keyboard
 # *****************************************************************************************
+# создаем слушателя для клавиатуры (для кнопки print_screen)
+class ListenerPrintScreen(keyboard.Listener):
+    pass
+# *****************************************************************************************
 # Keyboard - класс для работы с клавиатурай устройства
 class Keyboard:
     '''
     class Keyboard - класс для работы с клавиатурай устройства\n
     методы:\n
-        None\n
+        print_screen_is_exit(self) -> None\n
     '''
     # ---------------------------------------------------------------------------
     # vars
     pass
     # ---------------------------------------------------------------------------
-    # Показать кнопку которая была нажата
-    def button_press_show(self) -> str:
+    # При нажатии на кнопку print_screen происходит выход из программы
+    def print_screen_is_exit(self) -> None:
         '''
         Eng:\n
-        Show the button that was pressed.\n
+        When you click on the print_screen button, the program exits.\n
         Rus:\n
-        Показать кнопку которая была нажата.\n
+        При нажатии на кнопку print_screen происходит выход из программы.\n
         '''
         try:
             # блок `with` слушает события до выхода 
             # до остановки слушателя
-            with keyboard.Listener(
-                    on_press=on_press,
-                    on_release=on_release) as listener:
+            # with keyboard.Listener(
+            with ListenerPrintScreen(
+                    on_press=self.__on_press
+                    ) as listener:
                 listener.join()
         except (Exception) as e:
             return str(e)
-    # ---------------------------------------------------------------------------
-    # Блокировка кнопки PrtSc
-    def prt_sc_lock(self) -> None:
-        '''
-        Eng:\n
-        PrtSc button Lock.\n
-        Rus:\n
-        Блокировка кнопки PrtSc.\n
-        '''
+
+    # для прослушивания клавиатуры
+    def __on_press(key):
         try:
-            pass
-        except (Exception) as e:
-            return str(e)
-    # ---------------------------------------------------------------------------
-    # Снятие с блокировки кнопки PrtSc
-    def prt_sc_unlock(self) -> None:
-        '''
-        Eng:\n
-        Unlocking the PrtSc button.\n
-        Rus:\n
-        Снятие с блокировки кнопки PrtSc.\n
-        '''
-        try:
-            pass
-        except (Exception) as e:
+            # если нажата кнопка print_screen
+            if key == keyboard.Key.print_screen:
+                # test
+                print('Exit programm ...')
+                # остановить слушатель клавиатуры
+                ListenerPrintScreen.stop()
+                # выход из программы
+                exit()
+        except AttributeError as e:
             return str(e)
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
