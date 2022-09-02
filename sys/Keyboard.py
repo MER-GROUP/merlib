@@ -41,14 +41,14 @@ class Keyboard:
             # до остановки слушателя
             # with keyboard.Listener(
             with ListenerPrintScreen(
-                    on_press=self.__on_press
+                    on_press=self.__on_press_print_screen
                     ) as listener:
                 listener.join()
         except (Exception) as e:
             return str(e)
 
     # для прослушивания клавиатуры
-    def __on_press(self, key):
+    def __on_press_print_screen(self, key):
         try:
             # если нажата кнопка print_screen
             if key == keyboard.Key.print_screen:
