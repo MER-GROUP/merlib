@@ -20,6 +20,7 @@ class DateTime:
     class DateTime - класс для работы с датой и временем устройства\n
     методы:\n
         date_current_get(self) -> datetime
+        date_current_show(self) -> str
         date_current_get_from_net(self) -> datetime\n
         date_current_show_from_net(self) -> str\n
     '''
@@ -37,6 +38,23 @@ class DateTime:
         '''
         try:
             return datetime.now()
+        except (Exception) as e:
+            return str(e)
+    # ---------------------------------------------------------------------------
+    # Показать текущуюю дату взятую с устройства
+    def date_current_show(self) -> str:
+        '''
+        Eng:\n
+        Show the current date taken from the device.\n
+        Rus:\n
+        Показать текущуюю дату взятую с устройства.\n
+        '''
+        try:
+            cur_date =  self.date_current_get()
+            year = cur_date.year
+            month = cur_date.month
+            day = cur_date.day
+            return str(day) + '.' + str(month) + '.' + str(year)
         except (Exception) as e:
             return str(e)
     # ---------------------------------------------------------------------------
@@ -89,5 +107,7 @@ if __name__ == '__main__':
     print(DateTime().date_current_show_from_net())
     print('+++++date_current_get+++++')
     print(DateTime().date_current_get())
+    print('+++++date_current_show+++++')
+    print(DateTime().date_current_show())
     pass
 # *****************************************************************************************
