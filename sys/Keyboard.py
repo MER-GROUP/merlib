@@ -23,6 +23,7 @@ class Keyboard:
     class Keyboard - класс для работы с клавиатурай устройства\n
     методы:\n
         print_screen_is_exit(self) -> None\n
+        print_screen_is_exit_wait_input(self) -> None
     '''
     # ---------------------------------------------------------------------------
     # vars
@@ -46,7 +47,28 @@ class Keyboard:
                 listener.join()
         except (Exception) as e:
             return str(e)
-
+    # ---------------------------------------------------------------------------
+    # При нажатии на кнопку print_screen происходит выход из программы
+    def print_screen_is_exit_wait_input(self) -> None:
+        '''
+        Eng:\n
+        When you click on the print_screen button, the program exits,\n
+            but you need to wait for the button to be pressed.\n
+        Rus:\n
+        При нажатии на кнопку print_screen происходит выход из программы,\n
+            но нужно ждать нажатия кнопки.\n
+        '''
+        try:
+            # блок `with` слушает события до выхода 
+            # до остановки слушателя
+            # with keyboard.Listener(
+            with ListenerPrintScreen(
+                    on_press=self.__on_press_print_screen
+                    ) as listener:
+                listener.join()
+        except (Exception) as e:
+            return str(e)
+    # ---------------------------------------------------------------------------
     # для прослушивания клавиатуры
     def __on_press_print_screen(self, key):
         try:
@@ -72,7 +94,7 @@ class Keyboard:
 # если не модуль то выполнить программу
 if __name__ == '__main__':
     print('-------------------------------------')
-    print('+++++print_screen_is_exit+++++')
+    print('+++++print_screen_is_exit_wait_input+++++')
     # method
-    Keyboard().print_screen_is_exit()
+    Keyboard().print_screen_is_exit_wait_input()
 # *****************************************************************************************
