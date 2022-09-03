@@ -19,6 +19,7 @@ class DateTime:
     '''
     class DateTime - класс для работы с датой и временем устройства\n
     методы:\n
+        date_current_get(self) -> datetime
         date_current_get_from_net(self) -> datetime\n
         date_current_show_from_net(self) -> str\n
     '''
