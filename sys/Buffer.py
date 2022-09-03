@@ -79,7 +79,7 @@ class Buffer:
             self.timer.start()
         except (Exception) as e:
             return str(e)
-
+    # ---------------------------------------------------------------------------
     # алгоритм для метода lock
     def __lock_private(self) -> None:
         '''
