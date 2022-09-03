@@ -38,13 +38,15 @@ class Keyboard:
         При нажатии на кнопку print_screen происходит выход из программы.\n
         '''
         try:
+            # test ##########################
+            print('print_screen_is_exit') ###
             # блок `with` слушает события до выхода 
             # до остановки слушателя
             # with keyboard.Listener(
-            with ListenerPrintScreen(
+            listener = ListenerPrintScreen(
                     on_press=self.__on_press_print_screen
-                    ) as listener:
-                listener.join()
+                    )
+            listener.start()
         except (Exception) as e:
             return str(e)
     # ---------------------------------------------------------------------------
@@ -59,6 +61,8 @@ class Keyboard:
             но нужно ждать нажатия кнопки.\n
         '''
         try:
+            # test #####################################
+            print('print_screen_is_exit_wait_input') ###
             # блок `with` слушает события до выхода 
             # до остановки слушателя
             # with keyboard.Listener(
@@ -74,18 +78,23 @@ class Keyboard:
         try:
             # если нажата кнопка print_screen
             if key == keyboard.Key.print_screen:
-                # # test #######################
-                # print('Exit programm ...') ###
+                # test #######################
+                print('Exit programm ...') ###
                 # остановить слушатель клавиатуры
                 ListenerPrintScreen.stop
                 # выход из программы
-                exit()
-            # # test ###########################################################
-            # else:                                                          ### 
-            #     try:                                                       ###
-            #         print(f'Нажата буквенно-цифровая клавиша: {key.char}') ###
-            #     except AttributeError:                                     ###
-            #         print(f'Нажата специальная клавиша: {key}')            ###
+                __import__('sys').exit()
+                # exit(0)
+                # sys.exit
+                # os.abort()
+                # raise SystemExit
+                # raise SystemExit(1)
+            # test ###########################################################
+            else:                                                          ###
+                try:                                                       ###
+                    print(f'Нажата буквенно-цифровая клавиша: {key.char}') ###
+                except AttributeError:                                     ###
+                    print(f'Нажата специальная клавиша: {key}')            ###
         except AttributeError as e:
             return str(e)
     # ---------------------------------------------------------------------------
@@ -95,6 +104,16 @@ class Keyboard:
 if __name__ == '__main__':
     print('-------------------------------------')
     print('+++++print_screen_is_exit_wait_input+++++')
+    my_keyboard = Keyboard()
     # method
-    Keyboard().print_screen_is_exit_wait_input()
-# *****************************************************************************************
+    # Keyboard().print_screen_is_exit_wait_input()
+    my_keyboard.print_screen_is_exit_wait_input()
+    print('-------------------------------------')
+    print('+++++print_screen_is_exit+++++')
+    # method
+    # my_keyboard.print_screen_is_exit_wait_input()
+    my_keyboard.print_screen_is_exit()
+    for i in range (1, 61):
+        __import__('time').sleep(1)
+        print(f'{i} секунда')
+# # *****************************************************************************************
