@@ -26,6 +26,19 @@ class DateTime:
     # vars
     pass
     # ---------------------------------------------------------------------------
+    # Получить текущуюю дату взятую с устройства
+    def date_current_get(self) -> datetime:
+        '''
+        Eng:\n
+        Get the current date taken from the device.\n
+        Rus:\n
+        Получить текущуюю дату взятую с устройства.\n
+        '''
+        try:
+            return datetime.now()
+        except (Exception) as e:
+            return str(e)
+    # ---------------------------------------------------------------------------
     # Получить текущуюю дату взятую из интернета
     def date_current_get_from_net(self) -> datetime:
         '''
@@ -69,9 +82,11 @@ class DateTime:
 if __name__ == '__main__':
     print('-------------------------------------')
     # method
-    print('+++++date_current_show_from_net+++++')
+    print('+++++date_current_get_from_net+++++')
     print(DateTime().date_current_get_from_net())
     print('+++++date_current_show_from_net+++++')
     print(DateTime().date_current_show_from_net())
+    print('+++++date_current_get+++++')
+    print(DateTime().date_current_get())
     pass
 # *****************************************************************************************
