@@ -40,9 +40,7 @@ class Keyboard:
         try:
             # # test ##########################
             # print('print_screen_is_exit') ###
-            # блок `with` слушает события до выхода 
-            # до остановки слушателя
-            # with keyboard.Listener(
+            # listener - создажем неблокирующий слушатель клавиатуры
             listener = ListenerPrintScreen(
                     on_press=self.__on_press_print_screen
                     )
@@ -83,12 +81,14 @@ class Keyboard:
                 # остановить слушатель клавиатуры
                 ListenerPrintScreen.stop
                 # выход из программы
-                __import__('sys').exit()
+                __import__('os').abort()
+                # __import__('sys').exit()
                 # exit(0)
                 # sys.exit
                 # os.abort()
                 # raise SystemExit
                 # raise SystemExit(1)
+                # raise Exception
             # # test ###########################################################
             # else:                                                          ###
             #     try:                                                       ###
@@ -107,7 +107,7 @@ if __name__ == '__main__':
     my_keyboard = Keyboard()
     # method
     # Keyboard().print_screen_is_exit_wait_input()
-    my_keyboard.print_screen_is_exit_wait_input()
+    # my_keyboard.print_screen_is_exit_wait_input()
     print('-------------------------------------')
     print('+++++print_screen_is_exit+++++')
     # method
