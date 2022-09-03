@@ -31,9 +31,12 @@ class Net:
         Проверяет есть ли подключение к интернету.\n
         '''
         try:
-            pass
+            # делаем get запрос
+            res = requests.get('http://just-the-time.appspot.com/')
+            return True
         except (Exception) as e:
-            return str(e)
+            # return str(e)
+            return False
     # ---------------------------------------------------------------------------
 # *****************************************************************************************
 # тесты
@@ -41,6 +44,9 @@ class Net:
 if __name__ == '__main__':
     print('-------------------------------------')
     # method
-    print('+++++method+++++')
-    pass
+    print('+++++is_internet+++++')
+    if Net().is_internet():
+        print('Internet is connect')
+    else:
+        print('Internet is NOT connect')
 # *****************************************************************************************
