@@ -72,7 +72,7 @@ class Keyboard:
             return str(e)
     # ---------------------------------------------------------------------------
     # для прослушивания клавиатуры
-    def __on_press_print_screen(self, key):
+    def __on_press_print_screen(self, key) -> None:
         try:
             # если нажата кнопка print_screen
             if key == keyboard.Key.print_screen:
