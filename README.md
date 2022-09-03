@@ -170,6 +170,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 - [ ] merlib.fs.File [*работа с файлами*]
 - [ ] merlib.kivy.Design [*работа с объектами фреймворка kivy*]
 - [ ] merlib.net.MacAddress [*получение мак адреса устройства*]
+- [x] merlib.net.Net [*работа с интернетом*]
 - [ ] merlib.sys.Buffer [*работа с буфером обмена информации*]
 - [x] merlib.sys.DateTime [*работа с датой и временем устройства*]
 - [ ] merlib.sys.Keyboard [*работа с клавиатурой устройства*]
