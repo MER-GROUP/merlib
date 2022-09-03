@@ -37,7 +37,8 @@ class DateTime:
         Получить текущуюю дату взятую с устройства.\n
         '''
         try:
-            return datetime.now()
+            data = datetime.now()
+            return datetime(data.year, data.month, data.day)
         except (Exception) as e:
             return str(e)
     # ---------------------------------------------------------------------------
@@ -109,5 +110,9 @@ if __name__ == '__main__':
     print(DateTime().date_current_get())
     print('+++++date_current_show+++++')
     print(DateTime().date_current_show())
-    pass
+    print('+++++equal_date+++++')
+    if (DateTime().date_current_get_from_net() == DateTime().date_current_get()):
+        print('Date is equls')
+    else:
+        print('Date is NOT equls')
 # *****************************************************************************************
